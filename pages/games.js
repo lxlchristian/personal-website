@@ -76,7 +76,7 @@ const GamesPage = {
 
           <section class="content-section section-cta" aria-labelledby="contact-label">
             <span class="section-label" id="contact-label">${t('section.contact', lang)}</span>
-            <p class="cta-text">Your players will spend hundreds of hours with this music. Make it count.</p>
+            <p class="cta-text">Let's work on you rnext killer soundtrack.</p>
             <a href="mailto:${SITE_CONFIG.EMAIL}" class="cta-email">${SITE_CONFIG.EMAIL}</a>
             <a href="/contact" data-link="/contact" class="cta-btn">${t('contact.submit', lang)}</a>
           </section>
