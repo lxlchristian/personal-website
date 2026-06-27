@@ -21,9 +21,9 @@ const _SALOONEY_DATA = {
   ],
 
   performances: [
-    { dates: 'February 6 – March 8, 2026',  venue: 'Farkas Hall, Cambridge, MA'              },
-    { dates: 'March 13 & 14, 2026',          venue: 'Kaye Playhouse, New York'                },
-    { dates: 'March 18 – 20, 2026',          venue: 'Earl Cameron Theater, Hamilton, Bermuda' },
+    { dates: 'February 6–March 8, 2026', venue: 'Farkas Hall, Cambridge, MA'              },
+    { dates: 'March 13–14, 2026',         venue: 'Kaye Playhouse, New York'                },
+    { dates: 'March 18–20, 2026',         venue: 'Earl Cameron Theater, Hamilton, Bermuda' },
   ],
 
   synopsis: 'Salooney Tunes is a knee-slapping, nail-biting heist-gone-wrong that follows notorious outlaw Robin Yablind and his fame-hungry sidekick Wyatt Aintme. They must find a way to avoid Mayor Gerri Mandarin and pregnant Sheriff Carrie N Twins, who are on the hunt to put them behind bars. Chock-full of lovable characters like skittish saloon owner Bart Ender, sultry saloon-singer Sarah Problem, and twelve-year-old dancer Anna Fivesix-Fivesixseveneight, Salooney Tunes\'s twists and turns will keep you on the edge of your seat.',

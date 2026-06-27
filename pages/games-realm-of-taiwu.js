@@ -22,7 +22,7 @@ const _ROT_DATA = {
     { src: 'taiwu-screenshot-2.jpg', alt: 'Realm of Taiwu — title card' },
   ],
 
-  videoSrc: 'Taiwu_PV.mp4',
+  videoSrc: 'taiwu_PV.mp4',
   steamUrl: 'https://store.steampowered.com/app/3452720/Realm_of_Taiwu/',
 };
 
@@ -40,6 +40,7 @@ const RealmOfTaiwuPage = {
           <header class="game-hero">
             <span class="game-hero__label">${d.titleLabel}</span>
             <h1 class="game-hero__title">${d.title}</h1>
+            <a href="${d.steamUrl}" class="game-hero__steam" target="_blank" rel="noopener noreferrer">View on Steam ↗</a>
             <dl class="show-credits__grid">
               ${d.credits.map(c => `
                 <div class="show-credits__row">

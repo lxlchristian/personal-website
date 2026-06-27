@@ -43,6 +43,7 @@ const IslandOfHeartsPage = {
           <header class="game-hero">
             <span class="game-hero__label">${d.titleLabel}</span>
             <h1 class="game-hero__title">${d.title}</h1>
+            <a href="${d.steamUrl}" class="game-hero__steam" target="_blank" rel="noopener noreferrer">View on Steam ↗</a>
             <dl class="show-credits__grid">
               ${d.credits.map(c => `
                 <div class="show-credits__row">

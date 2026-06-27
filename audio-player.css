@@ -12,6 +12,17 @@ body.player-visible { padding-bottom: 68px; }
   body.player-visible { padding-bottom: 64px; }
 }
 
+/* ── Player clears the sidebar nav on subpages ───────────── */
+body:not([data-section="home"]) .audio-player {
+  left: var(--nav-width);
+}
+
+@media (max-width: 1024px), (max-height: 500px) and (min-width: 1025px) {
+  body:not([data-section="home"]) .audio-player {
+    left: 0;
+  }
+}
+
 /* ── Player bar ─────────────────────────────────────────── */
 .audio-player {
   position: fixed;
@@ -91,7 +102,8 @@ body.player-visible { padding-bottom: 68px; }
 
 /* ── Track info block ───────────────────────────────────── */
 .audio-player__info {
-  flex: 1;
+  flex: 0 0 auto;
+  max-width: 220px;
   min-width: 0;
   display: flex;
   flex-direction: column;
@@ -154,8 +166,8 @@ body.player-visible { padding-bottom: 68px; }
 
 /* ── Scrubber ───────────────────────────────────────────── */
 .audio-player__scrubber {
-  width: clamp(160px, 25vw, 360px);
-  flex-shrink: 0;
+  flex: 1;
+  min-width: 100px;
   padding: 21px 0; /* expands tap target to 44px */
   cursor: pointer;
   outline: none;
@@ -213,7 +225,6 @@ body.player-visible { padding-bottom: 68px; }
 }
 
 @media (max-width: 600px) {
-  .audio-player__scrubber { width: clamp(80px, 22vw, 160px); }
   .ap-time-sep,
   .ap-time-total           { display: none; }
   .audio-player__timestamp { min-width: 36px; padding-right: 12px; }
@@ -237,7 +248,6 @@ body.player-visible { padding-bottom: 68px; }
   margin: 0 -8px;
 }
 
-.track-row:first-child { border-top: 1px solid rgba(28, 24, 18, 0.07); }
 
 .track-row:hover:not(.track-row--unavailable) {
   background-color: rgba(28, 24, 18, 0.03);

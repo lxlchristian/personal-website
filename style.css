@@ -797,7 +797,6 @@ html[data-lang="ja"] .nav-item__title {
 .mus-prod-cards {
   display: flex;
   flex-direction: column;
-  border-top: 1px solid rgba(28, 24, 18, 0.10);
 }
 
 .mus-prod-card {
@@ -897,8 +896,6 @@ html[data-lang="ja"] .nav-item__title {
   padding: var(--sp-md) 0;
   border-bottom: 1px solid rgba(28, 24, 18, 0.07);
 }
-
-.mus-orch-item:first-child { border-top: 1px solid rgba(28, 24, 18, 0.07); }
 
 .mus-orch-title {
   font-family: var(--font-display);
@@ -1070,7 +1067,6 @@ html[data-lang="ja"] .nav-item__title {
   padding: var(--sp-sm) 0;
   border-bottom: 1px solid rgba(28, 24, 18, 0.07);
 }
-.show-credits__row:first-child { border-top: 1px solid rgba(28, 24, 18, 0.07); }
 
 .show-credits__label {
   font-family: var(--font-body);
@@ -1292,6 +1288,19 @@ html[data-lang="ja"] .nav-item__title {
 }
 .cta-steam:hover { color: var(--color-ink); }
 
+/* ── Steam link in game hero header ─────────────────────── */
+.game-hero__steam {
+  display: inline-block;
+  font-family: var(--font-body);
+  font-size: var(--text-sm);
+  color: var(--color-muted);
+  letter-spacing: 0.04em;
+  text-decoration: none;
+  margin-bottom: var(--sp-xl);
+  transition: color 200ms var(--ease-out);
+}
+.game-hero__steam:hover { color: var(--color-ink); }
+
 /* ── Linkable credit cards ───────────────────────────────── */
 a.credit-card {
   text-decoration: none;
@@ -1479,32 +1488,59 @@ a.credit-card:hover .credit-title { color: var(--color-play); }
   }
 }
 
+/* ── Lang select (mobile dropdown) ─────────────────────────
+   Shown in the subpage nav on narrow/short viewports.
+   The button lang-toggle is hidden there instead.            */
+.lang-select {
+  display: none;
+  background: transparent;
+  border: none;
+  border-bottom: 1px solid rgba(28, 24, 18, 0.15);
+  font-family: var(--font-body);
+  font-size: var(--text-xs);
+  color: var(--color-muted);
+  letter-spacing: 0.05em;
+  cursor: pointer;
+  padding: 2px 2px 2px 0;
+  outline: none;
+  -webkit-appearance: none;
+  appearance: none;
+}
+.lang-select:focus { border-bottom-color: var(--color-gold); }
+
 /* ── Mobile/portrait tablet — subpage nav (≤ 1024px) ─────── */
-@media (max-width: 1024px) {
+@media (max-width: 1024px), (max-height: 500px) and (min-width: 1025px) {
   .nav-subpage {
     position: static;
     width: 100%;
     height: auto;
-    flex-direction: column;
-    padding: 16px 20px 0;
+    flex-direction: row;
+    align-items: center;
+    padding: 8px 20px;
     border-bottom: 1px solid rgba(28, 24, 18, 0.08);
   }
 
   .nav-accordion {
     flex-direction: row;
-    flex: none;
-    gap: 0 20px;
-    flex-wrap: wrap;
-    overflow: visible;
+    flex: 1;
+    gap: 0 16px;
+    flex-wrap: nowrap;
+    overflow-x: auto;
+    overflow-y: hidden;
+    -webkit-overflow-scrolling: touch;
     padding-top: 0;
   }
+
+  /* hide scrollbar but keep scroll behaviour */
+  .nav-accordion::-webkit-scrollbar { display: none; }
+  .nav-accordion { scrollbar-width: none; }
 
   .nav-item { flex: none !important; }
 
   .nav-item--active .nav-item__link,
   .nav-item:not(.nav-item--active) .nav-item__link {
     align-items: center;
-    padding: 0 0 12px 0;
+    padding: 4px 0;
     min-height: auto;
     height: auto;
   }
@@ -1512,19 +1548,24 @@ a.credit-card:hover .credit-title { color: var(--color-play); }
   .nav-item__title {
     writing-mode: horizontal-tb;
     transform: none;
-    font-size: 1rem;
+    font-size: 0.8125rem;
     letter-spacing: 0.04em;
     border-bottom: 2px solid var(--color-play);
     padding-bottom: 2px;
   }
 
-  .nav-item__label { font-size: 1rem; padding: 0; }
+  .nav-item__label { font-size: 0.8125rem; padding: 0; }
 
   .nav-lang-subpage {
-    width: 100%;
-    padding: 8px 0 14px;
-    justify-content: flex-start;
+    width: auto;
+    flex-shrink: 0;
+    padding: 0 0 0 12px;
+    justify-content: flex-end;
   }
+
+  /* swap to compact select on mobile */
+  .nav-lang-subpage .lang-toggle { display: none; }
+  .nav-lang-subpage .lang-select { display: block; }
 
   .subpage-divider { display: none; }
 

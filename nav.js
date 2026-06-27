@@ -28,13 +28,19 @@ const Nav = (() => {
   /* ── Language toggle (shared between home and subpage) ── */
   function langToggleHTML() {
     const lang = getCurrentLang();
-    return `<div class="lang-toggle" role="group" aria-label="Language selector">
-      <button class="lang-btn${lang==='en'?' lang-btn--active':''}" data-lang="en" aria-pressed="${lang==='en'}">EN</button>
-      <span class="lang-sep" aria-hidden="true">·</span>
-      <button class="lang-btn${lang==='zh'?' lang-btn--active':''}" data-lang="zh" aria-pressed="${lang==='zh'}">中文</button>
-      <span class="lang-sep" aria-hidden="true">·</span>
-      <button class="lang-btn${lang==='ja'?' lang-btn--active':''}" data-lang="ja" aria-pressed="${lang==='ja'}">日本語</button>
-    </div>`;
+    return `
+      <div class="lang-toggle" role="group" aria-label="Language selector">
+        <button class="lang-btn${lang==='en'?' lang-btn--active':''}" data-lang="en" aria-pressed="${lang==='en'}">EN</button>
+        <span class="lang-sep" aria-hidden="true">·</span>
+        <button class="lang-btn${lang==='zh'?' lang-btn--active':''}" data-lang="zh" aria-pressed="${lang==='zh'}">中文</button>
+        <span class="lang-sep" aria-hidden="true">·</span>
+        <button class="lang-btn${lang==='ja'?' lang-btn--active':''}" data-lang="ja" aria-pressed="${lang==='ja'}">日本語</button>
+      </div>
+      <select class="lang-select" aria-label="Language selector">
+        <option value="en"${lang==='en'?' selected':''}>EN</option>
+        <option value="zh"${lang==='zh'?' selected':''}>中文</option>
+        <option value="ja"${lang==='ja'?' selected':''}>日本語</option>
+      </select>`;
   }
 
   /* ── Homepage nav ────────────────────────────────────────
@@ -188,6 +194,10 @@ const Nav = (() => {
       btn.addEventListener('click', () => {
         applyLanguage(btn.getAttribute('data-lang'));
       });
+    });
+
+    navEl.querySelectorAll('.lang-select').forEach(sel => {
+      sel.addEventListener('change', () => applyLanguage(sel.value));
     });
   }
 

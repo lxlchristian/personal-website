@@ -54,6 +54,7 @@ const Router = (() => {
   /* ── Navigate to a new path ────────────────────────────── */
   function navigate(path) {
     if (window.location.pathname === path) return;
+    AudioPlayer.stop();
     history.pushState({}, '', path);
     render(path);
   }
