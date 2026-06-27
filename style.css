@@ -1207,6 +1207,107 @@ html[data-lang="ja"] .nav-item__title {
 }
 
 /* ══════════════════════════════════════════════════════════
+   GAME SUBPAGES
+══════════════════════════════════════════════════════════ */
+
+/* ── Hero (no poster — title leads directly) ─────────────── */
+.game-hero { margin-bottom: var(--sp-3xl); }
+
+.game-hero__label {
+  display: block;
+  font-family: var(--font-body);
+  font-size: var(--text-xs);
+  color: var(--color-muted);
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  margin-bottom: var(--sp-sm);
+}
+
+.game-hero__title {
+  font-family: var(--font-display);
+  font-size: clamp(1.75rem, 4vw, 3rem);
+  font-weight: 400;
+  font-style: italic;
+  color: var(--color-ink);
+  letter-spacing: 0.01em;
+  line-height: 1.1;
+  margin-bottom: var(--sp-xl);
+}
+
+/* ── About paragraph ─────────────────────────────────────── */
+.game-description {
+  font-family: var(--font-body);
+  font-size: var(--text-base);
+  color: var(--color-muted);
+  line-height: 1.70;
+  max-width: 580px;
+}
+
+/* ── Screenshot horizontal strip ─────────────────────────── */
+.game-screenshot-strip {
+  display: flex;
+  gap: var(--sp-md);
+  overflow-x: auto;
+  scroll-snap-type: x mandatory;
+  -webkit-overflow-scrolling: touch;
+  padding-bottom: var(--sp-sm);
+}
+
+.game-screenshot-strip::-webkit-scrollbar { height: 3px; }
+.game-screenshot-strip::-webkit-scrollbar-track {
+  background: rgba(28, 24, 18, 0.05);
+  border-radius: 2px;
+}
+.game-screenshot-strip::-webkit-scrollbar-thumb {
+  background: rgba(200, 169, 122, 0.45);
+  border-radius: 2px;
+}
+
+.game-screenshot-strip__img {
+  flex-shrink: 0;
+  height: 230px;
+  width: auto;
+  aspect-ratio: 16 / 9;
+  object-fit: cover;
+  border-radius: 3px;
+  scroll-snap-align: start;
+  display: block;
+}
+
+/* ── CTA row: contact button + steam link side by side ────── */
+.game-cta-row {
+  display: flex;
+  align-items: center;
+  gap: var(--sp-xl);
+  flex-wrap: wrap;
+}
+
+/* ── Steam external link ─────────────────────────────────── */
+.cta-steam {
+  font-family: var(--font-body);
+  font-size: var(--text-sm);
+  color: var(--color-muted);
+  letter-spacing: 0.04em;
+  transition: color 200ms var(--ease-out);
+}
+.cta-steam:hover { color: var(--color-ink); }
+
+/* ── Linkable credit cards ───────────────────────────────── */
+a.credit-card {
+  text-decoration: none;
+  color: inherit;
+  transition: opacity 200ms;
+}
+a.credit-card:hover { opacity: 0.72; }
+a.credit-card:hover .credit-title { color: var(--color-play); }
+
+/* ── Mobile ──────────────────────────────────────────────── */
+@media (max-width: 768px) {
+  .game-screenshot-strip__img { height: 160px; }
+  .game-cta-row { flex-direction: column; align-items: flex-start; gap: var(--sp-md); }
+}
+
+/* ══════════════════════════════════════════════════════════
    BIOGRAPHY PAGE
 ══════════════════════════════════════════════════════════ */
 
