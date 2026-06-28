@@ -118,7 +118,7 @@ function _initMobileQuads() {
     if (!overlayEl) return;
     overlayEl.style.pointerEvents = 'all';
     overlayEl.style.cursor        = 'pointer';
-    overlayEl.style.zIndex        = '11'; /* above nav-home (z-index 10) */
+    overlayEl.style.zIndex        = '9'; /* below nav-home stacking context (z-index 10) */
     overlayEl.addEventListener('click', () => {
       if (typeof Router !== 'undefined') Router.navigate(_QUAD_PATHS[Q.toLowerCase()]);
     });

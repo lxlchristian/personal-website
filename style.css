@@ -529,7 +529,8 @@ html[data-lang="ja"] .nav-item__title {
 .game-description,
 .show-synopsis__text { margin-top: var(--sp-xl); }
 
-.show-perf-list,
+.show-perf-list { margin-top: var(--sp-xl); }
+
 .show-recordings-forthcoming,
 .mus-spotify-placeholder { margin-top: var(--sp-lg); }
 
