@@ -27,7 +27,7 @@ const _COP_DATA = {
   synopsis: 'City of Peace is a dark musical drama set in the cursed village of Myrhorod, loosely based on the stories of Nikolai Gogol. When Khoma Brut, an orphaned painter-philosopher, wanders into the wrong khutir on a summer holiday, he finds himself bound by promise to pray over the body of a girl he knows he killed. With his theologian companion Khaliava detained nearby, Khoma navigates three nights of haunting, manipulation, and moral collapse — beginning to question not only what he owes the dead, but what kind of man he is willing to become.',
 
   /* YouTube embed: replace YOUTUBE_ID with the actual video ID from the URL (?v=...) */
-  youtubeId: '', /* ← paste YouTube video ID here */
+  youtubeId: '7GpOX9bDCwk',
 
   tracks: [
     { title: 'The Cards',      src: 'cop_thecards.mp3',     durationStr: '' },

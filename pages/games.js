@@ -55,14 +55,16 @@ const GamesPage = {
         <div class="subpage-divider" aria-hidden="true">${_DIVIDER_SVG}</div>
         <div class="subpage-content">
 
-          ${SITE_CONFIG.VIDEOS.games.length ? `
           <section class="content-section section-reel" aria-labelledby="reel-label">
             <span class="section-label" id="reel-label">${t('section.reel', lang)}</span>
-            <video class="reel-video" controls preload="metadata">
-              <source src="./gamescoringreel_210626.mov" type="video/mp4">
-              <source src="./gamescoringreel_210626.mov" type="video/quicktime">
-            </video>
-          </section>` : ''}
+            <div class="show-media__video-wrap" style="margin-bottom: var(--sp-md)">
+              <iframe class="show-yt-embed"
+                src="https://www.youtube.com/embed/DTsnKl34Ap4"
+                title="Game Scoring Reel"
+                frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+                allowfullscreen loading="lazy"></iframe>
+            </div>
+          </section>
 
           ${SITE_CONFIG.CREDITS.games.length ? `
           <section class="content-section section-credits" aria-labelledby="credits-label">
