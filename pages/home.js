@@ -31,6 +31,14 @@ const _CORNER_NUDGE = {
   br: { x:  10, y:  10 },
 };
 
+/* ── Mobile armed nudge — larger spring signals "tap again to enter" */
+const _MOBILE_ARMED_NUDGE = {
+  tl: { x: -18, y: -18 },
+  tr: { x:  18, y: -18 },
+  bl: { x: -18, y:  18 },
+  br: { x:  18, y:  18 },
+};
+
 const _QUAD_PATHS = {
   tl: '/games',
   tr: '/biography',
@@ -105,24 +113,82 @@ function _render() {
   });
 }
 
-/* ── Mobile: diagonal-shaped touch zones via clip-path ──────
-   Sets quadrant clip-paths on the existing .quad-overlay divs
-   and enables pointer-events so the full quadrant area is
-   tappable, matching the visual diagonal boundaries.          */
+/* ── Mobile: two-tap reveal mechanic ────────────────────────
+   First tap: arms the quadrant — image fades in, label springs
+   outward (the signal). Second tap on same quad: navigates.
+   Tap a different quad: switches arm. Auto-resets after 2.5 s.
+   Nav-home (z:10) sits above quad overlays (z:3) so all touch
+   events are captured there via a single capturing listener.   */
 function _initMobileQuads() {
   _setResting();
-  _render(); /* sets clip-paths while SVG line elements still exist */
+  _render(); /* sets diagonal clip-paths on quad overlays */
 
-  ['TL', 'TR', 'BL', 'BR'].forEach(Q => {
-    const overlayEl = document.getElementById('quad' + Q);
-    if (!overlayEl) return;
-    overlayEl.style.pointerEvents = 'all';
-    overlayEl.style.cursor        = 'pointer';
-    overlayEl.style.zIndex        = '9'; /* below nav-home stacking context (z-index 10) */
-    overlayEl.addEventListener('click', () => {
-      if (typeof Router !== 'undefined') Router.navigate(_QUAD_PATHS[Q.toLowerCase()]);
+  let _armedQuad = null;
+  let _resetTimer = null;
+  const prefersReduced = window.matchMedia('(prefers-reduced-motion: reduce)');
+
+  function _deactivateAll() {
+    clearTimeout(_resetTimer);
+    _armedQuad = null;
+    document.querySelectorAll('.quad-overlay').forEach(el => el.classList.remove('is-active'));
+    document.querySelectorAll('.corner-label').forEach(el => {
+      el.classList.remove('is-armed');
+      if (typeof gsap !== 'undefined') {
+        if (prefersReduced.matches) {
+          gsap.set(el, { x: 0, y: 0 });
+        } else {
+          gsap.to(el, { x: 0, y: 0, duration: 0.6, ease: 'power2.out' });
+        }
+      }
     });
-  });
+  }
+
+  function _armQuad(quad) {
+    _deactivateAll(); /* resets previous arm (clears timer too) */
+    _armedQuad = quad;
+
+    const overlay = document.getElementById('quad' + quad.toUpperCase());
+    if (overlay) overlay.classList.add('is-active');
+
+    const label  = document.querySelector('.corner-' + quad);
+    const nudge  = _MOBILE_ARMED_NUDGE[quad];
+    if (label && nudge) {
+      label.classList.add('is-armed');
+      if (typeof gsap !== 'undefined') {
+        gsap.killTweensOf(label); /* cancel any lingering deactivate tween on this label */
+        if (prefersReduced.matches) {
+          gsap.set(label, { x: nudge.x, y: nudge.y });
+        } else {
+          gsap.to(label, { x: nudge.x, y: nudge.y, duration: 0.55, ease: 'elastic.out(1.2, 0.4)' });
+        }
+      }
+    }
+
+    _resetTimer = setTimeout(_deactivateAll, 2500);
+  }
+
+  const navEl = document.getElementById('site-nav');
+  if (!navEl) return;
+
+  /* Capturing listener fires before nav.js bubble listeners on corner-label <a> tags.
+     First tap: prevent default + stop propagation → arm quad.
+     Second tap on same quad: do nothing → event propagates → nav.js navigates. */
+  navEl.addEventListener('click', e => {
+    const link = e.target.closest('[data-quad]');
+    if (!link) return; /* lang toggle or empty middle zone */
+
+    const quad = link.dataset.quad;
+
+    if (_armedQuad === quad) {
+      clearTimeout(_resetTimer);
+      _armedQuad = null;
+      return; /* let nav.js handle navigation */
+    }
+
+    e.preventDefault();
+    e.stopPropagation();
+    _armQuad(quad);
+  }, true /* capture phase */);
 }
 
 /* Reset _st to resting state for current viewport */

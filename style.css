@@ -334,6 +334,9 @@ body:not([data-section="home"]) {
   .corner-bl { grid-area: bl; align-items: flex-start; justify-content: flex-start; }
   .corner-br { grid-area: br; align-items: flex-start; justify-content: flex-end;   }
 
+  /* Armed state: label is waiting for second tap to navigate */
+  .corner-label.is-armed { color: var(--color-ink); }
+
   /* Diagonal SVG lines serve as the visual dividers instead of borders */
 
   /* Lang toggle: fixed at bottom-center on mobile */
