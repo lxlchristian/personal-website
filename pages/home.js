@@ -114,20 +114,23 @@ function _render() {
 }
 
 /* ── Mobile: two-tap reveal mechanic ────────────────────────
-   First tap: arms the quadrant — image fades in, label springs
-   outward (the signal). Second tap on same quad: navigates.
-   Tap a different quad: switches arm. Auto-resets after 2.5 s.
-   Nav-home (z:10) sits above quad overlays (z:3) so all touch
-   events are captured there via a single capturing listener.   */
+   Quad overlays receive taps directly via their diagonal
+   clip-paths. Nav-home is pointer-events:none on mobile (CSS)
+   so clicks pass through to the overlay beneath.
+   First tap: arms the quad — diagonals shift (same as desktop
+   hover), image fades in, label springs outward.
+   Second tap on same quad: navigates. Tap a different quad:
+   switches arm. Auto-resets after 2.5 s.                      */
 function _initMobileQuads() {
   _setResting();
-  _render(); /* sets diagonal clip-paths on quad overlays */
+  _render();
 
   let _armedQuad = null;
   let _resetTimer = null;
   const prefersReduced = window.matchMedia('(prefers-reduced-motion: reduce)');
 
   function _deactivateAll() {
+    console.log('[mobile] _deactivateAll', new Error().stack.split('\n').slice(1,4).join(' | '));
     clearTimeout(_resetTimer);
     _armedQuad = null;
     document.querySelectorAll('.quad-overlay').forEach(el => el.classList.remove('is-active'));
@@ -141,21 +144,27 @@ function _initMobileQuads() {
         }
       }
     });
+    _animateLines(_target(null), 0.8, _EASE_OUT); /* return diagonals to rest */
   }
 
   function _armQuad(quad) {
-    _deactivateAll(); /* resets previous arm (clears timer too) */
+    _deactivateAll(); /* kills any in-progress diagonal return via _animateLines */
     _armedQuad = quad;
 
+    /* Reveal background image */
     const overlay = document.getElementById('quad' + quad.toUpperCase());
     if (overlay) overlay.classList.add('is-active');
 
-    const label  = document.querySelector('.corner-' + quad);
-    const nudge  = _MOBILE_ARMED_NUDGE[quad];
+    /* Shift diagonals exactly like desktop hover */
+    _animateLines(_target(quad));
+
+    /* Spring corner label outward (armed signal) */
+    const label = document.querySelector('.corner-' + quad);
+    const nudge = _MOBILE_ARMED_NUDGE[quad];
     if (label && nudge) {
       label.classList.add('is-armed');
       if (typeof gsap !== 'undefined') {
-        gsap.killTweensOf(label); /* cancel any lingering deactivate tween on this label */
+        gsap.killTweensOf(label);
         if (prefersReduced.matches) {
           gsap.set(label, { x: nudge.x, y: nudge.y });
         } else {
@@ -167,28 +176,24 @@ function _initMobileQuads() {
     _resetTimer = setTimeout(_deactivateAll, 2500);
   }
 
-  const navEl = document.getElementById('site-nav');
-  if (!navEl) return;
+  /* Each overlay receives taps via its diagonal clip-path region */
+  ['TL', 'TR', 'BL', 'BR'].forEach(Q => {
+    const overlay = document.getElementById('quad' + Q);
+    if (!overlay) return;
+    overlay.style.pointerEvents = 'all';
+    overlay.style.cursor = 'pointer';
 
-  /* Capturing listener fires before nav.js bubble listeners on corner-label <a> tags.
-     First tap: prevent default + stop propagation → arm quad.
-     Second tap on same quad: do nothing → event propagates → nav.js navigates. */
-  navEl.addEventListener('click', e => {
-    const link = e.target.closest('[data-quad]');
-    if (!link) return; /* lang toggle or empty middle zone */
-
-    const quad = link.dataset.quad;
-
-    if (_armedQuad === quad) {
-      clearTimeout(_resetTimer);
-      _armedQuad = null;
-      return; /* let nav.js handle navigation */
-    }
-
-    e.preventDefault();
-    e.stopPropagation();
-    _armQuad(quad);
-  }, true /* capture phase */);
+    const quad = Q.toLowerCase();
+    overlay.addEventListener('click', () => {
+      if (_armedQuad === quad) {
+        clearTimeout(_resetTimer);
+        _armedQuad = null;
+        if (typeof Router !== 'undefined') Router.navigate(_QUAD_PATHS[quad]);
+        return;
+      }
+      _armQuad(quad);
+    });
+  });
 }
 
 /* Reset _st to resting state for current viewport */
@@ -352,51 +357,21 @@ const _STOPS = `
   <stop offset="62%"  stop-color="#E4E3D5" stop-opacity="0"/>
   <stop offset="100%" stop-color="#E4E3D5" stop-opacity="0.75"/>`;
 
-/* ── Mobile: weight-fade bowtie polygons ─────────────────
-   Renders each line as two triangles meeting at a point at
-   the intersection — thick at viewport edges, tapering to
-   zero weight at the center. No opacity gradient needed.   */
-function _renderMobilePolygons(svg) {
-  const W = window.innerWidth, H = window.innerHeight;
-  _setResting();
-
-  const a = _st.a, b = _st.b;
-  const { x: ix, y: iy } = _intersect();
-
-  /* Half-width at endpoints (px); tapers to 0 at intersection */
-  const hw = 5;
-
-  function bowtiePath(x1, y1, x2, y2) {
-    const dx = x2 - x1, dy = y2 - y1;
-    const len = Math.sqrt(dx * dx + dy * dy);
-    const px = -dy / len, py = dx / len; /* unit perpendicular */
-    /* Bowtie: two triangles joined at (ix, iy) */
-    return [
-      `M ${x1 + hw * px},${y1 + hw * py}`,
-      `L ${ix},${iy}`,
-      `L ${x2 + hw * px},${y2 + hw * py}`,
-      `L ${x2 - hw * px},${y2 - hw * py}`,
-      `L ${ix},${iy}`,
-      `L ${x1 - hw * px},${y1 - hw * py}`,
-      'Z',
-    ].join(' ');
-  }
-
-  svg.innerHTML = `
-    <path d="${bowtiePath(a.x1, a.y1, a.x2, a.y2)}"
-          fill="rgba(200,169,122,0.55)" />
-    <path d="${bowtiePath(b.x1, b.y1, b.x2, b.y2)}"
-          fill="rgba(200,169,122,0.55)" />
-  `;
-}
 
 const HomePage = {
   mount(el) {
-    const lang = getCurrentLang();
+    console.log('[home] mount called', new Error().stack.split('\n').slice(1,5).join(' | '));
+    const lang     = getCurrentLang();
+    const isMobile = window.matchMedia('(max-width: 768px)').matches;
 
     const W = window.innerWidth, H = window.innerHeight;
     const ra = { x1: _REST.a.x1*W, y1: _REST.a.y1*H, x2: _REST.a.x2*W, y2: _REST.a.y2*H };
     const rb = { x1: _REST.b.x1*W, y1: _REST.b.y1*H, x2: _REST.b.x2*W, y2: _REST.b.y2*H };
+
+    /* Portrait crops for mobile, landscape for desktop */
+    const imgs = isMobile
+      ? ['home_bg1_m.jpg', 'home_bg2m.jpeg', 'home_bg3m.jpeg', 'home_bg4m.jpeg']
+      : ['home_bg1.jpg',   'home_bg2.jpeg',  'home_bg3.jpeg',  'home_bg4.jpeg'];
 
     el.className = 'page-home';
     el.innerHTML = `
@@ -419,21 +394,21 @@ const HomePage = {
           stroke="url(#diagGradB)" stroke-width="9"/>
       </svg>
 
-      <!-- Quadrant photo overlays — full clipped region is hover target -->
+      <!-- Quadrant photo overlays — clip-path defines tap zone on mobile -->
       <div class="quad-overlay" id="quadTL">
-        <img src="home_bg1.jpg"  alt="" class="quad-overlay__img"/>
+        <img src="${imgs[0]}" alt="" class="quad-overlay__img"/>
       </div>
       <div class="quad-overlay" id="quadTR">
-        <img src="home_bg2.jpeg" alt="" class="quad-overlay__img"/>
+        <img src="${imgs[1]}" alt="" class="quad-overlay__img"/>
       </div>
       <div class="quad-overlay" id="quadBL">
-        <img src="home_bg3.jpeg" alt="" class="quad-overlay__img"/>
+        <img src="${imgs[2]}" alt="" class="quad-overlay__img"/>
       </div>
       <div class="quad-overlay" id="quadBR">
-        <img src="home_bg4.jpeg" alt="" class="quad-overlay__img"/>
+        <img src="${imgs[3]}" alt="" class="quad-overlay__img"/>
       </div>
 
-      <!-- Dead zone: blocks quadrant hover in the title region -->
+      <!-- Dead zone: blocks quadrant interaction in the title region -->
       <div class="diag-deadzone" aria-hidden="true"></div>
 
       <!-- Name block: absolutely centered, never moves -->
@@ -444,21 +419,14 @@ const HomePage = {
       </div>
     `;
 
-    const isMobile = window.matchMedia('(max-width: 768px)').matches;
     if (isMobile) {
-      /* Must call _initMobileQuads() first (sets clip-paths while SVG line
-         elements still exist), then _renderMobilePolygons replaces svg.innerHTML */
       _initMobileQuads();
-      const diagSvg = el.querySelector('.diag-svg');
-      if (diagSvg) {
-        _renderMobilePolygons(diagSvg);
-        window.addEventListener('resize', () => {
-          if (window.matchMedia('(max-width: 768px)').matches) {
-            _renderMobilePolygons(diagSvg); /* calls _setResting() internally */
-            _render();                      /* updates clip-paths on quad overlays */
-          }
-        });
-      }
+      window.addEventListener('resize', () => {
+        if (window.matchMedia('(max-width: 768px)').matches) {
+          _setResting();
+          _render();
+        }
+      });
     } else {
       _initHover();
     }

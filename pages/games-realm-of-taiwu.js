@@ -17,7 +17,7 @@ const _ROT_DATA = {
   /* Replace this with your own description before launch */
   description: 'Realm of Taiwu (太吾弄世劫) is an action roguelite by Leap Studio and ConchShip Games, rooted in Chinese mythology and wuxia tradition, with hand-painted ink-wash visuals and kinetic top-down combat. I composed the music for the teaser trailer — [add your description of the music direction here].',
 
-  videoSrc: 'taiwu_PV.mp4',
+  youtubeId: 'uAmEFJ3UL3Q',
   steamUrl: 'https://store.steampowered.com/app/3452720/Realm_of_Taiwu/',
 };
 
@@ -38,9 +38,11 @@ const RealmOfTaiwuPage = {
           </header>
 
           <div class="show-media__video-wrap" style="margin-bottom: var(--sp-md)">
-            <video class="show-yt-embed" controls preload="metadata">
-              <source src="${d.videoSrc}" type="video/mp4">
-            </video>
+            <iframe class="show-yt-embed"
+              src="https://www.youtube.com/embed/${d.youtubeId}"
+              title="Realm of Taiwu: Teaser Trailer"
+              allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+              allowfullscreen></iframe>
           </div>
 
           <a href="${d.steamUrl}" class="game-hero__steam" target="_blank" rel="noopener noreferrer"
