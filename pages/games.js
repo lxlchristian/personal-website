@@ -68,20 +68,19 @@ const GamesPage = {
           <section class="content-section section-credits" aria-labelledby="credits-label">
             <span class="section-label" id="credits-label">${t('section.credits', lang)}</span>
             <div class="credits-grid">
-              ${SITE_CONFIG.CREDITS.games.map(credit => {
-                const tag   = credit.page ? `a` : `div`;
-                const attrs = credit.page
-                  ? `href="${credit.page}" data-link="${credit.page}" class="credit-card credit-card--link"`
-                  : `class="credit-card"`;
-                return `
-                <${tag} ${attrs}>
+              ${SITE_CONFIG.CREDITS.games.map(credit => `
+              <a class="game-credit-card" href="${credit.page}" data-link="${credit.page}">
+                <div class="game-credit-card__img">
                   ${credit.image
-                    ? `<img src="${credit.image}" alt="${credit.gameTitle}" class="credit-img" loading="lazy"/>`
-                    : `<div class="credit-img-placeholder"></div>`}
-                  <p class="credit-title">${credit.gameTitle}</p>
-                  <p class="credit-caption">${tCredit(credit, lang)}</p>
-                </${tag}>`;
-              }).join('')}
+                    ? `<img src="${credit.image}" alt="${credit.gameTitle}" loading="lazy"/>`
+                    : `<div class="game-credit-card__img-placeholder"></div>`}
+                </div>
+                <div class="game-credit-card__body">
+                  <p class="game-credit-card__title">${credit.gameTitle}</p>
+                  <p class="game-credit-card__meta">${credit.genre} · ${credit.year} · ${credit.studio}</p>
+                  <p class="game-credit-card__role">${tCredit(credit, lang)}</p>
+                </div>
+              </a>`).join('')}
             </div>
           </section>` : ''}
 
@@ -94,7 +93,6 @@ const GamesPage = {
             <span class="section-label" id="contact-label">${t('section.contact', lang)}</span>
             <p class="cta-text">Tell me all about your game project!</p>
             <a href="mailto:${SITE_CONFIG.EMAIL}" class="cta-email">${SITE_CONFIG.EMAIL}</a>
-            <a href="/contact" data-link="/contact" class="cta-btn">${t('contact.submit', lang)}</a>
           </section>
 
           <footer class="subpage-footer">

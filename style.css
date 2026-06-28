@@ -228,7 +228,7 @@ body:not([data-section="home"]) {
   position: absolute;
   pointer-events: all;
   font-family: var(--font-display);
-  font-size: 1.25rem;
+  font-size: 2.0625rem;
   font-weight: 300;
   color: var(--color-mid);
   letter-spacing: 0.04em;
@@ -583,9 +583,9 @@ html[data-lang="ja"] .nav-item__title {
 
 /* ── Credits ─────────────────────────────────────────────── */
 .credits-grid {
-  display: grid;
-  grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
-  gap: var(--sp-xl) var(--sp-2xl);
+  display: flex;
+  flex-direction: column;
+  gap: var(--sp-md);
 }
 
 .credit-card { display: flex; flex-direction: column; gap: var(--sp-sm); }
@@ -616,31 +616,33 @@ html[data-lang="ja"] .nav-item__title {
 
 /* ── Contact form ────────────────────────────────────────── */
 .contact-framing {
-  font-family: var(--font-body);
-  font-size: var(--text-lg);
+  font-family: var(--font-display);
+  font-size: clamp(1.1rem, 2.2vw, 1.65rem);
+  font-weight: 400;
+  font-style: italic;
   color: var(--color-ink);
+  letter-spacing: 0.01em;
+  line-height: 1.4;
   margin-top: var(--sp-xl);
-  margin-bottom: var(--sp-xl);
-  line-height: 1.55;
-  max-width: 520px;
+  margin-bottom: var(--sp-lg);
+  max-width: 480px;
 }
 
 .contact-email-link {
   display: inline-flex;
   align-items: center;
   gap: 0.45em;
-  font-family: var(--font-display);
-  font-size: clamp(1rem, 2.2vw, 1.3rem);
-  font-style: italic;
-  color: var(--color-ink);
-  letter-spacing: 0.02em;
+  font-family: var(--font-body);
+  font-size: var(--text-sm);
+  color: var(--color-muted);
+  letter-spacing: 0.03em;
   text-decoration: none;
   margin-bottom: var(--sp-2xl);
   transition: color 200ms ease;
 }
-.contact-email-link svg { opacity: 0.55; flex-shrink: 0; transition: opacity 200ms ease; }
-.contact-email-link:hover { color: var(--color-play); }
-.contact-email-link:hover svg { opacity: 1; }
+.contact-email-link svg { opacity: 0.4; flex-shrink: 0; transition: opacity 200ms ease; }
+.contact-email-link:hover { color: var(--color-ink); }
+.contact-email-link:hover svg { opacity: 0.7; }
 
 .contact-or {
   display: flex;
@@ -891,27 +893,26 @@ html[data-lang="ja"] .nav-item__title {
 
 .mus-orch-item {
   display: flex;
-  align-items: baseline;
-  gap: var(--sp-xl);
+  flex-direction: column;
+  gap: var(--sp-2xs);
   padding: var(--sp-md) 0;
   border-bottom: 1px solid rgba(28, 24, 18, 0.07);
 }
 
 .mus-orch-title {
-  font-family: var(--font-display);
-  font-size: var(--text-lg);
-  font-weight: 400;
-  color: var(--color-ink);
+  font-family: var(--font-body);
+  font-size: var(--text-sm);
+  font-weight: 500;
+  color: var(--color-muted);
   letter-spacing: 0.02em;
-  flex: 1;
 }
 
 .mus-orch-meta {
   font-family: var(--font-body);
-  font-size: var(--text-sm);
+  font-size: var(--text-xs);
   color: var(--color-muted);
   letter-spacing: 0.04em;
-  flex-shrink: 0;
+  opacity: 0.65;
 }
 
 /* ── Shared page-bottom CTA ──────────────────────────────── */
@@ -1288,6 +1289,25 @@ html[data-lang="ja"] .nav-item__title {
 }
 .cta-steam:hover { color: var(--color-ink); }
 
+/* ── Full-width hero image below game header ─────────────── */
+.game-hero-image {
+  width: 100%;
+  max-height: 420px;
+  overflow: hidden;
+  margin-bottom: var(--sp-3xl);
+}
+
+.game-hero-image img {
+  width: 100%;
+  height: 420px;
+  object-fit: cover;
+  display: block;
+}
+
+@media (max-width: 768px) {
+  .game-hero-image img { height: 240px; }
+}
+
 /* ── Steam link in game hero header ─────────────────────── */
 .game-hero__steam {
   display: inline-block;
@@ -1300,6 +1320,89 @@ html[data-lang="ja"] .nav-item__title {
   transition: color 200ms var(--ease-out);
 }
 .game-hero__steam:hover { color: var(--color-ink); }
+
+/* ── Horizontal game credit cards ────────────────────────── */
+.game-credit-card {
+  display: flex;
+  height: 180px;
+  border-left: 2px solid var(--color-gold);
+  text-decoration: none;
+  color: inherit;
+  overflow: hidden;
+  transition: transform 200ms var(--ease-out), box-shadow 200ms var(--ease-out);
+}
+
+.game-credit-card:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 6px 24px rgba(28, 24, 18, 0.10);
+}
+
+.game-credit-card__img {
+  flex: 0 0 42%;
+  overflow: hidden;
+}
+
+.game-credit-card__img img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+  filter: saturate(0.65);
+  transition: filter 300ms ease;
+}
+
+.game-credit-card:hover .game-credit-card__img img {
+  filter: saturate(1);
+}
+
+.game-credit-card__img-placeholder {
+  width: 100%;
+  height: 100%;
+  background: rgba(200, 169, 122, 0.10);
+}
+
+.game-credit-card__body {
+  flex: 1;
+  padding: var(--sp-lg) var(--sp-xl);
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  gap: var(--sp-xs);
+  min-width: 0;
+}
+
+.game-credit-card__title {
+  font-family: var(--font-display);
+  font-size: 1.6rem;
+  font-weight: 400;
+  font-style: italic;
+  color: var(--color-ink);
+  letter-spacing: 0.01em;
+  line-height: 1.1;
+}
+
+.game-credit-card__meta {
+  font-family: var(--font-body);
+  font-size: var(--text-xs);
+  color: var(--color-muted);
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+}
+
+.game-credit-card__role {
+  font-family: var(--font-body);
+  font-size: var(--text-xs);
+  color: var(--color-muted);
+  letter-spacing: 0.04em;
+  opacity: 0.65;
+}
+
+@media (max-width: 768px) {
+  .game-credit-card              { height: auto; min-height: 120px; }
+  .game-credit-card__img         { flex: 0 0 38%; }
+  .game-credit-card__body        { padding: var(--sp-md); }
+  .game-credit-card__title       { font-size: 1.2rem; }
+}
 
 /* ── Linkable credit cards ───────────────────────────────── */
 a.credit-card {
@@ -1322,7 +1425,7 @@ a.credit-card:hover .credit-title { color: var(--color-play); }
 
 .bio-grid {
   display: grid;
-  grid-template-columns: 220px 1fr;
+  grid-template-columns: 300px 1fr;
   gap: 0 var(--sp-3xl);
   align-items: start;
 }

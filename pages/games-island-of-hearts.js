@@ -53,6 +53,10 @@ const IslandOfHeartsPage = {
             </dl>
           </header>
 
+          <div class="game-hero-image">
+            <img src="islandofhearts_hero.jpg" alt="Island of Hearts" loading="eager" />
+          </div>
+
           <section class="content-section" aria-labelledby="desc-ioh">
             <span class="section-label" id="desc-ioh">About</span>
             <p class="game-description">${d.description}</p>
@@ -84,7 +88,6 @@ const IslandOfHeartsPage = {
             <p class="cta-text">Working on a game? I'd love to hear about it.</p>
             <a href="mailto:${SITE_CONFIG.EMAIL}" class="cta-email">${SITE_CONFIG.EMAIL}</a>
             <div class="game-cta-row">
-              <a href="/contact" data-link="/contact" class="cta-btn">Get in Touch</a>
               <a href="${d.steamUrl}" class="cta-steam" target="_blank" rel="noopener noreferrer">
                 View on Steam ↗
               </a>

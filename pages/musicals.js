@@ -184,15 +184,19 @@ const MusicalsPage = {
           </section>
 
           <section class="content-section mus-reveal" aria-labelledby="orch-label">
-            <span class="section-label" id="orch-label">Orchestration Credits</span>
+            <span class="section-label" id="orch-label">Additional Credits</span>
             <div class="mus-orch-list">
               <div class="mus-orch-item">
                 <h3 class="mus-orch-title">White House Princess</h3>
-                <p class="mus-orch-meta">Orchestration · 2023</p>
+                <p class="mus-orch-meta">Music Direction · 2023</p>
               </div>
               <div class="mus-orch-item">
                 <h3 class="mus-orch-title">Iscariot</h3>
                 <p class="mus-orch-meta">Orchestration · 2022</p>
+              </div>
+              <div class="mus-orch-item">
+                <h3 class="mus-orch-title">Be Cozy</h3>
+                <p class="mus-orch-meta">Sound Design / Scoring · 2025 · Harvard-Radcliffe Dramatic Club</p>
               </div>
             </div>
           </section>
@@ -201,7 +205,6 @@ const MusicalsPage = {
             <span class="section-label" id="cta-mus-label">Get in Touch</span>
             <p class="cta-text">Working on a musical? I'd love to hear about it.</p>
             <a href="mailto:${SITE_CONFIG.EMAIL}" class="cta-email">${SITE_CONFIG.EMAIL}</a>
-            <a href="/contact" data-link="/contact" class="cta-btn">Get in Touch</a>
           </section>
 
           <footer class="subpage-footer">

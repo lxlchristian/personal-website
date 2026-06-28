@@ -50,6 +50,10 @@ const RealmOfTaiwuPage = {
             </dl>
           </header>
 
+          <div class="game-hero-image">
+            <img src="realmoftaiwu-hero.jpg" alt="Realm of Taiwu" loading="eager" />
+          </div>
+
           <section class="content-section" aria-labelledby="desc-rot">
             <span class="section-label" id="desc-rot">About</span>
             <p class="game-description">${d.description}</p>
@@ -77,7 +81,6 @@ const RealmOfTaiwuPage = {
             <p class="cta-text">Working on a game? I'd love to hear about it.</p>
             <a href="mailto:${SITE_CONFIG.EMAIL}" class="cta-email">${SITE_CONFIG.EMAIL}</a>
             <div class="game-cta-row">
-              <a href="/contact" data-link="/contact" class="cta-btn">Get in Touch</a>
               <a href="${d.steamUrl}" class="cta-steam" target="_blank" rel="noopener noreferrer">
                 View on Steam ↗
               </a>

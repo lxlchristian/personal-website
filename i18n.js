@@ -22,7 +22,7 @@ const TRANSLATIONS = {
     'nav.contact':   'Contact',
 
     /* ── Homepage ── */
-    'home.subtitle': 'composer · songwriter · arranger',
+    'home.subtitle': 'composer · songwriter · producer · interactive audio',
 
     /* ── Section labels ── */
     'section.reel':    'Reel',
@@ -95,7 +95,7 @@ const TRANSLATIONS = {
     'nav.contact':   '联系',
 
     /* ── Homepage ── */
-    'home.subtitle': '作曲家 · 词曲作者 · 编曲人',
+    'home.subtitle': '作曲家 · 词曲作者 · 制作人 · 互动音频',
 
     /* ── Section labels ── */
     'section.reel':    '视频',
@@ -168,7 +168,7 @@ const TRANSLATIONS = {
     'nav.contact':   'お問い合わせ',
 
     /* ── Homepage ── */
-    'home.subtitle': '作曲家 · ソングライター · アレンジャー',
+    'home.subtitle': '作曲家 · ソングライター · プロデューサー · インタラクティブオーディオ',
 
     /* ── Section labels ── */
     'section.reel':    '映像',

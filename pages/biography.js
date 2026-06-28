@@ -48,7 +48,7 @@ const BiographyPage = {
                   <div class="bio-credits__group">
                     <span class="bio-credits__cat">${t('bio.credits.games', lang)}</span>
                     <ul class="bio-credits__list">
-                      <li>Island of Hearts <em>— ${t('credit.role.originalSoundtrack', lang)}</em></li>
+                      <li>Island of Hearts <em>— ${t('credit.role.originalSoundtrack', lang)}, Titan Digital Media</em></li>
                       <li>Realm of Taiwu <em>— ${t('credit.role.trailerMusic', lang)}, LEAP Studio</em></li>
                     </ul>
                   </div>

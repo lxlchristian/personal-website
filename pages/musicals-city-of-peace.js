@@ -143,7 +143,6 @@ const CityOfPeacePage = {
             <span class="section-label" id="cta-cop">Get in Touch</span>
             <p class="cta-text">Working on a musical? I'd love to hear about it.</p>
             <a href="mailto:${SITE_CONFIG.EMAIL}" class="cta-email">${SITE_CONFIG.EMAIL}</a>
-            <a href="/contact" data-link="/contact" class="cta-btn">Get in Touch</a>
           </section>
 
           <footer class="subpage-footer">
