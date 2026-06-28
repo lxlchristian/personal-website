@@ -114,35 +114,43 @@ const Nav = (() => {
       <div class="nav-accordion" role="list">${items}</div>
       <div class="nav-lang-subpage">${langToggleHTML()}</div>
 
-      <!-- Mobile bar (hidden on desktop via CSS) -->
-      <div class="nav-mobile-bar">
-        <button class="nav-mobile-hamburger" aria-label="Open navigation"
-                aria-expanded="false" aria-controls="nav-mobile-panel">
-          <svg width="18" height="14" viewBox="0 0 18 14" fill="none" stroke="currentColor"
-               stroke-width="1.6" stroke-linecap="round" aria-hidden="true">
-            <line x1="0" y1="1" x2="18" y2="1"/>
-            <line x1="0" y1="7" x2="18" y2="7"/>
-            <line x1="0" y1="13" x2="18" y2="13"/>
-          </svg>
-        </button>
-        <span class="nav-mobile-current">${currentLabel}</span>
-        <button class="nav-mobile-globe" aria-label="Select language"
-                aria-expanded="false" aria-controls="nav-mobile-lang-panel">
-          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor"
-               stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
-            <circle cx="12" cy="12" r="10"/>
-            <path d="M12 2a14.5 14.5 0 0 1 0 20 14.5 14.5 0 0 1 0-20"/>
-            <path d="M2 12h20"/>
-          </svg>
-        </button>
+      <!-- Mobile: spine strip (hidden on desktop) -->
+      <div class="nav-spine" id="nav-spine" role="button" tabindex="0"
+           aria-label="Open navigation" aria-expanded="false" aria-controls="nav-mobile-panel">
+        <span class="nav-spine__tab" aria-hidden="true"></span>
+        <span class="nav-spine__title" aria-hidden="true">${currentLabel}</span>
       </div>
 
-      <!-- Mobile nav panel -->
+      <!-- Mobile: globe language button (top-right, hidden on desktop) -->
+      <button class="nav-mobile-globe" aria-label="Select language"
+              aria-expanded="false" aria-controls="nav-mobile-lang-panel">
+        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+             stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+          <circle cx="12" cy="12" r="10"/>
+          <path d="M12 2a14.5 14.5 0 0 1 0 20 14.5 14.5 0 0 1 0-20"/>
+          <path d="M2 12h20"/>
+        </svg>
+      </button>
+
+      <!-- Mobile: full-screen nav overlay -->
       <div class="nav-mobile-panel" id="nav-mobile-panel" aria-hidden="true">
-        ${mobileItems}
+        <svg class="nav-mobile-panel__diag" viewBox="0 0 100 100" preserveAspectRatio="none"
+             aria-hidden="true">
+          <line x1="33" y1="0" x2="60" y2="100" stroke="rgba(200,169,122,0.18)" stroke-width="0.4"/>
+          <line x1="0" y1="60" x2="100" y2="40" stroke="rgba(200,169,122,0.12)" stroke-width="0.3"/>
+        </svg>
+        <button class="nav-mobile-panel__close" aria-label="Close navigation">
+          <svg width="16" height="16" viewBox="0 0 16 16" fill="none" stroke="currentColor"
+               stroke-width="1.4" stroke-linecap="round" aria-hidden="true">
+            <line x1="2" y1="2" x2="14" y2="14"/>
+            <line x1="14" y1="2" x2="2" y2="14"/>
+          </svg>
+        </button>
+        <nav class="nav-mobile-panel__items">${mobileItems}</nav>
+        <div class="nav-mobile-panel__lang">${langToggleHTML()}</div>
       </div>
 
-      <!-- Mobile language panel -->
+      <!-- Mobile: language panel (slides from globe button) -->
       <div class="nav-mobile-lang-panel" id="nav-mobile-lang-panel" aria-hidden="true">
         <button class="nav-mobile-lang-option${lang==='en'?' is-active':''}" data-lang="en">English</button>
         <button class="nav-mobile-lang-option${lang==='zh'?' is-active':''}" data-lang="zh">中文</button>
@@ -225,11 +233,11 @@ const Nav = (() => {
   function _closeMobilePanels() {
     const panel   = navEl.querySelector('.nav-mobile-panel');
     const lang    = navEl.querySelector('.nav-mobile-lang-panel');
-    const hbtn    = navEl.querySelector('.nav-mobile-hamburger');
+    const spine   = navEl.querySelector('.nav-spine');
     const gbtn    = navEl.querySelector('.nav-mobile-globe');
     if (panel)  { panel.classList.remove('is-open');  panel.setAttribute('aria-hidden', 'true'); }
     if (lang)   { lang.classList.remove('is-open');   lang.setAttribute('aria-hidden', 'true');  }
-    if (hbtn)   hbtn.setAttribute('aria-expanded', 'false');
+    if (spine)  spine.setAttribute('aria-expanded', 'false');
     if (gbtn)   gbtn.setAttribute('aria-expanded', 'false');
   }
 
@@ -241,9 +249,11 @@ const Nav = (() => {
         _closeMobilePanels();
         const path = el.getAttribute('data-link');
         const currentSection = document.body.dataset.section;
-        /* Between subpages: use accordion animation; from/to home: direct */
+        /* Between subpages: use accordion animation; from/to home: direct.
+           Skip on mobile — accordion is hidden (getBoundingClientRect returns 0). */
         const fromTitle = navEl.querySelector('.nav-item__title');
-        if (fromTitle && currentSection !== 'home' && path !== '/') {
+        const fromTitleVisible = fromTitle && fromTitle.getBoundingClientRect().height > 0;
+        if (fromTitleVisible && currentSection !== 'home' && path !== '/') {
           _animateAccordion(fromTitle, path);
         } else {
           Router.navigate(path);
@@ -261,22 +271,43 @@ const Nav = (() => {
       sel.addEventListener('change', () => applyLanguage(sel.value));
     });
 
-    /* ── Mobile: hamburger toggle ─────────────────────────── */
-    const hamburger  = navEl.querySelector('.nav-mobile-hamburger');
-    const navPanel   = navEl.querySelector('.nav-mobile-panel');
-    const globeBtn   = navEl.querySelector('.nav-mobile-globe');
-    const langPanel  = navEl.querySelector('.nav-mobile-lang-panel');
+    /* ── Mobile: spine toggle ────────────────────────────────
+       The spine strip IS the nav trigger. Tapping it opens the
+       full-screen overlay; the close button (×) or a link tap
+       closes it. First visit: shimmer hint after 900 ms.       */
+    const spine    = navEl.querySelector('.nav-spine');
+    const navPanel = navEl.querySelector('.nav-mobile-panel');
+    const closeBtn = navEl.querySelector('.nav-mobile-panel__close');
+    const globeBtn = navEl.querySelector('.nav-mobile-globe');
+    const langPanel = navEl.querySelector('.nav-mobile-lang-panel');
 
-    if (hamburger && navPanel) {
-      hamburger.addEventListener('click', () => {
+    function _openNavPanel() {
+      navPanel.classList.add('is-open');
+      navPanel.setAttribute('aria-hidden', 'false');
+      if (spine) spine.setAttribute('aria-expanded', 'true');
+      if (typeof gsap !== 'undefined') {
+        const items = navPanel.querySelectorAll('.nav-mobile-panel__item');
+        gsap.from(items, {
+          x: -16, duration: 0.30, ease: 'power2.out',
+          stagger: 0.045, delay: 0.06, clearProps: 'all',
+        });
+      }
+    }
+
+    if (spine && navPanel) {
+      const handleSpineOpen = () => {
         const opening = !navPanel.classList.contains('is-open');
         _closeMobilePanels();
-        if (opening) {
-          navPanel.classList.add('is-open');
-          navPanel.setAttribute('aria-hidden', 'false');
-          hamburger.setAttribute('aria-expanded', 'true');
-        }
+        if (opening) _openNavPanel();
+      };
+      spine.addEventListener('click', handleSpineOpen);
+      spine.addEventListener('keydown', e => {
+        if (e.key === 'Enter' || e.key === ' ') { e.preventDefault(); handleSpineOpen(); }
       });
+    }
+
+    if (closeBtn) {
+      closeBtn.addEventListener('click', () => _closeMobilePanels());
     }
 
     /* ── Mobile: globe toggle ─────────────────────────────── */
@@ -299,6 +330,23 @@ const Nav = (() => {
         _closeMobilePanels();
       });
     });
+
+    /* ── Mobile: first-visit spine shimmer hint ───────────── */
+    if (spine && spine.offsetWidth > 0 && !localStorage.getItem('cl-spine-hint')) {
+      const tid = setTimeout(() => {
+        if (localStorage.getItem('cl-spine-hint')) return;
+        spine.classList.add('is-hinting');
+        spine.addEventListener('animationend', () => {
+          spine.classList.remove('is-hinting');
+          localStorage.setItem('cl-spine-hint', '1');
+        }, { once: true });
+      }, 900);
+      spine.addEventListener('click', () => {
+        clearTimeout(tid);
+        spine.classList.remove('is-hinting');
+        localStorage.setItem('cl-spine-hint', '1');
+      }, { once: true });
+    }
 
   }
 

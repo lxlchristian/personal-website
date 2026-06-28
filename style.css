@@ -739,6 +739,137 @@ html[data-lang="ja"] .nav-item__title {
 }
 
 .contact-submit:hover { background: var(--color-ink); transform: translateY(-1px); }
+.contact-submit:disabled { opacity: 0.5; cursor: default; transform: none; }
+
+.form-actions { display: flex; flex-direction: column; gap: var(--sp-sm); align-items: flex-start; }
+
+.contact-error {
+  font-family: var(--font-body);
+  font-size: var(--text-xs);
+  color: var(--color-play);
+  letter-spacing: 0.04em;
+  min-height: 1.2em;
+}
+
+/* ── Contact success popup ───────────────────────────────── */
+.contact-success-overlay {
+  position: fixed;
+  inset: 0;
+  z-index: 1000;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: var(--sp-xl);
+  background: rgba(28, 24, 18, 0);
+  transition: background 240ms ease;
+}
+
+.contact-success-overlay.is-visible {
+  background: rgba(28, 24, 18, 0.70);
+}
+
+.contact-success-card {
+  background: var(--color-ground);
+  padding: var(--sp-3xl) var(--sp-2xl);
+  max-width: 400px;
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+  gap: var(--sp-lg);
+  opacity: 0;
+  transform: translateY(14px);
+  transition: opacity 360ms var(--ease-spring) 80ms,
+              transform 360ms var(--ease-spring) 80ms;
+}
+
+.contact-success-overlay.is-visible .contact-success-card {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+/* Quarter note icon */
+.success-note {
+  width: 24px;
+  height: 56px;
+}
+
+.note-svg {
+  width: 100%;
+  height: 100%;
+  overflow: visible;
+}
+
+/* Notehead: pops in with spring */
+.note-svg .note-head {
+  transform-box: fill-box;
+  transform-origin: center;
+  transform: scale(0);
+}
+
+.contact-success-overlay.is-visible .note-svg .note-head {
+  animation: note-head-pop 300ms var(--ease-spring) 330ms both;
+}
+
+@keyframes note-head-pop {
+  from { transform: scale(0); }
+  to   { transform: scale(1); }
+}
+
+/* Stem: draws upward from notehead */
+.note-svg .note-stem {
+  stroke-dasharray: 42;
+  stroke-dashoffset: 42;
+}
+
+.contact-success-overlay.is-visible .note-svg .note-stem {
+  animation: note-stem-draw 340ms var(--ease-out) 580ms both;
+}
+
+@keyframes note-stem-draw {
+  to { stroke-dashoffset: 0; }
+}
+
+.success-heading {
+  font-family: var(--font-display);
+  font-size: clamp(1.35rem, 3vw, 1.85rem);
+  font-weight: 400;
+  font-style: italic;
+  color: var(--color-ink);
+  letter-spacing: 0.01em;
+  line-height: 1.25;
+}
+
+.success-body {
+  font-family: var(--font-body);
+  font-size: var(--text-sm);
+  color: var(--color-muted);
+  letter-spacing: 0.04em;
+  margin-top: calc(-1 * var(--sp-sm));
+}
+
+.success-close { margin-top: var(--sp-sm); }
+
+/* Reduced-motion: skip all popup animations */
+@media (prefers-reduced-motion: reduce) {
+  .contact-success-overlay,
+  .contact-success-card {
+    transition: none;
+  }
+  .contact-success-overlay.is-visible .contact-success-card {
+    opacity: 1;
+    transform: none;
+  }
+  .contact-success-overlay.is-visible .note-svg .note-head {
+    animation: none;
+    transform: scale(1);
+  }
+  .contact-success-overlay.is-visible .note-svg .note-stem {
+    animation: none;
+    stroke-dashoffset: 0;
+  }
+}
 
 /* ── Subpage footer ──────────────────────────────────────── */
 .subpage-footer {
@@ -1649,121 +1780,227 @@ a.credit-card:hover .credit-title { color: var(--color-play); }
 }
 .lang-select:focus { border-bottom-color: var(--color-gold); }
 
-/* ── Mobile nav: hamburger + globe ─────────────────────────── */
-.nav-mobile-bar { display: none; }
+/* ── Mobile spine + globe: hidden on desktop ────────────────── */
+.nav-spine,
+.nav-mobile-globe { display: none; }
 .nav-mobile-panel,
 .nav-mobile-lang-panel { display: none; }
 
 /* ── Mobile/portrait tablet — subpage nav (≤ 1024px) ─────── */
 @media (max-width: 1024px), (max-height: 500px) and (min-width: 1025px) {
+
+  /* Spine container: 36px left column replacing the full sidebar */
   .nav-subpage {
     position: fixed;
-    top: 0; left: 0; right: 0;
-    width: 100%;
-    height: auto;
-    flex-direction: row;
-    align-items: center;
-    padding: 0;
-    border-bottom: 1px solid rgba(28, 24, 18, 0.08);
+    top: 0; left: 0;
+    width: 36px;
+    height: 100vh;
     background: var(--color-ground);
     z-index: 20;
+    display: block;
+    padding: 0;
   }
 
   .nav-accordion { display: none; }
   .nav-lang-subpage { display: none; }
 
-  /* ── Mobile bar ────────────────────────────────────────────── */
-  .nav-mobile-bar {
-    display: flex;
-    align-items: center;
-    width: 100%;
-    height: 48px;
-    padding: 0 4px;
-  }
-
-  .nav-mobile-hamburger,
-  .nav-mobile-globe {
-    width: 44px;
-    height: 44px;
-    flex-shrink: 0;
+  /* ── Spine strip ─────────────────────────────────────────── */
+  .nav-spine {
     display: flex;
     align-items: center;
     justify-content: center;
-    color: var(--color-mid);
-    transition: color 200ms ease;
+    position: absolute;
+    inset: 0;
+    cursor: pointer;
+    border-right: 1px solid rgba(200, 169, 122, 0.32);
+    -webkit-tap-highlight-color: transparent;
+    user-select: none;
+    transition: background 200ms ease;
   }
 
-  .nav-mobile-hamburger:hover,
-  .nav-mobile-globe:hover { color: var(--color-ink); }
+  .nav-spine:hover { background: rgba(200, 169, 122, 0.06); }
+  .nav-spine:active { background: rgba(200, 169, 122, 0.12); }
 
-  .nav-mobile-hamburger[aria-expanded="true"],
+  /* Folder-tab nub — permanent affordance hint */
+  .nav-spine__tab {
+    position: absolute;
+    right: -7px;
+    top: 50%;
+    transform: translateY(-50%);
+    width: 7px;
+    height: 32px;
+    background: var(--color-ground);
+    border: 1px solid rgba(200, 169, 122, 0.32);
+    border-left: none;
+    border-radius: 0 4px 4px 0;
+    pointer-events: none;
+    transition: border-color 200ms ease;
+  }
+
+  .nav-spine:hover .nav-spine__tab { border-color: rgba(200, 169, 122, 0.65); }
+
+  /* Vertical section title — echoes the desktop sidebar's vertical Bodoni */
+  .nav-spine__title {
+    font-family: var(--font-display);
+    font-size: 0.625rem;
+    font-weight: 700;
+    letter-spacing: 0.18em;
+    text-transform: uppercase;
+    color: var(--color-ink);
+    writing-mode: vertical-rl;
+    transform: rotate(180deg);
+    white-space: nowrap;
+    pointer-events: none;
+    line-height: 1;
+    opacity: 0.70;
+  }
+
+  /* CJK glyphs are naturally upright in vertical-rl — no rotation needed */
+  html[data-lang="zh"] .nav-spine__title,
+  html[data-lang="ja"] .nav-spine__title {
+    transform: none;
+  }
+
+  /* First-visit shimmer: draws eye to the spine once, then stops */
+  @keyframes spine-shimmer {
+    0%   { background: var(--color-ground); }
+    35%  { background: rgba(200, 169, 122, 0.12); }
+    65%  { background: rgba(200, 169, 122, 0.12); }
+    100% { background: var(--color-ground); }
+  }
+
+  .nav-spine.is-hinting { animation: spine-shimmer 1.6s ease forwards; }
+  .nav-spine.is-hinting .nav-spine__tab { border-color: rgba(200, 169, 122, 0.65); }
+
+  /* ── Globe language button (top-right corner) ───────────── */
+  .nav-mobile-globe {
+    display: flex;
+    position: fixed;
+    top: 10px;
+    right: 12px;
+    width: 36px;
+    height: 36px;
+    align-items: center;
+    justify-content: center;
+    color: var(--color-mid);
+    z-index: 18;
+    transition: color 200ms ease;
+    -webkit-tap-highlight-color: transparent;
+  }
+
+  .nav-mobile-globe:hover { color: var(--color-ink); }
   .nav-mobile-globe[aria-expanded="true"] { color: var(--color-ink); }
 
-  .nav-mobile-current {
-    flex: 1;
-    text-align: center;
-    font-family: var(--font-display);
-    font-size: 0.9375rem;
-    font-weight: 400;
-    letter-spacing: 0.05em;
-    color: var(--color-ink);
-    pointer-events: none;
-    user-select: none;
-  }
-
-  /* ── Nav panel (hamburger dropdown) ───────────────────────── */
+  /* ── Full-screen nav overlay ─────────────────────────────── */
   .nav-mobile-panel {
     display: flex;
     flex-direction: column;
+    justify-content: center;
     position: fixed;
-    top: 48px;
-    left: 0;
-    right: 0;
+    inset: 0;
     background: var(--color-ground);
-    border-bottom: 1px solid rgba(28, 24, 18, 0.08);
-    z-index: 19;
-    padding: 4px 0 8px;
-    transform: translateY(-110%);
+    z-index: 22;
+    padding: 60px 0 60px 48px;
+    opacity: 0;
     visibility: hidden;
-    transition: transform 260ms cubic-bezier(0.22, 1, 0.36, 1),
-                visibility 0ms 260ms;
+    transition: opacity 220ms ease, visibility 0ms 220ms;
     pointer-events: none;
   }
 
   .nav-mobile-panel.is-open {
-    transform: translateY(0);
+    opacity: 1;
     visibility: visible;
-    transition: transform 260ms cubic-bezier(0.22, 1, 0.36, 1),
-                visibility 0ms;
+    transition: opacity 220ms ease, visibility 0ms;
     pointer-events: all;
+  }
+
+  /* Diagonal SVG watermark — references the homepage crossing-line system */
+  .nav-mobile-panel__diag {
+    display: block;
+    position: absolute;
+    inset: 0;
+    width: 100%; height: 100%;
+    pointer-events: none;
+  }
+
+  /* Close button (×) top-right */
+  .nav-mobile-panel__close {
+    display: flex;
+    position: absolute;
+    top: 18px; right: 18px;
+    width: 36px; height: 36px;
+    align-items: center;
+    justify-content: center;
+    color: var(--color-mid);
+    cursor: pointer;
+    z-index: 5;
+    transition: color 200ms ease;
+    -webkit-tap-highlight-color: transparent;
+  }
+
+  .nav-mobile-panel__close:hover { color: var(--color-ink); }
+
+  /* Nav items */
+  .nav-mobile-panel__items {
+    position: relative;
+    z-index: 5;
+    display: flex;
+    flex-direction: column;
   }
 
   .nav-mobile-panel__item {
     display: block;
-    padding: 13px 20px;
+    padding: 5px 0;
     font-family: var(--font-display);
-    font-size: 1.125rem;
+    font-size: clamp(2rem, 8.5vw, 2.75rem);
     font-weight: 400;
     color: var(--color-mid);
+    opacity: 0.38;
+    letter-spacing: 0.02em;
+    line-height: 1.2;
     text-decoration: none;
-    letter-spacing: 0.04em;
-    transition: color 150ms ease;
+    transition: opacity 150ms ease, color 150ms ease;
   }
 
-  .nav-mobile-panel__item.is-current { color: var(--color-ink); }
-  .nav-mobile-panel__item:hover { color: var(--color-ink); }
+  .nav-mobile-panel__item.is-current {
+    font-weight: 700;
+    font-style: italic;
+    color: var(--color-ink);
+    opacity: 1;
+  }
 
-  /* ── Language panel (globe dropdown) ──────────────────────── */
+  .nav-mobile-panel__item:not(.is-current):hover {
+    opacity: 0.7;
+    color: var(--color-ink);
+  }
+
+  /* Language row — bottom-left of overlay */
+  .nav-mobile-panel__lang {
+    display: flex;
+    position: absolute;
+    bottom: 28px; left: 48px;
+    z-index: 5;
+  }
+
+  .nav-mobile-panel__lang .lang-btn { font-size: var(--text-xs); }
+
+  /* Short landscape viewports: tighten items so they fit */
+  @media (max-height: 500px) {
+    .nav-mobile-panel { padding: 52px 0 52px 40px; }
+    .nav-mobile-panel__item { font-size: 1.375rem; padding: 3px 0; }
+    .nav-mobile-panel__lang { left: 40px; bottom: 18px; }
+  }
+
+  /* ── Language panel (globe dropdown) ────────────────────── */
   .nav-mobile-lang-panel {
     display: flex;
     flex-direction: column;
     position: fixed;
-    top: 48px;
-    right: 0;
+    top: 44px; right: 0;
     background: var(--color-ground);
     border: 1px solid rgba(28, 24, 18, 0.08);
     border-top: none;
-    z-index: 19;
+    z-index: 24;
     padding: 4px 0 8px;
     min-width: 130px;
     transform: translateY(-110%);
@@ -1793,19 +2030,15 @@ a.credit-card:hover .credit-title { color: var(--color-play); }
     letter-spacing: 0.03em;
   }
 
-  .nav-mobile-lang-option.is-active {
-    color: var(--color-ink);
-    font-weight: 500;
-  }
-
+  .nav-mobile-lang-option.is-active { color: var(--color-ink); font-weight: 500; }
   .nav-mobile-lang-option:hover { color: var(--color-ink); }
 
   .subpage-divider { display: none; }
 
+  /* Content offset: make room for the 36px spine */
   .subpage-content {
-    margin-left: 0;
-    /* offset for the fixed nav bar */
-    padding: calc(48px + var(--sp-xl)) var(--sp-lg) var(--sp-3xl);
+    margin-left: 36px;
+    padding: var(--sp-xl) var(--sp-lg) calc(var(--sp-3xl) * 2.5);
   }
 
   .subpage-footer {

@@ -27,12 +27,18 @@ const SITE_CONFIG = {
   /* ── Contact ──────────────────────────────────────────── */
   EMAIL: 'xile.liu@gmail.com',
 
+  /* Formspree endpoint — sign up at formspree.io, create a form,
+     and paste the full URL here, e.g.:
+     'https://formspree.io/f/xpwzabcd'
+     Leave empty to disable the form (direct email link still works). */
+  FORM_ENDPOINT: 'https://formspree.io/f/xwvdbyrk',
+
   /* ── Social links (leave empty string '' to hide) ─────── */
   SOCIAL: {
-    youtube:    '',
-    soundcloud: '',
+    youtube:    'https://www.youtube.com/@xilebilemusic',
+    soundcloud: 'https://soundcloud.com/xielxiel',
     instagram:  '',
-    linkedin:   '',
+    linkedin:   'https://www.linkedin.com/feed/',
   },
 
   /* ── Audio tracks ─────────────────────────────────────── */

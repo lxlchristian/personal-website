@@ -55,6 +55,11 @@ const TRANSLATIONS = {
     'contact.submit':  'Get in Touch',
     'contact.send':    'Send Message',
     'contact.or':      'or send a message',
+    'contact.sending': 'Sending…',
+    'contact.error':   'Something went wrong — please email me directly.',
+    'contact.success.heading': 'Message sent.',
+    'contact.success.body':    'I\'ll be in touch soon.',
+    'contact.success.close':   'Close',
 
     /* ── Biography ── */
     'bio.label': 'Biography',
@@ -128,6 +133,11 @@ const TRANSLATIONS = {
     'contact.submit':  '联系我',
     'contact.send':    '发送消息',
     'contact.or':      '或发送消息',
+    'contact.sending': '发送中…',
+    'contact.error':   '发送失败，请直接发送邮件。',
+    'contact.success.heading': '消息已发送。',
+    'contact.success.body':    '我很快会与您联系。',
+    'contact.success.close':   '关闭',
 
     /* ── Biography ── */
     'bio.label': '个人简介',
@@ -201,6 +211,11 @@ const TRANSLATIONS = {
     'contact.submit':  'お問い合わせ',
     'contact.send':    'メッセージを送る',
     'contact.or':      'またはメッセージを送る',
+    'contact.sending': '送信中…',
+    'contact.error':   '送信に失敗しました。直接メールでご連絡ください。',
+    'contact.success.heading': 'メッセージを送信しました。',
+    'contact.success.body':    'すぐにご連絡いたします。',
+    'contact.success.close':   '閉じる',
 
     /* ── Biography ── */
     'bio.label': 'プロフィール',

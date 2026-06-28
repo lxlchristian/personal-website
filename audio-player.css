@@ -19,7 +19,7 @@ body:not([data-section="home"]) .audio-player {
 
 @media (max-width: 1024px), (max-height: 500px) and (min-width: 1025px) {
   body:not([data-section="home"]) .audio-player {
-    left: 0;
+    left: 36px;
   }
 }
 
