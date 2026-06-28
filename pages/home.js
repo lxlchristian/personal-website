@@ -254,7 +254,8 @@ function _initHover() {
   window.addEventListener('resize', () => { _setResting(); _render(); });
 }
 
-/* Page-load stagger: corner labels nudge toward center, return */
+/* Page-load entrance: all four corner labels nudge outward simultaneously,
+   then snap back with an elastic release — like a single breath. */
 function _initEntrance() {
   if (_pageLoadAnimDone) return;
   _withGSAP(() => {
@@ -262,16 +263,16 @@ function _initEntrance() {
       _pageLoadAnimDone = true; return;
     }
     [
-      { sel: '.corner-tl', dx:  15, dy:  15 },
-      { sel: '.corner-tr', dx: -15, dy:  15 },
-      { sel: '.corner-bl', dx:  15, dy: -15 },
-      { sel: '.corner-br', dx: -15, dy: -15 },
-    ].forEach(({ sel, dx, dy }, i) => {
+      { sel: '.corner-tl', dx: -4, dy: -4 },
+      { sel: '.corner-tr', dx:  4, dy: -4 },
+      { sel: '.corner-bl', dx: -4, dy:  4 },
+      { sel: '.corner-br', dx:  4, dy:  4 },
+    ].forEach(({ sel, dx, dy }) => {
       const el = document.querySelector(sel);
       if (!el) return;
-      gsap.timeline({ delay: 1.0 + i * 0.2 })
-        .to(el, { x: dx, y: dy, duration: 0.15, ease: 'power1.in' })
-        .to(el, { x: 0,  y: 0,  duration: 0.22, ease: 'power2.out' })
+      gsap.timeline({ delay: 1.2 })
+        .to(el, { x: dx, y: dy, duration: 0.08, ease: 'power1.in' })
+        .to(el, { x: 0,  y: 0,  duration: 0.65, ease: 'elastic.out(1.2, 0.4)' })
         .set(el, { clearProps: 'transform' });
     });
     _pageLoadAnimDone = true;
