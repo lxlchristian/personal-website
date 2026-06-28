@@ -22,7 +22,7 @@ const TRANSLATIONS = {
     'nav.contact':   'Contact',
 
     /* ── Homepage ── */
-    'home.subtitle': 'composer · songwriter · producer · interactive audio',
+    'home.subtitle': 'composer · songwriter · arranger',
 
     /* ── Section labels ── */
     'section.reel':    'Reel',
@@ -31,8 +31,8 @@ const TRANSLATIONS = {
     'section.contact': 'Get in Touch',
 
     /* ── Credit role descriptors ── */
-    'credit.role.trailerMusic':       'teaser trailer music',
-    'credit.role.originalSoundtrack': 'original soundtrack',
+    'credit.role.trailerMusic':       'Teaser Trailer Music',
+    'credit.role.originalSoundtrack': 'Original Soundtrack',
 
     /* ── Track game / genre descriptors ── */
     'track.game.Action Roguelite':    'Action Roguelite',
@@ -58,7 +58,7 @@ const TRANSLATIONS = {
 
     /* ── Biography ── */
     'bio.label': 'Biography',
-    'bio.p1': 'I\'m Christian Liu — a composer for video games and musical theater, and a graduate of the Harvard–Berklee Joint Studies Program.',
+    'bio.p1': 'Hi! I\'m Christian, a composer for video games and musical theater, and a graduate of the Harvard–Berklee Joint Studies Program.',
     'bio.p2': 'I grew up in Singapore and came to Harvard intending to study computer science. By graduation, I had written three full-length, two-act musicals — including my capstone with the Hasty Pudding Theatricals, which ran in Cambridge, New York, and Bermuda — and committed to making music a career.',
     'bio.p3': 'My game credits include Island of Hearts (17-track original soundtrack) and contributions to LEAP Studio\'s Realm of Taiwu, whose teaser trailer crossed 1.2 million views on Bilibili. Along the way I\'ve interned at Sony PlayStation in Tokyo and LEAP Studio in Beijing.',
     'bio.p4': 'I\'m now based in Tokyo and open to remote collaboration worldwide. If you\'re working on something that needs a composer, I\'d love to hear about it.',
@@ -69,7 +69,7 @@ const TRANSLATIONS = {
     'bio.milestone':      'views on Bilibili — Realm of Taiwu teaser trailer',
     'bio.credits.games':          'Games',
     'bio.credits.musicals':       'Musicals',
-    'bio.credits.orchestrations': 'Orchestrations',
+    'bio.credits.orchestrations': 'Additional Credits',
 
     /* ── Services ── */
     'svc.s1.title': 'Original Scoring',
@@ -95,7 +95,7 @@ const TRANSLATIONS = {
     'nav.contact':   '联系',
 
     /* ── Homepage ── */
-    'home.subtitle': '作曲家 · 词曲作者 · 制作人 · 互动音频',
+    'home.subtitle': '作曲家 · 词曲作者 · 编曲人',
 
     /* ── Section labels ── */
     'section.reel':    '视频',
@@ -142,7 +142,7 @@ const TRANSLATIONS = {
     'bio.milestone':      '哔哩哔哩播放量——《太吾绘卷》宣传片',
     'bio.credits.games':          '游戏',
     'bio.credits.musicals':       '音乐剧',
-    'bio.credits.orchestrations': '编曲',
+    'bio.credits.orchestrations': '其他作品',
 
     /* ── Services ── */
     'svc.s1.title': '原创配乐',
@@ -168,7 +168,7 @@ const TRANSLATIONS = {
     'nav.contact':   'お問い合わせ',
 
     /* ── Homepage ── */
-    'home.subtitle': '作曲家 · ソングライター · プロデューサー · インタラクティブオーディオ',
+    'home.subtitle': '作曲家 · ソングライター · アレンジャー',
 
     /* ── Section labels ── */
     'section.reel':    '映像',
@@ -215,7 +215,7 @@ const TRANSLATIONS = {
     'bio.milestone':      'Bilibili再生回数 — 太吾絵巻ティーザートレーラー',
     'bio.credits.games':          'ゲーム',
     'bio.credits.musicals':       'ミュージカル',
-    'bio.credits.orchestrations': '編曲',
+    'bio.credits.orchestrations': 'その他',
 
     /* ── Services ── */
     'svc.s1.title': 'オリジナル楽曲制作',

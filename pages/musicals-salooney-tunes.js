@@ -132,10 +132,8 @@ const SalooneyTunesPage = {
             </div>
           </section>
 
-          <section class="content-section" aria-labelledby="cta-st">
-            <span class="section-label" id="cta-st">Get in Touch</span>
-            <p class="cta-text">Working on a musical? I'd love to hear about it.</p>
-            <a href="mailto:${SITE_CONFIG.EMAIL}" class="cta-email">${SITE_CONFIG.EMAIL}</a>
+          <section class="content-section">
+            <a href="/contact" data-link="/contact" class="cta-btn">Let's work together!</a>
           </section>
 
           <footer class="subpage-footer">

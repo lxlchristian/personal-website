@@ -63,14 +63,14 @@ const Nav = (() => {
   }
 
   /* ── Subpage nav ─────────────────────────────────────────
-     Fixed-order accordion. Active item expands in place;
-     inactive items compress.
+     Fixed-order accordion (desktop) + hamburger/globe (mobile).
      backPath: when set, the active title renders as a link
      (e.g. "Musicals" on a show subpage links back to /musicals). */
   function renderSubpage(activeKey, backPath) {
     const lang = getCurrentLang();
     navEl.className = 'nav-subpage';
 
+    /* Desktop accordion items */
     const items = NAV_ITEMS.map(item => {
       const isActive = item.key === activeKey;
       const isHome   = item.key === 'home';
@@ -97,9 +97,57 @@ const Nav = (() => {
         </div>`;
     }).join('');
 
+    /* Mobile panel items (skip Home) */
+    const mobileItems = NAV_ITEMS.filter(i => i.key !== 'home').map(item => {
+      const isCurrent = item.key === activeKey;
+      const dest      = (isCurrent && backPath) ? backPath : item.path;
+      return `<a href="${dest}" data-link="${dest}"
+                 class="nav-mobile-panel__item${isCurrent ? ' is-current' : ''}"
+                 ${isCurrent ? 'aria-current="page"' : ''}>
+                 ${t(item.labelKey, lang)}
+               </a>`;
+    }).join('');
+
+    const currentLabel = t(NAV_ITEMS.find(i => i.key === activeKey)?.labelKey || '', lang);
+
     navEl.innerHTML = `
       <div class="nav-accordion" role="list">${items}</div>
       <div class="nav-lang-subpage">${langToggleHTML()}</div>
+
+      <!-- Mobile bar (hidden on desktop via CSS) -->
+      <div class="nav-mobile-bar">
+        <button class="nav-mobile-hamburger" aria-label="Open navigation"
+                aria-expanded="false" aria-controls="nav-mobile-panel">
+          <svg width="18" height="14" viewBox="0 0 18 14" fill="none" stroke="currentColor"
+               stroke-width="1.6" stroke-linecap="round" aria-hidden="true">
+            <line x1="0" y1="1" x2="18" y2="1"/>
+            <line x1="0" y1="7" x2="18" y2="7"/>
+            <line x1="0" y1="13" x2="18" y2="13"/>
+          </svg>
+        </button>
+        <span class="nav-mobile-current">${currentLabel}</span>
+        <button class="nav-mobile-globe" aria-label="Select language"
+                aria-expanded="false" aria-controls="nav-mobile-lang-panel">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+               stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+            <circle cx="12" cy="12" r="10"/>
+            <path d="M12 2a14.5 14.5 0 0 1 0 20 14.5 14.5 0 0 1 0-20"/>
+            <path d="M2 12h20"/>
+          </svg>
+        </button>
+      </div>
+
+      <!-- Mobile nav panel -->
+      <div class="nav-mobile-panel" id="nav-mobile-panel" aria-hidden="true">
+        ${mobileItems}
+      </div>
+
+      <!-- Mobile language panel -->
+      <div class="nav-mobile-lang-panel" id="nav-mobile-lang-panel" aria-hidden="true">
+        <button class="nav-mobile-lang-option${lang==='en'?' is-active':''}" data-lang="en">English</button>
+        <button class="nav-mobile-lang-option${lang==='zh'?' is-active':''}" data-lang="zh">中文</button>
+        <button class="nav-mobile-lang-option${lang==='ja'?' is-active':''}" data-lang="ja">日本語</button>
+      </div>
     `;
   }
 
@@ -173,11 +221,24 @@ const Nav = (() => {
     });
   }
 
+  /* ── Close all mobile panels ───────────────────────────── */
+  function _closeMobilePanels() {
+    const panel   = navEl.querySelector('.nav-mobile-panel');
+    const lang    = navEl.querySelector('.nav-mobile-lang-panel');
+    const hbtn    = navEl.querySelector('.nav-mobile-hamburger');
+    const gbtn    = navEl.querySelector('.nav-mobile-globe');
+    if (panel)  { panel.classList.remove('is-open');  panel.setAttribute('aria-hidden', 'true'); }
+    if (lang)   { lang.classList.remove('is-open');   lang.setAttribute('aria-hidden', 'true');  }
+    if (hbtn)   hbtn.setAttribute('aria-expanded', 'false');
+    if (gbtn)   gbtn.setAttribute('aria-expanded', 'false');
+  }
+
   /* ── Attach link + lang button event listeners ─────────── */
   function attachEvents() {
     navEl.querySelectorAll('[data-link]').forEach(el => {
       el.addEventListener('click', e => {
         e.preventDefault();
+        _closeMobilePanels();
         const path = el.getAttribute('data-link');
         const currentSection = document.body.dataset.section;
         /* Between subpages: use accordion animation; from/to home: direct */
@@ -199,6 +260,46 @@ const Nav = (() => {
     navEl.querySelectorAll('.lang-select').forEach(sel => {
       sel.addEventListener('change', () => applyLanguage(sel.value));
     });
+
+    /* ── Mobile: hamburger toggle ─────────────────────────── */
+    const hamburger  = navEl.querySelector('.nav-mobile-hamburger');
+    const navPanel   = navEl.querySelector('.nav-mobile-panel');
+    const globeBtn   = navEl.querySelector('.nav-mobile-globe');
+    const langPanel  = navEl.querySelector('.nav-mobile-lang-panel');
+
+    if (hamburger && navPanel) {
+      hamburger.addEventListener('click', () => {
+        const opening = !navPanel.classList.contains('is-open');
+        _closeMobilePanels();
+        if (opening) {
+          navPanel.classList.add('is-open');
+          navPanel.setAttribute('aria-hidden', 'false');
+          hamburger.setAttribute('aria-expanded', 'true');
+        }
+      });
+    }
+
+    /* ── Mobile: globe toggle ─────────────────────────────── */
+    if (globeBtn && langPanel) {
+      globeBtn.addEventListener('click', () => {
+        const opening = !langPanel.classList.contains('is-open');
+        _closeMobilePanels();
+        if (opening) {
+          langPanel.classList.add('is-open');
+          langPanel.setAttribute('aria-hidden', 'false');
+          globeBtn.setAttribute('aria-expanded', 'true');
+        }
+      });
+    }
+
+    /* ── Mobile: lang option buttons inside globe panel ────── */
+    navEl.querySelectorAll('.nav-mobile-lang-option[data-lang]').forEach(btn => {
+      btn.addEventListener('click', () => {
+        applyLanguage(btn.getAttribute('data-lang'));
+        _closeMobilePanels();
+      });
+    });
+
   }
 
   /* ── Animate incoming title on fresh subpage render ─────── */
@@ -214,6 +315,16 @@ const Nav = (() => {
     });
   }
 
+  /* ── Outside-click: close mobile panels (wired once) ────── */
+  let _outsideClickWired = false;
+  function _wireOutsideClick() {
+    if (_outsideClickWired) return;
+    _outsideClickWired = true;
+    document.addEventListener('click', e => {
+      if (!navEl.contains(e.target)) _closeMobilePanels();
+    }, { capture: true, passive: true });
+  }
+
   /* ── Public ─────────────────────────────────────────────── */
   function render(section, opts) {
     const fromSubpage = navEl.classList.contains('nav-subpage');
@@ -226,6 +337,7 @@ const Nav = (() => {
       }
     }
     attachEvents();
+    _wireOutsideClick();
   }
 
   return { render };

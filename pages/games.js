@@ -89,10 +89,8 @@ const GamesPage = {
             <div class="track-list" id="games-track-list" role="list"></div>
           </section>
 
-          <section class="content-section section-cta" aria-labelledby="contact-label">
-            <span class="section-label" id="contact-label">${t('section.contact', lang)}</span>
-            <p class="cta-text">Tell me all about your game project!</p>
-            <a href="mailto:${SITE_CONFIG.EMAIL}" class="cta-email">${SITE_CONFIG.EMAIL}</a>
+          <section class="content-section section-cta">
+            <a href="/contact" data-link="/contact" class="cta-btn">Let's work together!</a>
           </section>
 
           <footer class="subpage-footer">

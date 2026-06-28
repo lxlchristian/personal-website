@@ -16,8 +16,8 @@ const _IOH_DATA = {
   description: 'Island of Hearts is a live-action dating simulator set on a sun-drenched tropical island, blending real-video characters with choice-driven storytelling. The score is a departure from my usual work — the main theme leans unapologetically into the cutesy and tropical, while the background tracks strip back to solo piano, minimal and warm, leaving space for the story to breathe.',
 
   screenshots: [
-    { src: 'ioh-screenshot-1.jpg', alt: 'Island of Hearts — character storyline selection screen' },
-    { src: 'ioh-screenshot-2.jpg', alt: 'Island of Hearts — Gabby\'s room exploration scene' },
+    { src: 'ioh_screenshot1.jpg', alt: 'Island of Hearts — character storyline selection screen' },
+    { src: 'ioh_screenshot2.jpg', alt: 'Island of Hearts — Gabby\'s room exploration scene' },
   ],
 
   youtubeId: '636WXykodVE',
@@ -43,7 +43,21 @@ const IslandOfHeartsPage = {
           <header class="game-hero">
             <span class="game-hero__label">${d.titleLabel}</span>
             <h1 class="game-hero__title">${d.title}</h1>
-            <a href="${d.steamUrl}" class="game-hero__steam" target="_blank" rel="noopener noreferrer">View on Steam ↗</a>
+          </header>
+
+          <div class="show-media__video-wrap" style="margin-bottom: var(--sp-md)">
+            <iframe class="show-yt-embed"
+                    src="https://www.youtube.com/embed/${d.youtubeId}"
+                    title="Island of Hearts — official launch trailer"
+                    allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+                    allowfullscreen loading="lazy"></iframe>
+          </div>
+
+          <a href="${d.steamUrl}" class="game-hero__steam" target="_blank" rel="noopener noreferrer"
+             style="display:block; margin-bottom: var(--sp-2xl)">View on Steam ↗</a>
+
+          <section class="content-section" aria-labelledby="credits-ioh">
+            <span class="section-label" id="credits-ioh">Credits</span>
             <dl class="show-credits__grid">
               ${d.credits.map(c => `
                 <div class="show-credits__row">
@@ -51,11 +65,7 @@ const IslandOfHeartsPage = {
                   <dd class="show-credits__value">${c.value}</dd>
                 </div>`).join('')}
             </dl>
-          </header>
-
-          <div class="game-hero-image">
-            <img src="islandofhearts_hero.jpg" alt="Island of Hearts" loading="eager" />
-          </div>
+          </section>
 
           <section class="content-section" aria-labelledby="desc-ioh">
             <span class="section-label" id="desc-ioh">About</span>
@@ -70,28 +80,13 @@ const IslandOfHeartsPage = {
             </div>
           </section>
 
-          <section class="content-section" aria-labelledby="media-ioh">
-            <span class="section-label" id="media-ioh">Media</span>
-            <div class="show-media__video-wrap" style="margin-bottom: var(--sp-2xl)">
-              <iframe class="show-yt-embed"
-                      src="https://www.youtube.com/embed/${d.youtubeId}"
-                      title="Island of Hearts — official trailer"
-                      allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
-                      allowfullscreen loading="lazy"></iframe>
-            </div>
-            <span class="show-media__sub-label">Soundtrack</span>
+          <section class="content-section" aria-labelledby="tracks-ioh">
+            <span class="section-label" id="tracks-ioh">Featured Tracks</span>
             <div class="track-list" id="ioh-track-list" role="list"></div>
           </section>
 
-          <section class="content-section" aria-labelledby="cta-ioh">
-            <span class="section-label" id="cta-ioh">Get in Touch</span>
-            <p class="cta-text">Working on a game? I'd love to hear about it.</p>
-            <a href="mailto:${SITE_CONFIG.EMAIL}" class="cta-email">${SITE_CONFIG.EMAIL}</a>
-            <div class="game-cta-row">
-              <a href="${d.steamUrl}" class="cta-steam" target="_blank" rel="noopener noreferrer">
-                View on Steam ↗
-              </a>
-            </div>
+          <section class="content-section">
+            <a href="/contact" data-link="/contact" class="cta-btn">Let's work together!</a>
           </section>
 
           <footer class="subpage-footer">

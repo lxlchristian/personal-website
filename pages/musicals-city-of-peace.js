@@ -29,10 +29,10 @@ const _COP_DATA = {
   /* YouTube embed: replace YOUTUBE_ID with the actual video ID from the URL (?v=...) */
   youtubeId: '', /* ← paste YouTube video ID here */
 
-  /* Songs with unavailable audio */
-  songs: [
-    { title: 'Never Die',    desc: 'haunting folk tune intertwined with overtly happy dance' },
-    { title: 'The Bell Knell', desc: 'choral lament' },
+  tracks: [
+    { title: 'The Cards',      src: 'cop_thecards.mp3',     durationStr: '' },
+    { title: "A Devil's Born", src: 'cop_adevilsborn.mp3',  durationStr: '' },
+    { title: 'The Bell Knell', src: 'cop_thebellknell.mp3', durationStr: '' },
   ],
 };
 
@@ -111,38 +111,32 @@ const CityOfPeacePage = {
 
           <section class="content-section" aria-labelledby="media-cop">
             <span class="section-label" id="media-cop">Media</span>
-
-            <div class="show-media__video-wrap" style="margin-bottom: var(--sp-2xl)">
+            <div class="show-media__video-wrap">
               ${mediaSection}
-            </div>
-
-            <span class="show-media__sub-label">Selected Songs</span>
-            <div class="mus-feat-list">
-              ${d.songs.map(s => `
-                <div class="mus-feat-row mus-feat-row--unavailable">
-                  <button class="mus-feat-play" disabled aria-disabled="true"
-                          aria-label="Recording unavailable: ${s.title}">
-                    <svg class="icon-play" width="15" height="15" viewBox="0 0 24 24"
-                         fill="currentColor" aria-hidden="true"><polygon points="5,3 19,12 5,21"/></svg>
-                    <svg class="icon-pause" width="15" height="15" viewBox="0 0 24 24"
-                         fill="currentColor" aria-hidden="true"
-                         style="display:none"><rect x="6" y="4" width="4" height="16"/><rect x="14" y="4" width="4" height="16"/></svg>
-                  </button>
-                  <div class="mus-feat-info">
-                    <p class="mus-feat-title">${s.title}</p>
-                    <p class="mus-feat-meta">${s.desc}</p>
-                  </div>
-                  <div class="mus-feat-status">
-                    <span class="mus-feat-coming">Recording coming soon</span>
-                  </div>
-                </div>`).join('')}
             </div>
           </section>
 
-          <section class="content-section" aria-labelledby="cta-cop">
-            <span class="section-label" id="cta-cop">Get in Touch</span>
-            <p class="cta-text">Working on a musical? I'd love to hear about it.</p>
-            <a href="mailto:${SITE_CONFIG.EMAIL}" class="cta-email">${SITE_CONFIG.EMAIL}</a>
+          <section class="content-section" aria-labelledby="tracks-cop">
+            <span class="section-label" id="tracks-cop">Featured Tracks</span>
+            <div class="track-list" id="cop-track-list" role="list"></div>
+            <div class="mus-spotify-placeholder" style="margin-top: var(--sp-xl)">
+              <div class="mus-spotify-inner">
+                <svg class="mus-spotify-icon" width="22" height="22" viewBox="0 0 24 24"
+                     fill="currentColor" aria-hidden="true">
+                  <path d="M12 2C6.477 2 2 6.477 2 12s4.477 10 10 10 10-4.477 10-10S17.523 2 12
+                    2zm4.586 14.424a.622.622 0 01-.857.208c-2.348-1.435-5.304-1.76-8.785-.964a.623.623
+                    0 01-.277-1.215c3.809-.87 7.076-.496 9.712 1.115.294.181.387.564.207.856zm1.223-2.722a.78.78
+                    0 01-1.072.257C14.25 12.314 10.95 11.9 7.84 12.8a.78.78 0 01-.426-1.499c3.522-.999
+                    7.192-.516 9.939 1.329a.78.78 0 01.256 1.072zm.105-2.834C15.16 9.15 10.535 9 7.2
+                    9.984a.937.937 0 01-.517-1.8C10.4 7.08 15.503 7.25 18.9 9.387a.938.938 0 01-.986 1.481z"/>
+                </svg>
+                <p class="mus-spotify-label">Spotify album coming soon</p>
+              </div>
+            </div>
+          </section>
+
+          <section class="content-section">
+            <a href="/contact" data-link="/contact" class="cta-btn">Let's work together!</a>
           </section>
 
           <footer class="subpage-footer">
@@ -152,6 +146,51 @@ const CityOfPeacePage = {
 
         </div>
       </div>`;
+
+    /* ── Build track rows ──────────────────────────────────── */
+    const trackList = el.querySelector('#cop-track-list');
+    const rows = d.tracks.map(track => {
+      const audioConfig = {
+        src:       track.src,
+        title:     track.title,
+        source:    d.title,
+        available: true,
+      };
+      const rowEl = buildTrackRow({
+        title:     track.title,
+        meta:      d.title,
+        duration:  track.durationStr,
+        available: true,
+      });
+      const iconEl = rowEl.querySelector('.track-row__play-icon');
+      rowEl.querySelector('.track-row__play').addEventListener('click', () => {
+        AudioPlayer.setLastTrigger(iconEl);
+        AudioPlayer.play(audioConfig);
+      });
+      trackList.appendChild(rowEl);
+      return { el: rowEl, config: audioConfig };
+    });
+
+    function _syncRows() {
+      const current = AudioPlayer.getCurrentTrack();
+      const playing = AudioPlayer.isPlaying();
+      rows.forEach(({ el: rowEl, config }) => {
+        if (!rowEl.isConnected) return;
+        const isActive = !!(current && current.src === config.src);
+        rowEl.classList.toggle('track-row--active', isActive);
+        const iconPlay  = rowEl.querySelector('.ap-row-icon-play');
+        const iconPause = rowEl.querySelector('.ap-row-icon-pause');
+        if (iconPlay)  iconPlay.style.display  = (isActive && playing) ? 'none' : '';
+        if (iconPause) iconPause.style.display = (isActive && playing) ? ''     : 'none';
+        const btn = rowEl.querySelector('.track-row__play');
+        if (btn) btn.setAttribute('aria-label',
+          (isActive && playing) ? `Pause ${config.title}` : `Play ${config.title}`);
+      });
+    }
+
+    AudioPlayer.onTrackChange(_syncRows);
+    AudioPlayer.onPlayStateChange(_syncRows);
+    _syncRows();
 
     _initMusLinks(el);
     _initMusReveals(el);

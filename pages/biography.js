@@ -43,41 +43,39 @@ const BiographyPage = {
                 </div>
 
                 <p class="bio-body">${t('bio.p4', lang)}</p>
-
-                <div class="bio-credits">
-                  <div class="bio-credits__group">
-                    <span class="bio-credits__cat">${t('bio.credits.games', lang)}</span>
-                    <ul class="bio-credits__list">
-                      <li>Island of Hearts <em>— ${t('credit.role.originalSoundtrack', lang)}, Titan Digital Media</em></li>
-                      <li>Realm of Taiwu <em>— ${t('credit.role.trailerMusic', lang)}, LEAP Studio</em></li>
-                    </ul>
-                  </div>
-                  <div class="bio-credits__group">
-                    <span class="bio-credits__cat">${t('bio.credits.musicals', lang)}</span>
-                    <ul class="bio-credits__list">
-                      <li><a href="/musicals/salooney-tunes" data-link="/musicals/salooney-tunes">Salooney Tunes ↗</a> <em>— Hasty Pudding Theatricals, 2026</em></li>
-                      <li><a href="/musicals/city-of-peace" data-link="/musicals/city-of-peace">City of Peace ↗</a> <em>— Harvard Office for Fine Arts, 2025</em></li>
-                      <li><a href="/musicals/post-mortem" data-link="/musicals/post-mortem">Post-Mortem ↗</a> <em>— Harvard Office for Fine Arts, 2023</em></li>
-                    </ul>
-                  </div>
-                  <div class="bio-credits__group">
-                    <span class="bio-credits__cat">${t('bio.credits.orchestrations', lang)}</span>
-                    <ul class="bio-credits__list">
-                      <li>White House Princess <em>— 2023</em></li>
-                      <li>Iscariot <em>— 2022</em></li>
-                    </ul>
-                  </div>
-                </div>
               </div>
 
             </div>
+
+            <div class="bio-credits">
+              <div class="bio-credits__group">
+                <span class="bio-credits__cat">${t('bio.credits.games', lang)}</span>
+                <ul class="bio-credits__list">
+                  <li><a href="/games/island-of-hearts" data-link="/games/island-of-hearts">Island of Hearts ↗</a> <em>— Composer &amp; Sound Designer · Titan Digital Media · 2026</em></li>
+                  <li><a href="/games/realm-of-taiwu" data-link="/games/realm-of-taiwu">Realm of Taiwu ↗</a> <em>— Composer (Teaser Trailer) · LEAP Studio · 2025</em></li>
+                </ul>
+              </div>
+              <div class="bio-credits__group">
+                <span class="bio-credits__cat">${t('bio.credits.musicals', lang)}</span>
+                <ul class="bio-credits__list">
+                  <li><a href="/musicals/salooney-tunes" data-link="/musicals/salooney-tunes">Salooney Tunes ↗</a> <em>— Music · Hasty Pudding Theatricals · 2026</em></li>
+                  <li><a href="/musicals/city-of-peace" data-link="/musicals/city-of-peace">City of Peace ↗</a> <em>— Music · Harvard Office for Fine Arts · 2025</em></li>
+                  <li><a href="/musicals/post-mortem" data-link="/musicals/post-mortem">Post-Mortem ↗</a> <em>— Music · Harvard Office for Fine Arts · 2023</em></li>
+                </ul>
+              </div>
+              <div class="bio-credits__group">
+                <span class="bio-credits__cat">${t('bio.credits.orchestrations', lang)}</span>
+                <ul class="bio-credits__list">
+                  <li>Be Cozy <em>— Sound Design / Scoring · Harvard-Radcliffe Dramatic Club · 2025</em></li>
+                  <li>White House Princess <em>— Music Direction · Harvard-Radcliffe Dramatic Club · 2023</em></li>
+                  <li>Iscariot <em>— Orchestration · Harvard-Radcliffe Dramatic Club · 2022</em></li>
+                </ul>
+              </div>
+            </div>
           </section>
 
-          <section class="content-section section-cta" aria-labelledby="bio-cta-label">
-            <span class="section-label" id="bio-cta-label">${t('section.contact', lang)}</span>
-            <p class="cta-text">${t('contact.framing', lang)}</p>
-            <a href="mailto:${SITE_CONFIG.EMAIL}" class="cta-email">${SITE_CONFIG.EMAIL}</a>
-            <a href="/contact" data-link="/contact" class="cta-btn">${t('contact.submit', lang)}</a>
+          <section class="content-section section-cta">
+            <a href="/contact" data-link="/contact" class="cta-btn">Let's work together!</a>
           </section>
 
           <footer class="subpage-footer">

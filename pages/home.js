@@ -263,6 +263,44 @@ const _STOPS = `
   <stop offset="62%"  stop-color="#E4E3D5" stop-opacity="0"/>
   <stop offset="100%" stop-color="#E4E3D5" stop-opacity="0.75"/>`;
 
+/* ── Mobile: weight-fade bowtie polygons ─────────────────
+   Renders each line as two triangles meeting at a point at
+   the intersection — thick at viewport edges, tapering to
+   zero weight at the center. No opacity gradient needed.   */
+function _renderMobilePolygons(svg) {
+  const W = window.innerWidth, H = window.innerHeight;
+  _setResting();
+
+  const a = _st.a, b = _st.b;
+  const { x: ix, y: iy } = _intersect();
+
+  /* Half-width at endpoints (px); tapers to 0 at intersection */
+  const hw = 5;
+
+  function bowtiePath(x1, y1, x2, y2) {
+    const dx = x2 - x1, dy = y2 - y1;
+    const len = Math.sqrt(dx * dx + dy * dy);
+    const px = -dy / len, py = dx / len; /* unit perpendicular */
+    /* Bowtie: two triangles joined at (ix, iy) */
+    return [
+      `M ${x1 + hw * px},${y1 + hw * py}`,
+      `L ${ix},${iy}`,
+      `L ${x2 + hw * px},${y2 + hw * py}`,
+      `L ${x2 - hw * px},${y2 - hw * py}`,
+      `L ${ix},${iy}`,
+      `L ${x1 - hw * px},${y1 - hw * py}`,
+      'Z',
+    ].join(' ');
+  }
+
+  svg.innerHTML = `
+    <path d="${bowtiePath(a.x1, a.y1, a.x2, a.y2)}"
+          fill="rgba(200,169,122,0.55)" />
+    <path d="${bowtiePath(b.x1, b.y1, b.x2, b.y2)}"
+          fill="rgba(200,169,122,0.55)" />
+  `;
+}
+
 const HomePage = {
   mount(el) {
     const lang = getCurrentLang();
@@ -317,7 +355,20 @@ const HomePage = {
       </div>
     `;
 
-    _initHover();
+    const isMobile = window.matchMedia('(max-width: 768px)').matches;
+    if (isMobile) {
+      const diagSvg = el.querySelector('.diag-svg');
+      if (diagSvg) {
+        _renderMobilePolygons(diagSvg);
+        window.addEventListener('resize', () => {
+          if (window.matchMedia('(max-width: 768px)').matches) {
+            _renderMobilePolygons(diagSvg);
+          }
+        });
+      }
+    } else {
+      _initHover();
+    }
     _initEntrance();
   },
 };

@@ -85,36 +85,13 @@ const PostMortemPage = {
 
           <section class="content-section" aria-labelledby="recordings-pm">
             <span class="section-label" id="recordings-pm">Music</span>
-
-            <div class="mus-feat-list">
-              <div class="mus-feat-row mus-feat-row--unavailable">
-                <button class="mus-feat-play" disabled aria-disabled="true"
-                        aria-label="Recording unavailable: ${d.featuredSong.title}">
-                  <svg class="icon-play" width="15" height="15" viewBox="0 0 24 24"
-                       fill="currentColor" aria-hidden="true"><polygon points="5,3 19,12 5,21"/></svg>
-                  <svg class="icon-pause" width="15" height="15" viewBox="0 0 24 24"
-                       fill="currentColor" aria-hidden="true"
-                       style="display:none"><rect x="6" y="4" width="4" height="16"/><rect x="14" y="4" width="4" height="16"/></svg>
-                </button>
-                <div class="mus-feat-info">
-                  <p class="mus-feat-title">${d.featuredSong.title}</p>
-                  <p class="mus-feat-meta">${d.featuredSong.desc}</p>
-                </div>
-                <div class="mus-feat-status">
-                  <span class="mus-feat-coming">Recording coming soon</span>
-                </div>
-              </div>
-            </div>
-
             <div class="show-recordings-forthcoming">
               <p class="show-recordings-forthcoming__text">Recordings forthcoming.</p>
             </div>
           </section>
 
-          <section class="content-section" aria-labelledby="cta-pm">
-            <span class="section-label" id="cta-pm">Get in Touch</span>
-            <p class="cta-text">Working on a musical? I'd love to hear about it.</p>
-            <a href="mailto:${SITE_CONFIG.EMAIL}" class="cta-email">${SITE_CONFIG.EMAIL}</a>
+          <section class="content-section">
+            <a href="/contact" data-link="/contact" class="cta-btn">Let's work together!</a>
           </section>
 
           <footer class="subpage-footer">
