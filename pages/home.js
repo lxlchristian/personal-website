@@ -77,17 +77,19 @@ function _render() {
   const lB = document.getElementById('diagLineB');
   const gA = document.getElementById('diagGradA');
   const gB = document.getElementById('diagGradB');
-  if (!lA) return;
 
-  lA.setAttribute('x1', a.x1); lA.setAttribute('y1', a.y1);
-  lA.setAttribute('x2', a.x2); lA.setAttribute('y2', a.y2);
-  lB.setAttribute('x1', b.x1); lB.setAttribute('y1', b.y1);
-  lB.setAttribute('x2', b.x2); lB.setAttribute('y2', b.y2);
-
-  gA.setAttribute('x1', a.x1); gA.setAttribute('y1', a.y1);
-  gA.setAttribute('x2', a.x2); gA.setAttribute('y2', a.y2);
-  gB.setAttribute('x1', b.x1); gB.setAttribute('y1', b.y1);
-  gB.setAttribute('x2', b.x2); gB.setAttribute('y2', b.y2);
+  /* Update SVG line/gradient elements only if they exist (desktop, or before
+     _renderMobilePolygons replaces svg.innerHTML on mobile) */
+  if (lA) {
+    lA.setAttribute('x1', a.x1); lA.setAttribute('y1', a.y1);
+    lA.setAttribute('x2', a.x2); lA.setAttribute('y2', a.y2);
+    lB.setAttribute('x1', b.x1); lB.setAttribute('y1', b.y1);
+    lB.setAttribute('x2', b.x2); lB.setAttribute('y2', b.y2);
+    gA.setAttribute('x1', a.x1); gA.setAttribute('y1', a.y1);
+    gA.setAttribute('x2', a.x2); gA.setAttribute('y2', a.y2);
+    gB.setAttribute('x1', b.x1); gB.setAttribute('y1', b.y1);
+    gB.setAttribute('x2', b.x2); gB.setAttribute('y2', b.y2);
+  }
 
   const { x: ix, y: iy } = _intersect();
 
@@ -100,6 +102,26 @@ function _render() {
   Object.entries(clips).forEach(([q, cp]) => {
     const el = document.getElementById('quad' + q);
     if (el) el.style.clipPath = cp;
+  });
+}
+
+/* ── Mobile: diagonal-shaped touch zones via clip-path ──────
+   Sets quadrant clip-paths on the existing .quad-overlay divs
+   and enables pointer-events so the full quadrant area is
+   tappable, matching the visual diagonal boundaries.          */
+function _initMobileQuads() {
+  _setResting();
+  _render(); /* sets clip-paths while SVG line elements still exist */
+
+  ['TL', 'TR', 'BL', 'BR'].forEach(Q => {
+    const overlayEl = document.getElementById('quad' + Q);
+    if (!overlayEl) return;
+    overlayEl.style.pointerEvents = 'all';
+    overlayEl.style.cursor        = 'pointer';
+    overlayEl.style.zIndex        = '11'; /* above nav-home (z-index 10) */
+    overlayEl.addEventListener('click', () => {
+      if (typeof Router !== 'undefined') Router.navigate(_QUAD_PATHS[Q.toLowerCase()]);
+    });
   });
 }
 
@@ -357,12 +379,16 @@ const HomePage = {
 
     const isMobile = window.matchMedia('(max-width: 768px)').matches;
     if (isMobile) {
+      /* Must call _initMobileQuads() first (sets clip-paths while SVG line
+         elements still exist), then _renderMobilePolygons replaces svg.innerHTML */
+      _initMobileQuads();
       const diagSvg = el.querySelector('.diag-svg');
       if (diagSvg) {
         _renderMobilePolygons(diagSvg);
         window.addEventListener('resize', () => {
           if (window.matchMedia('(max-width: 768px)').matches) {
-            _renderMobilePolygons(diagSvg);
+            _renderMobilePolygons(diagSvg); /* calls _setResting() internally */
+            _render();                      /* updates clip-paths on quad overlays */
           }
         });
       }

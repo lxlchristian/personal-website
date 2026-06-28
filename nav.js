@@ -97,8 +97,8 @@ const Nav = (() => {
         </div>`;
     }).join('');
 
-    /* Mobile panel items (skip Home) */
-    const mobileItems = NAV_ITEMS.filter(i => i.key !== 'home').map(item => {
+    /* Mobile panel items (includes Home) */
+    const mobileItems = NAV_ITEMS.map(item => {
       const isCurrent = item.key === activeKey;
       const dest      = (isCurrent && backPath) ? backPath : item.path;
       return `<a href="${dest}" data-link="${dest}"

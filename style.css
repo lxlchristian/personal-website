@@ -301,9 +301,10 @@ body:not([data-section="home"]) {
     pointer-events: none;
   }
 
-  /* Dead zone: not needed on mobile */
+  /* Dead zone: sits above quad touch overlays (z-index 11) so the
+     title area doesn't trigger navigation on mobile */
   .diag-deadzone {
-    display: none;
+    z-index: 12;
   }
 
   /* Nav: 3-row grid spanning full viewport */
@@ -1007,7 +1008,7 @@ html[data-lang="ja"] .nav-item__title {
   align-items: flex-start;
 }
 
-.show-hero__poster-col { flex-shrink: 0; width: 148px; }
+.show-hero__poster-col { flex-shrink: 0; width: 250px; }
 
 .show-hero__poster {
   display: block;
@@ -1206,7 +1207,7 @@ html[data-lang="ja"] .nav-item__title {
   .mus-prod-card__year-mobile     { display: inline; }
 
   .show-hero__layout     { flex-direction: column; gap: var(--sp-lg); }
-  .show-hero__poster-col { width: 110px; }
+  .show-hero__poster-col { width: 188px; }
   .show-credits__row     { grid-template-columns: 120px 1fr; }
 }
 
