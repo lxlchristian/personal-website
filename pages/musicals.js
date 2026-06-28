@@ -53,7 +53,7 @@ const _FEATURED_TRACKS = [
   },
   {
     title:     'Maybe It\'s Best to Tie',
-    show:      'Post-Mortem',
+    show:      'Post Mortem',
     showPath:  '/musicals/post-mortem',
     src:       '',
     available: false,
@@ -83,14 +83,14 @@ const _PRODUCTIONS_INDEX = [
     posterAlt:  'City of Peace — 2025 Harvard Office for Fine Arts production poster',
   },
   {
-    title:      'Post-Mortem',
+    title:      'Post Mortem',
     path:       '/musicals/post-mortem',
     year:       2023,
     producer:   'Harvard Office for Fine Arts',
     role:       'Music by Christian Liu',
     teaser:     'A comedy-musical set in a crumbling Classics department where an accidental ghost-summoning derails a desperate rescue plan.',
     poster:     'postmortem-poster.JPG',
-    posterAlt:  'Post-Mortem — 2023 Harvard Office for Fine Arts production poster',
+    posterAlt:  'Post Mortem — 2023 Harvard Office for Fine Arts production poster',
   },
 ];
 

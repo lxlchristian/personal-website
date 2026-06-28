@@ -38,7 +38,7 @@ const SITE_CONFIG = {
     youtube:    'https://www.youtube.com/@xilebilemusic',
     soundcloud: 'https://soundcloud.com/xielxiel',
     instagram:  '',
-    linkedin:   'https://www.linkedin.com/feed/',
+    linkedin:   'https://www.linkedin.com/in/christian-liu-51480522b/',
   },
 
   /* ── Audio tracks ─────────────────────────────────────── */
@@ -64,7 +64,7 @@ const SITE_CONFIG = {
       waveformProfile: 'flowing-electronic',
     },
     {
-      title:           'Fight! Ancient Ocean Deity',
+      title:           'Battle the Beast!',
       game:            'Action Roguelite',
       gameUrl:         '',
       genre:           'Cinematic / Orchestral',

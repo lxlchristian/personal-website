@@ -11,8 +11,14 @@
     {
       "name": "portfolio-verify",
       "runtimeExecutable": "python3",
-      "runtimeArgs": ["-m", "http.server", "3003"],
-      "port": 3003
+      "runtimeArgs": ["-m", "http.server", "3004"],
+      "port": 3004
+    },
+    {
+      "name": "portfolio-check",
+      "runtimeExecutable": "python3",
+      "runtimeArgs": ["-m", "http.server", "3008"],
+      "port": 3008
     }
   ]
 }

@@ -50,14 +50,14 @@ const Nav = (() => {
     const lang = getCurrentLang();
     navEl.className = 'nav-home';
     navEl.innerHTML = `
-      <a class="corner-label corner-tl" href="/games"     data-link="/games"     data-quad="tl"
-         aria-label="${t('nav.games', lang)}">${t('nav.games', lang)}</a>
-      <a class="corner-label corner-tr" href="/biography" data-link="/biography" data-quad="tr"
+      <a class="corner-label corner-tl" href="/biography" data-link="/biography" data-quad="tl"
          aria-label="${t('nav.biography', lang)}">${t('nav.biography', lang)}</a>
-      <a class="corner-label corner-bl" href="/musicals"  data-link="/musicals"  data-quad="bl"
-         aria-label="${t('nav.musicals', lang)}">${t('nav.musicals', lang)}</a>
-      <a class="corner-label corner-br" href="/contact"   data-link="/contact"   data-quad="br"
+      <a class="corner-label corner-tr" href="/contact"   data-link="/contact"   data-quad="tr"
          aria-label="${t('nav.contact', lang)}">${t('nav.contact', lang)}</a>
+      <a class="corner-label corner-bl" href="/games"     data-link="/games"     data-quad="bl"
+         aria-label="${t('nav.games', lang)}">${t('nav.games', lang)}</a>
+      <a class="corner-label corner-br" href="/musicals"  data-link="/musicals"  data-quad="br"
+         aria-label="${t('nav.musicals', lang)}">${t('nav.musicals', lang)}</a>
       <div class="nav-lang-home">${langToggleHTML()}</div>
     `;
   }
@@ -121,17 +121,6 @@ const Nav = (() => {
         <span class="nav-spine__title" aria-hidden="true">${currentLabel}</span>
       </div>
 
-      <!-- Mobile: globe language button (top-right, hidden on desktop) -->
-      <button class="nav-mobile-globe" aria-label="Select language"
-              aria-expanded="false" aria-controls="nav-mobile-lang-panel">
-        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor"
-             stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
-          <circle cx="12" cy="12" r="10"/>
-          <path d="M12 2a14.5 14.5 0 0 1 0 20 14.5 14.5 0 0 1 0-20"/>
-          <path d="M2 12h20"/>
-        </svg>
-      </button>
-
       <!-- Mobile: full-screen nav overlay -->
       <div class="nav-mobile-panel" id="nav-mobile-panel" aria-hidden="true">
         <svg class="nav-mobile-panel__diag" viewBox="0 0 100 100" preserveAspectRatio="none"
@@ -150,12 +139,6 @@ const Nav = (() => {
         <div class="nav-mobile-panel__lang">${langToggleHTML()}</div>
       </div>
 
-      <!-- Mobile: language panel (slides from globe button) -->
-      <div class="nav-mobile-lang-panel" id="nav-mobile-lang-panel" aria-hidden="true">
-        <button class="nav-mobile-lang-option${lang==='en'?' is-active':''}" data-lang="en">English</button>
-        <button class="nav-mobile-lang-option${lang==='zh'?' is-active':''}" data-lang="zh">中文</button>
-        <button class="nav-mobile-lang-option${lang==='ja'?' is-active':''}" data-lang="ja">日本語</button>
-      </div>
     `;
   }
 
@@ -231,14 +214,10 @@ const Nav = (() => {
 
   /* ── Close all mobile panels ───────────────────────────── */
   function _closeMobilePanels() {
-    const panel   = navEl.querySelector('.nav-mobile-panel');
-    const lang    = navEl.querySelector('.nav-mobile-lang-panel');
-    const spine   = navEl.querySelector('.nav-spine');
-    const gbtn    = navEl.querySelector('.nav-mobile-globe');
-    if (panel)  { panel.classList.remove('is-open');  panel.setAttribute('aria-hidden', 'true'); }
-    if (lang)   { lang.classList.remove('is-open');   lang.setAttribute('aria-hidden', 'true');  }
-    if (spine)  spine.setAttribute('aria-expanded', 'false');
-    if (gbtn)   gbtn.setAttribute('aria-expanded', 'false');
+    const panel = navEl.querySelector('.nav-mobile-panel');
+    const spine = navEl.querySelector('.nav-spine');
+    if (panel) { panel.classList.remove('is-open'); panel.setAttribute('aria-hidden', 'true'); }
+    if (spine) spine.setAttribute('aria-expanded', 'false');
   }
 
   /* ── Attach link + lang button event listeners ─────────── */
@@ -278,8 +257,6 @@ const Nav = (() => {
     const spine    = navEl.querySelector('.nav-spine');
     const navPanel = navEl.querySelector('.nav-mobile-panel');
     const closeBtn = navEl.querySelector('.nav-mobile-panel__close');
-    const globeBtn = navEl.querySelector('.nav-mobile-globe');
-    const langPanel = navEl.querySelector('.nav-mobile-lang-panel');
 
     function _openNavPanel() {
       navPanel.classList.add('is-open');
@@ -309,27 +286,6 @@ const Nav = (() => {
     if (closeBtn) {
       closeBtn.addEventListener('click', () => _closeMobilePanels());
     }
-
-    /* ── Mobile: globe toggle ─────────────────────────────── */
-    if (globeBtn && langPanel) {
-      globeBtn.addEventListener('click', () => {
-        const opening = !langPanel.classList.contains('is-open');
-        _closeMobilePanels();
-        if (opening) {
-          langPanel.classList.add('is-open');
-          langPanel.setAttribute('aria-hidden', 'false');
-          globeBtn.setAttribute('aria-expanded', 'true');
-        }
-      });
-    }
-
-    /* ── Mobile: lang option buttons inside globe panel ────── */
-    navEl.querySelectorAll('.nav-mobile-lang-option[data-lang]').forEach(btn => {
-      btn.addEventListener('click', () => {
-        applyLanguage(btn.getAttribute('data-lang'));
-        _closeMobilePanels();
-      });
-    });
 
     /* ── Mobile: first-visit spine shimmer hint ───────────── */
     if (spine && spine.offsetWidth > 0 && !localStorage.getItem('cl-spine-hint')) {

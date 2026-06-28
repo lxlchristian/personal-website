@@ -63,10 +63,10 @@ const TRANSLATIONS = {
 
     /* ── Biography ── */
     'bio.label': 'Biography',
-    'bio.p1': 'Hi! I\'m Christian, a composer for video games and musical theater, and a graduate of the Harvard–Berklee Joint Studies Program.',
-    'bio.p2': 'I grew up in Singapore and came to Harvard intending to study computer science. By graduation, I had written three full-length, two-act musicals — including my capstone with the Hasty Pudding Theatricals, which ran in Cambridge, New York, and Bermuda — and committed to making music a career.',
-    'bio.p3': 'My game credits include Island of Hearts (17-track original soundtrack) and contributions to LEAP Studio\'s Realm of Taiwu, whose teaser trailer crossed 1.2 million views on Bilibili. Along the way I\'ve interned at Sony PlayStation in Tokyo and LEAP Studio in Beijing.',
-    'bio.p4': 'I\'m now based in Tokyo and open to remote collaboration worldwide. If you\'re working on something that needs a composer, I\'d love to hear about it.',
+    'bio.p1': 'Hi! My name is Christian, and I\’m a composer from Singapore who loves scoring video games and writing for musical theatre. I\’m also a recent graduate of the Harvard–Berklee Joint Studies Program.',
+    'bio.p2': 'Though much of my time as an undergraduate was spent studying Computer Science, perhaps even more of it was spent writing music. By graduation, I\'d written three full-length, two-act musicals, including one with <a href="https://www.hastypudding.org/hasty-pudding-theatricals/" target="_blank" rel="noopener">the Hasty Pudding Theatricals</a>, which ran 40 shows throughout Cambridge, New York, and Bermuda.',
+    'bio.p3': 'I also released my first full 17-track original video game soundtrack with Island of Hearts, and made contributions to action roguelite Realm of Taiwu, whose teaser trailer I scored crossed 1.2 million views on Bilibili. I\'ve also collaborated with numerous game devs through Berklee\'s Games and Interactive Scoring Program, as well as interned at Sony PlayStation in Tokyo and Leap Studio in Beijing.',
+    'bio.p4': 'I\'m now based in Tokyo and open to collaboration worldwide. If you\'re working on something that needs a composer, I\'d love to hear about it!',
     'bio.basedLabel':     'Based in',
     'bio.basedValue':     'Tokyo — open to remote',
     'bio.langLabel':      'Languages',

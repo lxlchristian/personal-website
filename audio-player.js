@@ -60,7 +60,7 @@ const AudioPlayer = (() => {
 
   /* DOM refs — populated by _ensureDOM */
   let _closeBtn, _playBtn, _playIconEl, _pauseIconEl;
-  let _titleWrap, _titleEl, _sourceEl;
+  let _titleEl, _sourceEl;
   let _scrubberEl, _fillEl, _dotEl;
   let _timeCurEl, _timeTotEl;
 
@@ -126,23 +126,24 @@ const AudioPlayer = (() => {
           </svg>
         </span>
       </button>
-      <div class="audio-player__info">
-        <div class="audio-player__title-wrap">
-          <span class="audio-player__title-inner"></span>
+      <div class="audio-player__right">
+        <div class="audio-player__info">
+          <span class="audio-player__title-inner"></span><span class="audio-player__source"></span>
         </div>
-        <div class="audio-player__source"></div>
-      </div>
-      <div class="audio-player__scrubber" role="slider"
-           aria-label="Seek" aria-valuemin="0" aria-valuemax="0" aria-valuenow="0" tabindex="0">
-        <div class="audio-player__track-line">
-          <div class="audio-player__fill"></div>
-          <div class="audio-player__dot"></div>
+        <div class="audio-player__progress-row">
+          <div class="audio-player__scrubber" role="slider"
+               aria-label="Seek" aria-valuemin="0" aria-valuemax="0" aria-valuenow="0" tabindex="0">
+            <div class="audio-player__track-line">
+              <div class="audio-player__fill"></div>
+              <div class="audio-player__dot"></div>
+            </div>
+          </div>
+          <div class="audio-player__timestamp">
+            <span class="ap-time-current">0:00</span><span
+                 class="ap-time-sep"> / </span><span
+                 class="ap-time-total">0:00</span>
+          </div>
         </div>
-      </div>
-      <div class="audio-player__timestamp">
-        <span class="ap-time-current">0:00</span><span
-             class="ap-time-sep"> / </span><span
-             class="ap-time-total">0:00</span>
       </div>`;
 
     document.body.appendChild(_el);
@@ -151,7 +152,6 @@ const AudioPlayer = (() => {
     _playBtn     = _el.querySelector('.audio-player__play-btn');
     _playIconEl  = _el.querySelector('.ap-icon-play');
     _pauseIconEl = _el.querySelector('.ap-icon-pause');
-    _titleWrap   = _el.querySelector('.audio-player__title-wrap');
     _titleEl     = _el.querySelector('.audio-player__title-inner');
     _sourceEl    = _el.querySelector('.audio-player__source');
     _scrubberEl  = _el.querySelector('.audio-player__scrubber');
@@ -261,27 +261,11 @@ const AudioPlayer = (() => {
     if (_playBtn)
       _playBtn.setAttribute('aria-label', _playing ? `Pause ${label}` : `Play ${label}`);
 
-    if (_titleWrap) _titleWrap.classList.toggle('is-playing', _playing);
   }
 
   /* ── Title + marquee ───────────────────────────────────── */
   function _updateTitle(title) {
-    if (!_titleEl || !_titleWrap) return;
-    _titleEl.textContent = title;
-    _titleWrap.classList.remove('needs-marquee');
-    _titleWrap.style.removeProperty('--marquee-dur');
-
-    /* Check overflow after layout has settled */
-    requestAnimationFrame(() => {
-      if (!_titleEl || !_titleWrap) return;
-      if (_titleEl.scrollWidth > _titleWrap.clientWidth) {
-        /* Duplicate with em-space separator so the scroll loop is seamless */
-        _titleEl.textContent = title + '   ' + title;
-        const dur = Math.max(8, title.length * 0.35).toFixed(1);
-        _titleWrap.style.setProperty('--marquee-dur', dur + 's');
-        _titleWrap.classList.add('needs-marquee');
-      }
-    });
+    if (_titleEl) _titleEl.textContent = title;
   }
 
   /* ── Show / hide player bar ────────────────────────────── */

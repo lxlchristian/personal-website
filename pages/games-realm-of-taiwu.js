@@ -14,8 +14,7 @@ const _ROT_DATA = {
     { label: 'Teaser Released', value: 'August 2025' },
   ],
 
-  /* Replace this with your own description before launch */
-  description: 'Realm of Taiwu (太吾弄世劫) is an action roguelite by Leap Studio and ConchShip Games, rooted in Chinese mythology and wuxia tradition, with hand-painted ink-wash visuals and kinetic top-down combat. I composed the music for the teaser trailer — [add your description of the music direction here].',
+  description: 'I composed the score for the teaser trailer of Realm of Taiwu (太吾弄世劫), a long-awaited return to one of China\'s most celebrated indie IPs. Built on Chinese mythology and wuxia tradition, the game pairs hand-painted ink-wash visuals with kinetic top-down combat, a world that I found demanded music rooted in classical Chinese instrumentation but with a modern and electric spirit. The trailer crossed 1.2 million views on Bilibili.',
 
   youtubeId: 'uAmEFJ3UL3Q',
   steamUrl: 'https://store.steampowered.com/app/3452720/Realm_of_Taiwu/',

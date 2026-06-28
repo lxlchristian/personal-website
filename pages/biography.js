@@ -18,7 +18,10 @@ const BiographyPage = {
 
               <div class="bio-image-col">
                 <div class="bio-image-frame">
-                  <img src="me.jpg" alt="Christian Liu" class="bio-img" />
+                  <picture>
+                    <source media="(max-width: 768px)" srcset="landscape.JPG" />
+                    <img src="portrait.JPG" alt="Christian Liu" class="bio-img" />
+                  </picture>
                 </div>
                 <dl class="bio-facts">
                   <div class="fact">
@@ -60,7 +63,7 @@ const BiographyPage = {
                 <ul class="bio-credits__list">
                   <li><a href="/musicals/salooney-tunes" data-link="/musicals/salooney-tunes">Salooney Tunes ↗</a> <em>— Music · Hasty Pudding Theatricals · 2026</em></li>
                   <li><a href="/musicals/city-of-peace" data-link="/musicals/city-of-peace">City of Peace ↗</a> <em>— Music · Harvard Office for Fine Arts · 2025</em></li>
-                  <li><a href="/musicals/post-mortem" data-link="/musicals/post-mortem">Post-Mortem ↗</a> <em>— Music · Harvard Office for Fine Arts · 2023</em></li>
+                  <li><a href="/musicals/post-mortem" data-link="/musicals/post-mortem">Post Mortem ↗</a> <em>— Music · Harvard Office for Fine Arts · 2023</em></li>
                 </ul>
               </div>
               <div class="bio-credits__group">

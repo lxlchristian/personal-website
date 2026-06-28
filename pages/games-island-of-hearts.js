@@ -14,7 +14,7 @@ const _IOH_DATA = {
     { label: 'Released',  value: 'March 2026' },
   ],
 
-  description: 'Island of Hearts is a live-action dating simulator set on a sun-drenched tropical island, blending real-video characters with choice-driven storytelling. The score is a departure from my usual work — the main theme leans unapologetically into the cutesy and tropical, while the background tracks strip back to solo piano, minimal and warm, leaving space for the story to breathe.',
+  description: 'Island of Hearts is a live-action dating simulator set on a sun-drenched tropical island, blending real-video characters with choice-driven storytelling. The score is a departure from my usual work: the main theme leans rather unapologetically into the cutesy and tropical, and the tracks accompanying the narrative scenes strip back mostly to solo piano, minimal and warm, leaving space for the story to breathe.',
 
   screenshots: [
     { src: 'ioh_screenshot1.jpg', alt: 'Island of Hearts — character storyline selection screen' },
@@ -25,8 +25,9 @@ const _IOH_DATA = {
   steamUrl:  'https://store.steampowered.com/app/3794770/Island_of_Hearts/',
 
   tracks: [
-    { title: 'Island of Hearts Main Theme', src: 'ioh_theme.mp3',     durationStr: '2:14' },
-    { title: 'Sweet Dreaming',              src: 'sweet_dreaming.wav', durationStr: '1:42' },
+    { title: 'Island of Hearts Main Theme', src: 'ioh_theme.mp3',       durationStr: '2:14' },
+    { title: 'The Doctor Is In',            src: 'thedoctorisin.mp3',   durationStr: '2:33' },
+    { title: 'Sweet Dreaming',              src: 'sweet_dreaming.wav',  durationStr: '1:42' },
   ],
 };
 

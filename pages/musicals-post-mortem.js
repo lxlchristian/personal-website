@@ -4,12 +4,12 @@
 ══════════════════════════════════════════════════════════ */
 
 const _POSTMORTEM_DATA = {
-  title:     'Post-Mortem',
+  title:     'Post Mortem',
   year:      2023,
   role:      'Music by Christian Liu',
   producer:  'Harvard Office for Fine Arts',
   poster:    'postmortem-poster.JPG',
-  posterAlt: 'Post-Mortem — 2023 Harvard Office for Fine Arts production poster',
+  posterAlt: 'Post Mortem — 2023 Harvard Office for Fine Arts production poster',
 
   credits: [
     { label: 'Book',             value: 'Paul Palmer' },
@@ -25,7 +25,7 @@ const _POSTMORTEM_DATA = {
     { dates: 'April 20–23, 2023', venue: 'Agassiz Theater, Cambridge, MA' },
   ],
 
-  synopsis: 'Post-Mortem takes place in the basement archives of a crumbling Classics department at a fictional liberal arts college. When beleaguered doctoral student Sylvia accidentally summons the ghost of Gaius Valerius Catullus while pulling an all-nighter, the Roman poet refuses to leave until his works are properly catalogued and his reputation restored. Meanwhile, her advisor Professor Bodnar is under review, her funding is being cut, and the department chair keeps scheduling emergency meetings at 11 PM. What begins as a supernatural inconvenience becomes a meditation on obsession, legacy, and what it means to devote your life to work that the world has largely stopped caring about.',
+  synopsis: 'Post Mortem takes place in the basement archives of a crumbling Classics department at a fictional liberal arts college. When beleaguered doctoral student Sylvia accidentally summons the ghost of Gaius Valerius Catullus while pulling an all-nighter, the Roman poet refuses to leave until his works are properly catalogued and his reputation restored. Meanwhile, her advisor Professor Bodnar is under review, her funding is being cut, and the department chair keeps scheduling emergency meetings at 11 PM. What begins as a supernatural inconvenience becomes a meditation on obsession, legacy, and what it means to devote your life to work that the world has largely stopped caring about.',
 
   /* Featured song — no audio yet */
   featuredSong: { title: 'Maybe It\'s Best to Tie', desc: 'pop ballad', src: '' },

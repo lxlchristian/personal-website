@@ -17,10 +17,10 @@ const _REST = {
 /* ── Hover endpoint overrides per quadrant ──────────────
    All four endpoints specified; both lines shift on hover. */
 const _HOVER = {
-  tl: { a: { x1: 0.44, x2: 0.76 }, b: { y1: 0.72, y2: 0.70 } }, /* Games     */
-  tr: { a: { x1: 0.29, x2: 0.45 }, b: { y1: 0.76, y2: 0.52 } }, /* Biography */
-  bl: { a: { x1: 0.62, x2: 0.72 }, b: { y1: 0.48, y2: 0.23 } }, /* Musicals  */
-  br: { a: { x1: 0.23, x2: 0.48 }, b: { y1: 0.34, y2: 0.45 } }, /* Contact   */
+  tl: { a: { x1: 0.44, x2: 0.76 }, b: { y1: 0.72, y2: 0.70 } }, /* Biography */
+  tr: { a: { x1: 0.29, x2: 0.45 }, b: { y1: 0.76, y2: 0.52 } }, /* Contact   */
+  bl: { a: { x1: 0.62, x2: 0.72 }, b: { y1: 0.48, y2: 0.23 } }, /* Games     */
+  br: { a: { x1: 0.23, x2: 0.48 }, b: { y1: 0.34, y2: 0.45 } }, /* Musicals  */
 };
 
 /* ── Corner label translate direction on hover ───────── */
@@ -40,10 +40,10 @@ const _MOBILE_ARMED_NUDGE = {
 };
 
 const _QUAD_PATHS = {
-  tl: '/games',
-  tr: '/biography',
-  bl: '/musicals',
-  br: '/contact',
+  tl: '/biography',
+  tr: '/contact',
+  bl: '/games',
+  br: '/musicals',
 };
 
 const _SPRING     = 'cubic-bezier(0.16, 1, 0.3, 1)'; /* corner label nudge */
@@ -370,8 +370,8 @@ const HomePage = {
 
     /* Portrait crops for mobile, landscape for desktop */
     const imgs = isMobile
-      ? ['home_bg1_m.jpg', 'home_bg2m.jpeg', 'home_bg3m.jpeg', 'home_bg4m.jpeg']
-      : ['home_bg1.jpg',   'home_bg2.jpeg',  'home_bg3.jpeg',  'home_bg4.jpeg'];
+      ? ['home_bg1m.jpeg', 'home_bg2m.jpeg', 'home_bg3m.jpeg', 'home_bg4m.jpeg']
+      : ['home_bg1.jpeg',   'home_bg2.jpeg',  'home_bg3.jpeg',  'home_bg4.jpeg'];
 
     el.className = 'page-home';
     el.innerHTML = `
