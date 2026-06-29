@@ -361,6 +361,15 @@ const AudioPlayer = (() => {
   function onTrackChange(cb)    { _trackChangeCBs.push(cb); }
   function onPlayStateChange(cb){ _playStateCBs.push(cb); }
 
+  /* ── Retranslate source label when language changes ─────── */
+  window.addEventListener('langchange', () => {
+    if (_currentTrack && _currentTrack.sourceKey && _sourceEl) {
+      const newSource = t(_currentTrack.sourceKey);
+      _currentTrack = Object.assign({}, _currentTrack, { source: newSource });
+      _sourceEl.textContent = newSource;
+    }
+  });
+
   return {
     play, pause, resume, stop, seek,
     getCurrentTrack, isPlaying, setLastTrigger,

@@ -41,8 +41,29 @@ const Router = (() => {
 
   const contentEl = document.getElementById('content');
 
+  /* ── Language prefix helpers ─────────────────────────── */
+  function _getLangFromPath(pathname) {
+    if (pathname === '/cn' || pathname.startsWith('/cn/')) return 'zh';
+    if (pathname === '/jp' || pathname.startsWith('/jp/')) return 'ja';
+    return 'en';
+  }
+
+  function _stripLangPrefix(pathname) {
+    if (pathname.startsWith('/cn/')) return pathname.slice(3);
+    if (pathname === '/cn') return '/';
+    if (pathname.startsWith('/jp/')) return pathname.slice(3);
+    if (pathname === '/jp') return '/';
+    return pathname;
+  }
+
+  function _addLangPrefix(strippedPath, lang) {
+    if (lang === 'zh') return strippedPath === '/' ? '/cn' : '/cn' + strippedPath;
+    if (lang === 'ja') return strippedPath === '/' ? '/jp' : '/jp' + strippedPath;
+    return strippedPath;
+  }
+
   function getSection(pathname) {
-    return ROUTES[pathname] || 'home';
+    return ROUTES[_stripLangPrefix(pathname)] || 'home';
   }
 
   function getNavKey(section) {
@@ -51,19 +72,20 @@ const Router = (() => {
     return section;
   }
 
-  /* ── Navigate to a new path ────────────────────────────── */
+  /* ── Navigate to a new path (path is always prefix-free) ─ */
   function navigate(path) {
-    if (window.location.pathname === path) return;
+    const fullPath = _addLangPrefix(path, getCurrentLang());
+    if (window.location.pathname === fullPath) return;
     AudioPlayer.stop();
-    history.pushState({}, '', path);
-    render(path);
+    history.pushState({}, '', fullPath);
+    render(fullPath);
   }
 
   /* ── Full render cycle ─────────────────────────────────── */
   let _renderCount = 0;
   function render(pathname) {
     console.log('[router] render #' + (++_renderCount) + ' path=' + pathname, new Error().stack.split('\n').slice(1,5).join(' | '));
-    const section    = getSection(pathname);
+    const section    = getSection(pathname); // getSection strips the lang prefix internally
     const navSection = getNavKey(section);
 
     /* Drive body[data-section] — CSS uses this for overflow and layout */
@@ -138,11 +160,37 @@ const Router = (() => {
 
   /* ── Event listeners ───────────────────────────────────── */
 
-  /* Back / forward navigation */
-  window.addEventListener('popstate', () => render(window.location.pathname));
+  /* Flag: true while popstate is syncing language to suppress URL rewrite in langchange */
+  let _poppingState = false;
 
-  /* Language change — re-render current section with new language */
-  window.addEventListener('langchange', () => render(window.location.pathname));
+  /* Back / forward: if URL lang differs from current, sync language first.
+     applyLanguage dispatches langchange synchronously, which renders; the flag
+     prevents that handler from also rewriting the URL (it's already correct). */
+  window.addEventListener('popstate', () => {
+    const pathname = window.location.pathname;
+    const pathLang = _getLangFromPath(pathname);
+    if (pathLang !== getCurrentLang()) {
+      _poppingState = true;
+      applyLanguage(pathLang);
+      _poppingState = false;
+    } else {
+      render(pathname);
+    }
+  });
+
+  /* Language change — update URL prefix and re-render */
+  window.addEventListener('langchange', () => {
+    if (_poppingState) {
+      /* URL is already correct (set by browser history); just re-render */
+      render(window.location.pathname);
+      return;
+    }
+    const lang      = getCurrentLang();
+    const stripped  = _stripLangPrefix(window.location.pathname);
+    const newPath   = _addLangPrefix(stripped, lang);
+    history.replaceState({}, '', newPath);
+    render(newPath);
+  });
 
   /* ── Cold entry: render from current URL ──────────────── */
   render(window.location.pathname);

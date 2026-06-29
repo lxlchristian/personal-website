@@ -45,7 +45,7 @@ const TRANSLATIONS = {
     'show.musicalTheater':        'Musical Theater',
     'show.producedBy':            'Produced by',
     'show.viewOnSteam':           'View on Steam ↗',
-    'show.spotifyComingSoon':     'Spotify album coming soon',
+    'show.spotifyComingSoon':     'Spotify cast recording coming soon',
     'show.videoComingSoon':       'Video coming soon',
     'show.recordingsForthcoming': 'Recordings forthcoming.',
 
@@ -368,8 +368,21 @@ function applyLanguage(lang) {
   window.dispatchEvent(new CustomEvent('langchange', { detail: { lang } }));
 }
 
-/* ── Auto-detect browser language on first load ─────────── */
+/* ── Auto-detect language: URL prefix first, then browser ── */
 (function () {
+  const path = window.location.pathname;
+  if (path === '/cn' || path.startsWith('/cn/')) {
+    _lang = 'zh';
+    document.documentElement.setAttribute('lang',      'zh-Hans');
+    document.documentElement.setAttribute('data-lang', 'zh');
+    return;
+  }
+  if (path === '/jp' || path.startsWith('/jp/')) {
+    _lang = 'ja';
+    document.documentElement.setAttribute('lang',      'ja');
+    document.documentElement.setAttribute('data-lang', 'ja');
+    return;
+  }
   const bl = (navigator.language || '').toLowerCase();
   if      (bl.startsWith('zh')) _lang = 'zh';
   else if (bl.startsWith('ja')) _lang = 'ja';

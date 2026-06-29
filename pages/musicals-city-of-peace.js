@@ -24,7 +24,7 @@ const _COP_DATA = {
     { dates: 'December 5–7, 2025', venue: 'Agassiz Theater, Cambridge, MA' },
   ],
 
-  synopsis: 'City of Peace is a dark musical drama set in the cursed village of Myrhorod, loosely based on the stories of Nikolai Gogol. When Khoma Brut, an orphaned painter-philosopher, wanders into the wrong khutir on a summer holiday, he finds himself bound by promise to pray over the body of a girl he knows he killed. With his theologian companion Khaliava detained nearby, Khoma navigates three nights of haunting, manipulation, and moral collapse, faced with the question of what kind of man he is willing to become.',
+  synopsis: 'City of Peace is a dark musical drama set in the cursed village of Myrhorod, loosely based on the stories of Nikolai Gogol. When Khoma Brut, an orphaned painter-philosopher, wanders into the wrong khutir on a summer holiday, he finds himself bound by promise to pray over the body of a girl he knows he killed. With his theologian companion Khaliava detained nearby, Khoma spends three nights in a locked church, haunted and manipulated until the question becomes less whether he survives than what\'s left of him if he does.',
 
   /* YouTube embed: replace YOUTUBE_ID with the actual video ID from the URL (?v=...) */
   youtubeId: '7GpOX9bDCwk',

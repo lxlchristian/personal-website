@@ -1524,10 +1524,20 @@ html[data-lang="ja"] .nav-item__title {
 }
 .game-hero__steam:hover { color: var(--color-ink); }
 
-/* ── Horizontal game credit cards ────────────────────────── */
+/* ── Game credit cards — stacked: image on top, text below ── */
+.credits-grid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: var(--sp-lg);
+}
+
+@media (max-width: 900px) {
+  .credits-grid { grid-template-columns: 1fr; }
+}
+
 .game-credit-card {
   display: flex;
-  height: 180px;
+  flex-direction: column;
   border-left: 2px solid var(--color-gold);
   text-decoration: none;
   color: inherit;
@@ -1541,8 +1551,10 @@ html[data-lang="ja"] .nav-item__title {
 }
 
 .game-credit-card__img {
-  flex: 0 0 42%;
+  width: 100%;
+  aspect-ratio: 460 / 215;
   overflow: hidden;
+  flex-shrink: 0;
 }
 
 .game-credit-card__img img {
@@ -1565,18 +1577,15 @@ html[data-lang="ja"] .nav-item__title {
 }
 
 .game-credit-card__body {
-  flex: 1;
-  padding: var(--sp-lg) var(--sp-xl);
+  padding: var(--sp-md) var(--sp-lg);
   display: flex;
   flex-direction: column;
-  justify-content: center;
   gap: var(--sp-xs);
-  min-width: 0;
 }
 
 .game-credit-card__title {
   font-family: var(--font-display);
-  font-size: 1.6rem;
+  font-size: 1.4rem;
   font-weight: 400;
   font-style: italic;
   color: var(--color-ink);
@@ -1598,13 +1607,6 @@ html[data-lang="ja"] .nav-item__title {
   color: var(--color-muted);
   letter-spacing: 0.04em;
   opacity: 0.65;
-}
-
-@media (max-width: 768px) {
-  .game-credit-card              { height: auto; min-height: 120px; }
-  .game-credit-card__img         { flex: 0 0 38%; }
-  .game-credit-card__body        { padding: var(--sp-md); }
-  .game-credit-card__title       { font-size: 1.2rem; }
 }
 
 /* ── Linkable credit cards ───────────────────────────────── */

@@ -21,6 +21,12 @@
       "port": 3008
     },
     {
+      "name": "portfolio-verify2",
+      "runtimeExecutable": "python3",
+      "runtimeArgs": ["-m", "http.server", "3016"],
+      "port": 3016
+    },
+    {
       "name": "portfolio-ja",
       "runtimeExecutable": "python3",
       "runtimeArgs": ["-m", "http.server"],

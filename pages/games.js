@@ -111,6 +111,7 @@ const GamesPage = {
         src:       track.src,
         title:     track.title,
         source:    gameLabel,
+        sourceKey: 'track.game.' + track.game,
         available: !!track.src,
       };
       const rowEl = buildTrackRow({
