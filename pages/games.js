@@ -99,7 +99,7 @@ const GamesPage = {
                 </div>
                 <div class="game-credit-card__body">
                   <p class="game-credit-card__title">${credit.gameTitle}</p>
-                  <p class="game-credit-card__meta">${credit.genre} · ${credit.year} · ${credit.studio}</p>
+                  <p class="game-credit-card__meta">${t('track.game.' + credit.genre, lang)} · ${credit.year} · ${credit.studio}</p>
                   <p class="game-credit-card__role">${tCredit(credit, lang)}</p>
                 </div>
               </a>`).join('')}
@@ -107,7 +107,7 @@ const GamesPage = {
           </section>` : ''}
 
           <section class="content-section section-tracks" aria-labelledby="tracks-label">
-            <span class="section-label" id="tracks-label">${t('section.tracks', lang)}</span>
+            <span class="section-label" id="tracks-label">${t('section.specTracks', lang)}</span>
             <div class="track-list" id="games-track-list" role="list"></div>
           </section>
 

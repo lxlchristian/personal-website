@@ -6,7 +6,6 @@
 const _COP_DATA = {
   title:     'City of Peace',
   year:      2025,
-  role:      'Music by Christian Liu',
   producer:  'Harvard Office for Fine Arts',
   poster:    'cityofpeace-poster.jpg',
   posterAlt: 'City of Peace — 2025 Harvard Office for Fine Arts production poster',
@@ -21,7 +20,10 @@ const _COP_DATA = {
   ],
 
   performances: [
-    { dates: 'December 5–7, 2025', venue: 'Agassiz Theater, Cambridge, MA' },
+    {
+      dates: { en: 'December 5–7, 2025', zh: '2025年12月5–7日',  ja: '2025年12月5〜7日'  },
+      venue: { en: 'Agassiz Theater, Cambridge, MA', zh: '阿加西剧场，剑桥，马萨诸塞州', ja: 'アガシー劇場、ケンブリッジ、マサチューセッツ州' },
+    },
   ],
 
   synopsis: 'City of Peace is a dark musical drama set in the cursed village of Myrhorod, loosely based on the stories of Nikolai Gogol. When Khoma Brut, an orphaned painter-philosopher, wanders into the wrong khutir on a summer holiday, he finds himself bound by promise to pray over the body of a girl he knows he killed. With his theologian companion Khaliava detained nearby, Khoma spends three nights in a locked church, haunted and manipulated until the question becomes less whether he survives than what\'s left of him if he does.',
@@ -76,7 +78,7 @@ const CityOfPeacePage = {
               <div class="show-hero__info">
                 <span class="show-hero__label">${t('show.musicalTheater', lang)} · ${d.year}</span>
                 <h1 class="show-hero__title">${d.title}</h1>
-                <p class="show-hero__role">${d.role}</p>
+                <p class="show-hero__role">${t('show.musicBy', lang)} Christian Liu</p>
                 <p class="show-hero__producer">${t('show.producedBy', lang)} ${d.producer}</p>
               </div>
             </div>
@@ -98,8 +100,8 @@ const CityOfPeacePage = {
             <ol class="show-perf-list">
               ${d.performances.map(p => `
                 <li class="show-perf-item">
-                  <p class="show-perf-dates">${p.dates}</p>
-                  <p class="show-perf-venue">${p.venue}</p>
+                  <p class="show-perf-dates">${p.dates[lang] || p.dates.en}</p>
+                  <p class="show-perf-venue">${p.venue[lang] || p.venue.en}</p>
                 </li>`).join('')}
             </ol>
           </section>
@@ -159,7 +161,7 @@ const CityOfPeacePage = {
       };
       const rowEl = buildTrackRow({
         title:     track.title,
-        meta:      d.title,
+        meta:      d.title + ' / City of Peace Cast & Orchestra',
         duration:  track.durationStr,
         available: true,
       });

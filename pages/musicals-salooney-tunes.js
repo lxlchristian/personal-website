@@ -6,7 +6,6 @@
 const _SALOONEY_DATA = {
   title:     'Salooney Tunes',
   year:      2026,
-  role:      'Music by Christian Liu',
   producer:  'the Hasty Pudding Theatricals',
   poster:    'salooneytunes-poster.jpg',
   posterAlt: 'Salooney Tunes — 2026 Hasty Pudding Theatricals production poster',
@@ -21,9 +20,18 @@ const _SALOONEY_DATA = {
   ],
 
   performances: [
-    { dates: 'February 6–March 8, 2026', venue: 'Farkas Hall, Cambridge, MA'              },
-    { dates: 'March 13–14, 2026',         venue: 'Kaye Playhouse, New York'                },
-    { dates: 'March 18–20, 2026',         venue: 'Earl Cameron Theater, Hamilton, Bermuda' },
+    {
+      dates: { en: 'February 6–March 8, 2026', zh: '2026年2月6日 – 3月8日',  ja: '2026年2月6日〜3月8日'  },
+      venue: { en: 'Farkas Hall, Cambridge, MA',              zh: '法卡斯厅，剑桥，马萨诸塞州',                   ja: 'ファーカス・ホール、ケンブリッジ、マサチューセッツ州'   },
+    },
+    {
+      dates: { en: 'March 13–14, 2026',         zh: '2026年3月13–14日',        ja: '2026年3月13〜14日'        },
+      venue: { en: 'Kaye Playhouse, New York',                zh: '凯伊剧场，纽约',                                ja: 'カイ・プレイハウス、ニューヨーク'                       },
+    },
+    {
+      dates: { en: 'March 18–20, 2026',         zh: '2026年3月18–20日',        ja: '2026年3月18〜20日'        },
+      venue: { en: 'Earl Cameron Theater, Hamilton, Bermuda', zh: '厄尔·卡梅伦剧场，百慕大哈密尔顿',              ja: 'アール・キャメロン劇場、バミューダ・ハミルトン'         },
+    },
   ],
 
   synopsis: 'Salooney Tunes is a knee-slapping, nail-biting heist-gone-wrong that follows notorious outlaw Robin Yablind and his fame-hungry sidekick Wyatt Aintme. They must find a way to avoid Mayor Gerri Mandarin and pregnant Sheriff Carrie N Twins, who are on the hunt to put them behind bars. Chock-full of lovable characters like skittish saloon owner Bart Ender, sultry saloon-singer Sarah Problem, and twelve-year-old dancer Anna Fivesix-Fivesixseveneight, Salooney Tunes\'s twists and turns will keep you on the edge of your seat.',
@@ -56,7 +64,7 @@ const SalooneyTunesPage = {
               <div class="show-hero__info">
                 <span class="show-hero__label">${t('show.musicalTheater', lang)} · ${d.year}</span>
                 <h1 class="show-hero__title">${d.title}</h1>
-                <p class="show-hero__role">${d.role}</p>
+                <p class="show-hero__role">${t('show.musicBy', lang)} Christian Liu</p>
                 <p class="show-hero__producer">${t('show.producedBy', lang)} <a href="https://www.hastypudding.org/" target="_blank" rel="noopener" class="show-hero__producer-link">${d.producer}</a></p>
               </div>
             </div>
@@ -78,8 +86,8 @@ const SalooneyTunesPage = {
             <ol class="show-perf-list">
               ${d.performances.map(p => `
                 <li class="show-perf-item">
-                  <p class="show-perf-dates">${p.dates}</p>
-                  <p class="show-perf-venue">${p.venue}</p>
+                  <p class="show-perf-dates">${p.dates[lang] || p.dates.en}</p>
+                  <p class="show-perf-venue">${p.venue[lang] || p.venue.en}</p>
                 </li>`).join('')}
             </ol>
           </section>
@@ -141,7 +149,7 @@ const SalooneyTunesPage = {
       .filter(tr => tr.src)
       .map(tr => {
         const audioConfig = { src: tr.src, title: tr.title, source: 'Salooney Tunes', available: true };
-        const rowEl = buildTrackRow({ title: tr.title, meta: 'Salooney Tunes', duration: tr.durationStr, available: true });
+        const rowEl = buildTrackRow({ title: tr.title, meta: 'Salooney Tunes / The Hasty Pudding Cast & Band', duration: tr.durationStr, available: true });
         const iconEl = rowEl.querySelector('.track-row__play-icon');
         rowEl.querySelector('.track-row__play').addEventListener('click', () => {
           AudioPlayer.setLastTrigger(iconEl);

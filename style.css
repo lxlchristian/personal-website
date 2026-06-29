@@ -308,38 +308,44 @@ body:not([data-section="home"]) {
     z-index: 12;
   }
 
-  /* Nav: 3-row grid spanning full viewport — pass-through for taps;
-     quad overlays (z:3, pointer-events:all) receive them instead */
+  /* Nav: labels are absolutely positioned at screen corners — no grid */
   .nav-home {
-    display: grid;
-    grid-template-columns: 1fr 1fr;
-    grid-template-rows: 30vh 40vh 30vh;
-    grid-template-areas:
-      "tl tr"
-      ".  .  "
-      "bl br";
     pointer-events: none;
   }
 
-  /* Corner labels become full-tile blocks — pointer-events:none so taps
-     fall through to the quad overlays (triangular clip-path hit areas) */
+  /* Corner labels: anchored to true viewport corners.
+     Diagonal lines start from screen edges and can never reach the corners,
+     so these are safe from clipping at all hover/armed states. */
   .corner-label {
-    position: static;
-    display: flex;
-    align-items: flex-end;
-    padding: 20px 24px;
+    position: absolute;
+    display: block;
+    padding: 0;
     font-size: 1.0625rem;
     transition: color 200ms ease;
     pointer-events: none;
   }
 
-  .corner-tl { grid-area: tl; align-items: flex-end; justify-content: flex-start;  }
-  .corner-tr { grid-area: tr; align-items: flex-end; justify-content: flex-end;    }
-  .corner-bl { grid-area: bl; align-items: flex-start; justify-content: flex-start; }
-  .corner-br { grid-area: br; align-items: flex-start; justify-content: flex-end;   }
+  .corner-tl { top: 52px;    left: 44px;  }
+  .corner-tr { top: 52px;    right: 44px; }
+  .corner-bl { bottom: 68px; left: 44px;  }
+  .corner-br { bottom: 68px; right: 44px; }
 
-  /* Armed state: label is waiting for second tap to navigate */
+  /* Armed state: color change + a brief gold underline signals "tap again to enter" */
   .corner-label.is-armed { color: var(--color-ink); }
+
+  .corner-label.is-armed::after {
+    content: '';
+    display: block;
+    height: 1px;
+    background: var(--color-gold);
+    margin-top: 4px;
+    opacity: 0;
+    animation: tap-hint-line 0.2s 0.3s ease forwards;
+  }
+
+  @keyframes tap-hint-line {
+    to { opacity: 0.6; }
+  }
 
   /* Diagonal SVG lines serve as the visual dividers instead of borders */
 
@@ -358,10 +364,10 @@ body:not([data-section="home"]) {
     pointer-events: all;
   }
 
-  /* Name block: middle 40vh row, fixed over the grid */
+  /* Name block: shifted up slightly so it reads as centered between corner labels */
   .home-center {
     position: fixed;
-    top: 30vh;
+    top: 25vh;
     left: 0;
     right: 0;
     height: 40vh;

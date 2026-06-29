@@ -54,24 +54,24 @@ const BiographyPage = {
               <div class="bio-credits__group">
                 <span class="bio-credits__cat">${t('bio.credits.games', lang)}</span>
                 <ul class="bio-credits__list">
-                  <li><a href="/games/island-of-hearts" data-link="/games/island-of-hearts">Island of Hearts ↗</a> <em>— Composer &amp; Sound Designer · Titan Digital Media · 2026</em></li>
-                  <li><a href="/games/realm-of-taiwu" data-link="/games/realm-of-taiwu">Realm of Taiwu ↗</a> <em>— Composer (Teaser Trailer) · LEAP Studio · 2025</em></li>
+                  <li><a href="/games/island-of-hearts" data-link="/games/island-of-hearts">Island of Hearts ↗</a> <em>— ${t('credit.role.composerSoundDesigner', lang)} · Titan Digital Media · 2026</em></li>
+                  <li><a href="/games/realm-of-taiwu" data-link="/games/realm-of-taiwu">Realm of Taiwu ↗</a> <em>— ${t('credit.role.composerTeaserTrailer', lang)} · LEAP Studio · 2025</em></li>
                 </ul>
               </div>
               <div class="bio-credits__group">
                 <span class="bio-credits__cat">${t('bio.credits.musicals', lang)}</span>
                 <ul class="bio-credits__list">
-                  <li><a href="/musicals/salooney-tunes" data-link="/musicals/salooney-tunes">Salooney Tunes ↗</a> <em>— Music · <a href="https://www.hastypudding.org/" target="_blank" rel="noopener" class="bio-credits__org-link">Hasty Pudding Theatricals</a> · 2026</em></li>
-                  <li><a href="/musicals/city-of-peace" data-link="/musicals/city-of-peace">City of Peace ↗</a> <em>— Music · Harvard Office for Fine Arts · 2025</em></li>
-                  <li><a href="/musicals/post-mortem" data-link="/musicals/post-mortem">Post Mortem ↗</a> <em>— Music · Harvard Office for Fine Arts · 2023</em></li>
+                  <li><a href="/musicals/salooney-tunes" data-link="/musicals/salooney-tunes">Salooney Tunes ↗</a> <em>— ${t('credit.field.Music', lang)} · <a href="https://www.hastypudding.org/" target="_blank" rel="noopener" class="bio-credits__org-link">Hasty Pudding Theatricals</a> · 2026</em></li>
+                  <li><a href="/musicals/city-of-peace" data-link="/musicals/city-of-peace">City of Peace ↗</a> <em>— ${t('credit.field.Music', lang)} · Harvard Office for Fine Arts · 2025</em></li>
+                  <li><a href="/musicals/post-mortem" data-link="/musicals/post-mortem">Post Mortem ↗</a> <em>— ${t('credit.field.Music', lang)} · Harvard Office for Fine Arts · 2023</em></li>
                 </ul>
               </div>
               <div class="bio-credits__group">
                 <span class="bio-credits__cat">${t('bio.credits.orchestrations', lang)}</span>
                 <ul class="bio-credits__list">
-                  <li>Be Cozy <em>— Sound Design / Scoring · Harvard-Radcliffe Dramatic Club · 2025</em></li>
-                  <li>White House Princess <em>— Music Direction · Harvard-Radcliffe Dramatic Club · 2023</em></li>
-                  <li>Iscariot <em>— Orchestration · Harvard-Radcliffe Dramatic Club · 2022</em></li>
+                  <li>Be Cozy <em>— ${t('credit.field.Sound Design / Scoring', lang)} · Harvard-Radcliffe Dramatic Club · 2025</em></li>
+                  <li>White House Princess <em>— ${t('credit.field.Music Direction', lang)} · Harvard-Radcliffe Dramatic Club · 2023</em></li>
+                  <li>Iscariot <em>— ${t('credit.field.Orchestration', lang)} · Harvard-Radcliffe Dramatic Club · 2022</em></li>
                 </ul>
               </div>
             </div>

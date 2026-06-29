@@ -6,7 +6,6 @@
 const _POSTMORTEM_DATA = {
   title:     'Post Mortem',
   year:      2023,
-  role:      'Music by Christian Liu',
   producer:  'Harvard Office for Fine Arts',
   poster:    'postmortem-poster.JPG',
   posterAlt: 'Post Mortem — 2023 Harvard Office for Fine Arts production poster',
@@ -22,10 +21,13 @@ const _POSTMORTEM_DATA = {
   ],
 
   performances: [
-    { dates: 'April 20–23, 2023', venue: 'Agassiz Theater, Cambridge, MA' },
+    {
+      dates: { en: 'April 20–23, 2023', zh: '2023年4月20–23日',  ja: '2023年4月20〜23日'  },
+      venue: { en: 'Agassiz Theater, Cambridge, MA', zh: '阿加西剧场，剑桥，马萨诸塞州', ja: 'アガシー劇場、ケンブリッジ、マサチューセッツ州' },
+    },
   ],
 
-  synopsis: 'Post Mortem takes place in the basement archives of a crumbling Classics department at a fictional liberal arts college. When beleaguered doctoral student Sylvia accidentally summons the ghost of Gaius Valerius Catullus while pulling an all-nighter, the Roman poet refuses to leave until his works are properly catalogued and his reputation restored. Meanwhile, her advisor Professor Bodnar is under review, her funding is being cut, and the department chair keeps scheduling emergency meetings at 11 PM. What begins as a supernatural inconvenience becomes a meditation on obsession, legacy, and what it means to devote your life to work that the world has largely stopped caring about.',
+  synopsis: 'Post Mortem takes place in the basement archives of a crumbling Classics department at a fictional liberal arts college. When beleaguered doctoral student Sylvia accidentally summons the ghost of Gaius Valerius Catullus while pulling an all-nighter, the Roman poet refuses to leave until his works are properly catalogued and his reputation restored.',
 
   /* Featured song — no audio yet */
   featuredSong: { title: 'Maybe It\'s Best to Tie', desc: 'pop ballad', src: '' },
@@ -50,7 +52,7 @@ const PostMortemPage = {
               <div class="show-hero__info">
                 <span class="show-hero__label">${t('show.musicalTheater', lang)} · ${d.year}</span>
                 <h1 class="show-hero__title">${d.title}</h1>
-                <p class="show-hero__role">${d.role}</p>
+                <p class="show-hero__role">${t('show.musicBy', lang)} Christian Liu</p>
                 <p class="show-hero__producer">${t('show.producedBy', lang)} ${d.producer}</p>
               </div>
             </div>
@@ -72,8 +74,8 @@ const PostMortemPage = {
             <ol class="show-perf-list">
               ${d.performances.map(p => `
                 <li class="show-perf-item">
-                  <p class="show-perf-dates">${p.dates}</p>
-                  <p class="show-perf-venue">${p.venue}</p>
+                  <p class="show-perf-dates">${p.dates[lang] || p.dates.en}</p>
+                  <p class="show-perf-venue">${p.venue[lang] || p.venue.en}</p>
                 </li>`).join('')}
             </ol>
           </section>

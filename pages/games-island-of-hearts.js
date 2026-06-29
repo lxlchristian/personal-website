@@ -11,11 +11,15 @@ const _IOH_DATA = {
   credits: [
     { label: 'Developer', value: 'Titan Digital Media' },
     { label: 'Publisher', value: '4Divinity' },
-    { label: 'Role',      value: 'Composer and Sound Designer' },
-    { label: 'Released',  value: 'March 2026' },
+    { label: 'Role',      value: { en: 'Composer and Sound Designer', zh: '作曲·音效设计', ja: '作曲・サウンドデザイン' } },
+    { label: 'Released',  value: { en: 'March 2026',                  zh: '2026年3月',      ja: '2026年3月'              } },
   ],
 
-  description: 'Island of Hearts is a live-action dating simulator set on a sun-drenched tropical island, blending real-video characters with choice-driven storytelling. The score is a departure from my usual work: the main theme leans rather unapologetically into the cutesy and tropical, and the tracks accompanying the narrative scenes strip back mostly to solo piano, minimal and warm, leaving space for the story to breathe.',
+  description: {
+    en: 'Island of Hearts is a live-action dating simulator set on a sun-drenched tropical island, blending real-video characters with choice-driven storytelling. The score is a departure from my usual work: the main theme leans rather unapologetically into the cutesy and tropical, and the tracks accompanying the narrative scenes strip back mostly to solo piano, minimal and warm, leaving space for the story to breathe.',
+    zh: '《心之岛》是一款以阳光明媚的热带岛屿为背景的真人恋爱模拟游戏，将真实视频角色与选择驱动的叙事融为一体。这张原声大碟与我以往的作品风格有所不同：主题曲毫不掩饰地走向可爱与热带风情，而叙事场景的配乐则大多回归到简约温暖的独奏钢琴，留出空间让故事自然呼吸。',
+    ja: '「アイランド・オブ・ハーツ」は、陽光降り注ぐ熱帯の島を舞台にした実写恋愛シミュレーションゲームで、実写キャラクターと選択肢による物語を融合させた作品です。スコアは私の通常の仕事とは一線を画しており、メインテーマはキュートでトロピカルな雰囲気を遠慮なく押し出し、ナラティブシーンの楽曲は主にソロピアノへとそぎ落とされ、シンプルで温かく、物語が息づくための空間を残しています。',
+  },
 
   screenshots: [
     { src: 'ioh_screenshot1.jpg', alt: 'Island of Hearts — character storyline selection screen' },
@@ -65,14 +69,14 @@ const IslandOfHeartsPage = {
               ${d.credits.map(c => `
                 <div class="show-credits__row">
                   <dt class="show-credits__label">${t('credit.field.' + c.label, lang) || c.label}</dt>
-                  <dd class="show-credits__value">${c.value}</dd>
+                  <dd class="show-credits__value">${typeof c.value === 'object' ? (c.value[lang] || c.value.en) : c.value}</dd>
                 </div>`).join('')}
             </dl>
           </section>
 
           <section class="content-section" aria-labelledby="desc-ioh">
             <span class="section-label" id="desc-ioh">${t('show.about', lang)}</span>
-            <p class="game-description">${d.description}</p>
+            <p class="game-description">${typeof d.description === 'object' ? (d.description[lang] || d.description.en) : d.description}</p>
           </section>
 
           <section class="content-section" aria-labelledby="screens-ioh">

@@ -23,6 +23,20 @@ const _HOVER = {
   br: { a: { x1: 0.23, x2: 0.48 }, b: { y1: 0.34, y2: 0.45 } }, /* Musicals  */
 };
 
+/* ── Mobile-specific line positions — wider angles for portrait viewport ─
+   Intersection lands near (46 %, 52 %) which is roughly screen center.    */
+const _REST_MOBILE = {
+  a: { x1: 0.44, y1: 0,    x2: 0.56, y2: 1    },
+  b: { x1: 0,    y1: 0.70, x2: 1,    y2: 0.30 },
+};
+
+const _HOVER_MOBILE = {
+  tl: { a: { x1: 0.40, x2: 0.79 }, b: { y1: 0.70, y2: 0.82 } },
+  tr: { a: { x1: 0.10, x2: 0.52 }, b: { y1: 0.82, y2: 0.58 } },
+  bl: { a: { x1: 0.48, x2: 0.86 }, b: { y1: 0.52, y2: 0.06 } },
+  br: { a: { x1: 0.08, x2: 0.48 }, b: { y1: 0.40, y2: 0.22 } },
+};
+
 /* ── Corner label translate direction on hover ───────── */
 const _CORNER_NUDGE = {
   tl: { x: -10, y: -10 },
@@ -31,12 +45,12 @@ const _CORNER_NUDGE = {
   br: { x:  10, y:  10 },
 };
 
-/* ── Mobile armed nudge — larger spring signals "tap again to enter" */
+/* ── Mobile armed nudge — moves label outward to signal "tap again to enter" */
 const _MOBILE_ARMED_NUDGE = {
-  tl: { x: -18, y: -18 },
-  tr: { x:  18, y: -18 },
-  bl: { x: -18, y:  18 },
-  br: { x:  18, y:  18 },
+  tl: { x: -16, y: -16 },
+  tr: { x:  16, y: -16 },
+  bl: { x: -16, y:  16 },
+  br: { x:  16, y:  16 },
 };
 
 const _QUAD_PATHS = {
@@ -129,7 +143,8 @@ function _initMobileQuads() {
   let _resetTimer = null;
   const prefersReduced = window.matchMedia('(prefers-reduced-motion: reduce)');
 
-  function _deactivateAll() {
+  /* restoreOpacity=false when called from _armQuad — opacity is handled there instead */
+  function _deactivateAll(restoreOpacity = true) {
     console.log('[mobile] _deactivateAll', new Error().stack.split('\n').slice(1,4).join(' | '));
     clearTimeout(_resetTimer);
     _armedQuad = null;
@@ -137,10 +152,13 @@ function _initMobileQuads() {
     document.querySelectorAll('.corner-label').forEach(el => {
       el.classList.remove('is-armed');
       if (typeof gsap !== 'undefined') {
+        gsap.killTweensOf(el);
         if (prefersReduced.matches) {
-          gsap.set(el, { x: 0, y: 0 });
+          gsap.set(el, { x: 0, y: 0, ...(restoreOpacity ? { opacity: 1 } : {}) });
+        } else if (restoreOpacity) {
+          gsap.to(el, { x: 0, y: 0, opacity: 1, duration: 0.5, ease: 'power2.out' });
         } else {
-          gsap.to(el, { x: 0, y: 0, duration: 0.6, ease: 'power2.out' });
+          gsap.set(el, { x: 0, y: 0 });
         }
       }
     });
@@ -148,15 +166,27 @@ function _initMobileQuads() {
   }
 
   function _armQuad(quad) {
-    _deactivateAll(); /* kills any in-progress diagonal return via _animateLines */
+    _deactivateAll(false); /* kills timers + resets position; opacity handled below */
     _armedQuad = quad;
+
+    /* Dim non-armed labels; keep armed label at full opacity */
+    if (typeof gsap !== 'undefined') {
+      document.querySelectorAll('.corner-label').forEach(el => {
+        gsap.killTweensOf(el);
+        if (el.classList.contains('corner-' + quad)) {
+          gsap.set(el, { opacity: 1 });
+        } else {
+          gsap.to(el, { opacity: 0.2, duration: 0.25, ease: 'power2.out' });
+        }
+      });
+    }
 
     /* Reveal background image */
     const overlay = document.getElementById('quad' + quad.toUpperCase());
     if (overlay) overlay.classList.add('is-active');
 
-    /* Shift diagonals exactly like desktop hover */
-    _animateLines(_target(quad));
+    /* Shift diagonals — slower, softer ease on mobile */
+    _animateLines(_target(quad), 0.85, 'power2.inOut');
 
     /* Spring corner label outward (armed signal) */
     const label = document.querySelector('.corner-' + quad);
@@ -168,7 +198,7 @@ function _initMobileQuads() {
         if (prefersReduced.matches) {
           gsap.set(label, { x: nudge.x, y: nudge.y });
         } else {
-          gsap.to(label, { x: nudge.x, y: nudge.y, duration: 0.55, ease: 'elastic.out(1.2, 0.4)' });
+          gsap.to(label, { x: nudge.x, y: nudge.y, duration: 0.45, ease: 'power3.out' });
         }
       }
     }
@@ -199,17 +229,22 @@ function _initMobileQuads() {
 /* Reset _st to resting state for current viewport */
 function _setResting() {
   const W = window.innerWidth, H = window.innerHeight;
-  _st.a = { x1: _REST.a.x1*W, y1: _REST.a.y1*H, x2: _REST.a.x2*W, y2: _REST.a.y2*H };
-  _st.b = { x1: _REST.b.x1*W, y1: _REST.b.y1*H, x2: _REST.b.x2*W, y2: _REST.b.y2*H };
+  const isMob = window.matchMedia('(max-width: 768px)').matches;
+  const rest = isMob ? _REST_MOBILE : _REST;
+  _st.a = { x1: rest.a.x1*W, y1: rest.a.y1*H, x2: rest.a.x2*W, y2: rest.a.y2*H };
+  _st.b = { x1: rest.b.x1*W, y1: rest.b.y1*H, x2: rest.b.x2*W, y2: rest.b.y2*H };
 }
 
 /* Compute hover target px (quad=null → resting) */
 function _target(quad) {
   const W = window.innerWidth, H = window.innerHeight;
-  const ha = quad ? (_HOVER[quad].a || {}) : {};
-  const hb = quad ? (_HOVER[quad].b || {}) : {};
-  const fa = { ..._REST.a, ...ha };
-  const fb = { ..._REST.b, ...hb };
+  const isMob = window.matchMedia('(max-width: 768px)').matches;
+  const restSrc  = isMob ? _REST_MOBILE : _REST;
+  const hoverSrc = isMob ? _HOVER_MOBILE : _HOVER;
+  const ha = quad ? (hoverSrc[quad].a || {}) : {};
+  const hb = quad ? (hoverSrc[quad].b || {}) : {};
+  const fa = { ...restSrc.a, ...ha };
+  const fb = { ...restSrc.b, ...hb };
   return {
     a: { x1: fa.x1*W, y1: fa.y1*H, x2: fa.x2*W, y2: fa.y2*H },
     b: { x1: fb.x1*W, y1: fb.y1*H, x2: fb.x2*W, y2: fb.y2*H },
@@ -365,8 +400,9 @@ const HomePage = {
     const isMobile = window.matchMedia('(max-width: 768px)').matches;
 
     const W = window.innerWidth, H = window.innerHeight;
-    const ra = { x1: _REST.a.x1*W, y1: _REST.a.y1*H, x2: _REST.a.x2*W, y2: _REST.a.y2*H };
-    const rb = { x1: _REST.b.x1*W, y1: _REST.b.y1*H, x2: _REST.b.x2*W, y2: _REST.b.y2*H };
+    const restSrc = isMobile ? _REST_MOBILE : _REST;
+    const ra = { x1: restSrc.a.x1*W, y1: restSrc.a.y1*H, x2: restSrc.a.x2*W, y2: restSrc.a.y2*H };
+    const rb = { x1: restSrc.b.x1*W, y1: restSrc.b.y1*H, x2: restSrc.b.x2*W, y2: restSrc.b.y2*H };
 
     /* Portrait crops for mobile, landscape for desktop */
     const imgs = isMobile

@@ -29,6 +29,7 @@ const TRANSLATIONS = {
     'section.reel':              'Reel',
     'section.credits':           'Professional Credits',
     'section.tracks':            'Featured Tracks',
+    'section.specTracks':        'Featured Spec Tracks',
     'section.contact':           'Get in Touch',
     'section.productions':       'Productions',
     'section.additionalCredits': 'Additional Credits',
@@ -44,18 +45,26 @@ const TRANSLATIONS = {
     'show.featuredRecording':     'Featured Recording',
     'show.musicalTheater':        'Musical Theater',
     'show.producedBy':            'Produced by',
+    'show.musicBy':               'Music by',
     'show.viewOnSteam':           'View on Steam ↗',
     'show.spotifyComingSoon':     'Spotify cast recording coming soon',
     'show.videoComingSoon':       'Video coming soon',
     'show.recordingsForthcoming': 'Recordings forthcoming.',
     'show.roughMixNote':          'Pre-release rough mixes · Full cast recording coming soon on Spotify.',
 
+    /* ── Production teasers ── */
+    'prod.teaser.salooney-tunes': "Harvard's 177th Hasty Pudding Musical: an all-new wild west adventure from the nation's oldest collegiate theater company.",
+    'prod.teaser.city-of-peace':  'Inspired by 19th-century Ukrainian gothic literature, an original operetta exploring evil, folklore, and the human condition.',
+    'prod.teaser.post-mortem':    'A comedy-musical set in a crumbling Classics department where an accidental ghost-summoning derails a desperate rescue plan.',
+
     /* ── CTA ── */
     'cta.workTogether': "Let's work together!",
 
     /* ── Credit role descriptors ── */
-    'credit.role.trailerMusic':       'Teaser Trailer Music',
-    'credit.role.originalSoundtrack': 'Original Soundtrack',
+    'credit.role.trailerMusic':          'Teaser Trailer Music',
+    'credit.role.originalSoundtrack':    'Original Soundtrack',
+    'credit.role.composerSoundDesigner': 'Composer & Sound Designer',
+    'credit.role.composerTeaserTrailer': 'Composer (Teaser Trailer)',
 
     /* ── Credit field labels ── */
     'credit.field.Book':                   'Book',
@@ -78,17 +87,22 @@ const TRANSLATIONS = {
     'track.game.Action Roguelite':    'Action Roguelite',
     'track.game.Dating Simulator':    'Dating Simulator',
     'track.game.Bullet Hell Shooter': 'Bullet Hell Shooter',
+    'track.game.Platformer':          'Platformer',
+    'track.game.JRPG':                'JRPG',
+    'track.game.Retro Platformer':    'Retro Platformer',
     'track.genre.Game Trailer / Rock':      'Game Trailer / Rock',
     'track.genre.Electronic / Drum & Bass': 'Electronic / Drum & Bass',
     'track.genre.Cinematic / Orchestral':   'Cinematic / Orchestral',
     'track.genre.Electronic':               'Electronic',
     'track.genre.Piano':                    'Piano',
+    'track.genre.Battle / Piano':           'Battle / Piano',
+    'track.genre.Chiptune':                 'Chiptune',
 
     /* ── Contact ── */
-    'contact.framing': 'Tell me about your project.',
+    'contact.framing': 'Let\'s get to work!',
     'contact.name':    'Name',
     'contact.email':   'Email',
-    'contact.message': 'Tell me about your project',
+    'contact.message': 'Tell me about your project!',
     'contact.send':    'Send Message',
     'contact.or':      'or send a message',
     'contact.sending': 'Sending…',
@@ -135,6 +149,7 @@ const TRANSLATIONS = {
     'section.reel':              '视频',
     'section.credits':           '专业履历',
     'section.tracks':            '精选曲目',
+    'section.specTracks':        '精选示范曲目',
     'section.contact':           '联系我',
     'section.productions':       '作品',
     'section.additionalCredits': '其他作品',
@@ -150,18 +165,26 @@ const TRANSLATIONS = {
     'show.featuredRecording':     '精选录音',
     'show.musicalTheater':        '音乐剧',
     'show.producedBy':            '出品方',
+    'show.musicBy':               '作曲',
     'show.viewOnSteam':           '在Steam查看 ↗',
     'show.spotifyComingSoon':     'Spotify专辑即将上线',
     'show.videoComingSoon':       '视频即将上线',
     'show.recordingsForthcoming': '录音即将发布。',
     'show.roughMixNote':          '预发布粗混版 · 完整卡司录音即将登陆 Spotify',
 
+    /* ── Production teasers ── */
+    'prod.teaser.salooney-tunes': '哈佛第177届Hasty Pudding年度音乐剧：来自美国历史最悠久的大学剧社的全新西部冒险故事。',
+    'prod.teaser.city-of-peace':  '灵感来自19世纪乌克兰哥特文学，一部探索邪恶、民间传说与人类处境的原创歌剧。',
+    'prod.teaser.post-mortem':    '一部喜剧音乐剧，发生在行将崩塌的古典系——一场意外的召鬼事件打乱了绝望的救援计划。',
+
     /* ── CTA ── */
     'cta.workTogether': '期待与您合作！',
 
     /* ── Credit role descriptors ── */
-    'credit.role.trailerMusic':       '预告片音乐',
-    'credit.role.originalSoundtrack': '原声带',
+    'credit.role.trailerMusic':          '预告片音乐',
+    'credit.role.originalSoundtrack':    '原声带',
+    'credit.role.composerSoundDesigner': '作曲·音效设计',
+    'credit.role.composerTeaserTrailer': '作曲（宣传片）',
 
     /* ── Credit field labels ── */
     'credit.field.Book':                   '剧本',
@@ -184,11 +207,16 @@ const TRANSLATIONS = {
     'track.game.Action Roguelite':    '动作肉鸽游戏',
     'track.game.Dating Simulator':    '恋爱模拟器',
     'track.game.Bullet Hell Shooter': '弹幕射击游戏',
+    'track.game.Platformer':          '平台游戏',
+    'track.game.JRPG':                '日式RPG',
+    'track.game.Retro Platformer':    '复古平台游戏',
     'track.genre.Game Trailer / Rock':      '游戏预告 / 摇滚',
     'track.genre.Electronic / Drum & Bass': '电子 / 鼓打贝斯',
     'track.genre.Cinematic / Orchestral':   '电影风格 / 管弦乐',
     'track.genre.Electronic':               '电子音乐',
     'track.genre.Piano':                    '钢琴',
+    'track.genre.Battle / Piano':           '战斗 / 钢琴',
+    'track.genre.Chiptune':                 '芯片音乐',
 
     /* ── Contact ── */
     'contact.framing': '欢迎告诉我您的项目。',
@@ -241,6 +269,7 @@ const TRANSLATIONS = {
     'section.reel':              'リール',
     'section.credits':           '制作実績',
     'section.tracks':            '注目楽曲',
+    'section.specTracks':        '注目デモ楽曲',
     'section.contact':           'お問い合わせ',
     'section.productions':       '作品一覧',
     'section.additionalCredits': 'その他の実績',
@@ -256,18 +285,26 @@ const TRANSLATIONS = {
     'show.featuredRecording':     '注目録音',
     'show.musicalTheater':        'ミュージカル',
     'show.producedBy':            '製作',
+    'show.musicBy':               '音楽',
     'show.viewOnSteam':           'Steamで見る ↗',
     'show.spotifyComingSoon':     'Spotifyアルバム、近日公開',
     'show.videoComingSoon':       'ビデオ近日公開',
     'show.recordingsForthcoming': '録音近日公開。',
     'show.roughMixNote':          'プレリリース版ラフミックス · 正式音源は近日Spotifyにて公開',
 
+    /* ── Production teasers ── */
+    'prod.teaser.salooney-tunes': 'ハーバード第177回Hasty Pudding年度ミュージカル：米国最古の大学劇団による新作ワイルドウエストアドベンチャー。',
+    'prod.teaser.city-of-peace':  '19世紀ウクライナのゴシック文学から着想を得た、悪・民話・人間の本質を探るオリジナルオペレッタ。',
+    'prod.teaser.post-mortem':    '廃れていくクラシック学科を舞台に、偶然の幽霊召喚が必死の救出計画を狂わせるコメディ・ミュージカル。',
+
     /* ── CTA ── */
     'cta.workTogether': 'ぜひ一緒にお仕事しましょう！',
 
     /* ── Credit role descriptors ── */
-    'credit.role.trailerMusic':       'ティーザートレーラー楽曲',
-    'credit.role.originalSoundtrack': 'オリジナルサウンドトラック',
+    'credit.role.trailerMusic':          'ティーザートレーラー楽曲',
+    'credit.role.originalSoundtrack':    'オリジナルサウンドトラック',
+    'credit.role.composerSoundDesigner': '作曲・サウンドデザイン',
+    'credit.role.composerTeaserTrailer': '作曲（ティーザートレーラー）',
 
     /* ── Credit field labels ── */
     'credit.field.Book':                   '台本',
@@ -290,11 +327,16 @@ const TRANSLATIONS = {
     'track.game.Action Roguelite':    'アクションローグライト',
     'track.game.Dating Simulator':    '恋愛シミュレーション',
     'track.game.Bullet Hell Shooter': '弾幕シューター',
+    'track.game.Platformer':          'プラットフォーマー',
+    'track.game.JRPG':                'JRPG',
+    'track.game.Retro Platformer':    'レトロプラットフォーマー',
     'track.genre.Game Trailer / Rock':      'ゲームトレーラー / ロック',
     'track.genre.Electronic / Drum & Bass': 'エレクトロニック / ドラムンベース',
     'track.genre.Cinematic / Orchestral':   'シネマティック / オーケストラ',
     'track.genre.Electronic':               'エレクトロニック',
     'track.genre.Piano':                    'ピアノ',
+    'track.genre.Battle / Piano':           'バトル / ピアノ',
+    'track.genre.Chiptune':                 'チップチューン',
 
     /* ── Contact ── */
     'contact.framing': 'プロジェクトについて、ぜひお聞かせください。',
@@ -311,10 +353,10 @@ const TRANSLATIONS = {
 
     /* ── Biography ── */
     'bio.label': 'プロフィール',
-    'bio.p1': 'はじめまして。シンガポール出身の作曲家、Christian Liuです。ビデオゲームの音楽制作とミュージカルの作曲を専門とし、ハーバード大学・バークリー音楽院合同プログラムを修了しました。',
-    'bio.p2': '学部ではコンピュータサイエンスを学びながらも、音楽制作に多くの時間を注ぎました。卒業までに2幕構成の本格ミュージカルを3作書き上げ、そのうちの1作は<a href="https://www.hastypudding.org/hasty-pudding-theatricals/" target="_blank" rel="noopener">Hasty Pudding Theatricals</a>との共同制作として、ケンブリッジ・ニューヨーク・バミューダで計40公演を行いました。',
-    'bio.p3': 'ゲーム音楽の分野では、Island of Hearts（17曲収録の初のオリジナルサウンドトラック）と、アクションローグライト『太吾絵巻』のティーザートレーラーを手がけました。このトレーラーはBilibiliで120万回以上の再生を記録しています。バークリー音楽院のGames and Interactive Scoring Programを通じて多くのゲーム開発者と協働し、東京のソニー・プレイステーション、北京のLEAPスタジオでインターンも経験しました。',
-    'bio.p4': '現在は東京を拠点に、世界中のクライアントとのリモートコラボレーションも承っています。作曲家をお探しでしたら、ぜひお気軽にご連絡ください！',
+    'bio.p1': 'シンガポール出身、東京を拠点に活動する作曲家、Christian Liuです。ビデオゲーム音楽とミュージカルを中心に、物語を彩る音楽を創り続けています。ハーバード大学×バークリー音楽院の合同プログラムを修了。',
+    'bio.p2': '学内はコンピュータサイエンスを学びながら創作にも情熱を注ぎ、2幕構成のオリジナル・ミュージカルを3作品完成。',
+    'bio.p3': 'ゲーム音楽では、オリジナルサウンドトラック『Island of Hearts』（全17曲）を制作しました。さらに担当した『太吾絵巻』ティーザートレーラーは、Bilibiliで120万回以上再生されるなど、大きな反響を獲得しています。バークリー音楽院のGames and Interactive Scoring Programを通じて世界中の開発者と協働し、ソニー・インタラクティブエンタテインメント（東京）およびLEAP Studio（北京）でのインターンシップも経験。国際的な現場で実践を重ねてきました。',
+    'bio.p4': '現在は東京を拠点に、世界中のクライアントとリモートでコラボレーションを行っています。心を動かし、世界観を広げる音楽を。ぜひあなたのプロジェクトでご一緒できれば嬉しいです。お気軽にご連絡ください！',
     'bio.basedLabel':             '拠点',
     'bio.basedValue':             '東京 · リモート対応可',
     'bio.langLabel':              '言語',

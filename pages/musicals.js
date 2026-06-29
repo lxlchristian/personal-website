@@ -40,6 +40,7 @@ const _FEATURED_TRACKS = [
   {
     title:       'I Just Want To Be Wanted',
     show:        'Salooney Tunes',
+    meta:        'Salooney Tunes / The Hasty Pudding Cast & Band',
     showPath:    '/musicals/salooney-tunes',
     src:         'WantToBeWanted_rough.wav',
     durationStr: '5:20',
@@ -48,6 +49,7 @@ const _FEATURED_TRACKS = [
   {
     title:       'Rodeo and Juliet',
     show:        'Salooney Tunes',
+    meta:        'Salooney Tunes / The Hasty Pudding Cast & Band',
     showPath:    '/musicals/salooney-tunes',
     src:         'Rodeo_rough.wav.mp3',
     durationStr: '3:09',
@@ -56,6 +58,7 @@ const _FEATURED_TRACKS = [
   {
     title:       'The Bell Knell',
     show:        'City of Peace',
+    meta:        'City of Peace / City of Peace Cast & Orchestra',
     showPath:    '/musicals/city-of-peace',
     src:         'TheBellKnell_live.mp3',
     durationStr: '5:02',
@@ -66,42 +69,41 @@ const _FEATURED_TRACKS = [
 /* Production cards — order is intentional (Salooney first) */
 const _PRODUCTIONS_INDEX = [
   {
-    title:      'Salooney Tunes',
-    path:       '/musicals/salooney-tunes',
-    year:       2026,
-    producer:   'The Hasty Pudding Theatricals',
-    role:       'Music by Christian Liu',
-    teaser:     'A high-energy comic western heist musical that ran in Cambridge, New York, and Bermuda.',
-    poster:     'salooneytunes-poster.jpg',
-    posterAlt:  'Salooney Tunes — 2026 Hasty Pudding Theatricals production poster',
+    title:     'Salooney Tunes',
+    path:      '/musicals/salooney-tunes',
+    year:      2026,
+    producer:  'The Hasty Pudding Theatricals',
+    teaserKey: 'prod.teaser.salooney-tunes',
+    poster:    'salooneytunes-poster.jpg',
+    posterAlt: 'Salooney Tunes — 2026 Hasty Pudding Theatricals production poster',
   },
   {
-    title:      'City of Peace',
-    path:       '/musicals/city-of-peace',
-    year:       2025,
-    producer:   'Harvard Office for Fine Arts',
-    role:       'Music by Christian Liu',
-    teaser:     'A dark folk-inflected musical drama of haunting, guilt, and moral collapse.',
-    poster:     'cityofpeace-poster.jpg',
-    posterAlt:  'City of Peace — 2025 Harvard Office for Fine Arts production poster',
+    title:     'City of Peace',
+    path:      '/musicals/city-of-peace',
+    year:      2025,
+    producer:  'Harvard Office for Fine Arts',
+    teaserKey: 'prod.teaser.city-of-peace',
+    poster:    'cityofpeace-poster.jpg',
+    posterAlt: 'City of Peace — 2025 Harvard Office for Fine Arts production poster',
   },
   {
-    title:      'Post Mortem',
-    path:       '/musicals/post-mortem',
-    year:       2023,
-    producer:   'Harvard Office for Fine Arts',
-    role:       'Music by Christian Liu',
-    teaser:     'A comedy-musical set in a crumbling Classics department where an accidental ghost-summoning derails a desperate rescue plan.',
-    poster:     'postmortem-poster.JPG',
-    posterAlt:  'Post Mortem — 2023 Harvard Office for Fine Arts production poster',
+    title:     'Post Mortem',
+    path:      '/musicals/post-mortem',
+    year:      2023,
+    producer:  'Harvard Office for Fine Arts',
+    teaserKey: 'prod.teaser.post-mortem',
+    poster:    'postmortem-poster.JPG',
+    posterAlt: 'Post Mortem — 2023 Harvard Office for Fine Arts production poster',
   },
 ];
 
 /* ── Production card HTML ───────────────────────────────── */
-function _prodCard(prod) {
+function _prodCard(prod, lang) {
+  const role   = t('show.musicBy', lang) + ' Christian Liu';
+  const teaser = t(prod.teaserKey, lang);
   return `
     <a class="mus-prod-card" href="${prod.path}" data-link="${prod.path}"
-       aria-label="${prod.title}, ${prod.year}. ${prod.teaser}">
+       aria-label="${prod.title}, ${prod.year}. ${teaser}">
       <span class="mus-prod-card__year" aria-hidden="true">${prod.year}</span>
       <div class="mus-prod-card__body">
         <h3 class="mus-prod-card__title">
@@ -109,9 +111,9 @@ function _prodCard(prod) {
         </h3>
         <div class="mus-prod-card__rule" aria-hidden="true"></div>
         <p class="mus-prod-card__credits">
-          <span class="mus-prod-card__year-mobile" aria-hidden="true">${prod.year}&ensp;·&ensp;</span>${prod.producer}&ensp;·&ensp;${prod.role}
+          <span class="mus-prod-card__year-mobile" aria-hidden="true">${prod.year}&ensp;·&ensp;</span>${prod.producer}&ensp;·&ensp;${role}
         </p>
-        <p class="mus-prod-card__teaser">${prod.teaser}</p>
+        <p class="mus-prod-card__teaser">${teaser}</p>
       </div>
       <div class="mus-prod-card__poster-col">
         <img src="${prod.poster}" alt="${prod.posterAlt}" loading="lazy"/>
@@ -177,7 +179,7 @@ const MusicalsPage = {
           <section class="content-section mus-reveal" aria-labelledby="prod-label">
             <span class="section-label" id="prod-label">${t('section.productions', lang)}</span>
             <div class="mus-prod-cards">
-              ${_PRODUCTIONS_INDEX.map(_prodCard).join('')}
+              ${_PRODUCTIONS_INDEX.map(p => _prodCard(p, lang)).join('')}
             </div>
           </section>
 
@@ -222,7 +224,7 @@ const MusicalsPage = {
     _FEATURED_TRACKS.forEach(track => {
       trackList.appendChild(buildTrackRow({
         title:     track.title,
-        meta:      track.show,
+        meta:      track.meta || track.show,
         duration:  track.durationStr,
         available: track.available,
       }));

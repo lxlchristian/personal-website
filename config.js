@@ -7,13 +7,6 @@
    Do NOT edit: i18n.js, nav.js, router.js, or pages/*.js
    Those are layout and logic — content lives here only.
 
-   WAVEFORM PROFILES
-   ─────────────────
-   Sets the visual character of the waveform bars per track.
-   Choose from: 'dense-rhythmic' | 'flowing-electronic' |
-                'sweeping-orchestral' | 'sparse-electronic' |
-                'sparse-melodic'
-
    CREDIT ROLE KEYS
    ────────────────
    roleKey values are looked up in i18n.js for translation.
@@ -36,62 +29,72 @@ const SITE_CONFIG = {
   /* ── Social links (leave empty string '' to hide) ─────── */
   SOCIAL: {
     youtube:    'https://www.youtube.com/@xilebilemusic',
-    soundcloud: 'https://soundcloud.com/xielxiel',
+    soundcloud: 'https://soundcloud.com/xilebile',
     instagram:  '',
     linkedin:   'https://www.linkedin.com/in/christian-liu-51480522b/',
   },
 
   /* ── Audio tracks ─────────────────────────────────────── */
   TRACKS: [
+    // {
+    //   title:           'Realm of Taiwu Trailer Theme',
+    //   game:            'Action Roguelite',
+    //   gameUrl:         '',
+    //   genre:           'Game Trailer / Rock',
+    //   duration:        74,
+    //   durationStr:     '1:14',
+    //   src:             'TaiwuSurvivorPV.wav',
+    //   waveformProfile: 'dense-rhythmic',
+    // },
+    // {
+    //   title:           'Island of Hearts Main Theme',
+    //   game:            'Dating Simulator',
+    //   gameUrl:         '',
+    //   genre:           'Electronic / Drum & Bass',
+    //   duration:        134,
+    //   durationStr:     '2:14',
+    //   src:             'ioh_theme.mp3',
+    //   waveformProfile: 'flowing-electronic',
+    // },
     {
-      title:           'Realm of Taiwu Trailer Theme',
-      game:            'Action Roguelite',
-      gameUrl:         '',
-      genre:           'Game Trailer / Rock',
-      duration:        74,
-      durationStr:     '1:14',
-      src:             'TaiwuSurvivorPV.wav',
-      waveformProfile: 'dense-rhythmic',
+      title:       'Reconnaissance',
+      game:        'Bullet Hell Shooter',
+      gameUrl:     '',
+      genre:       'Electronic',
+      durationStr: '2:08',
+      src:         'recon.wav',
     },
     {
-      title:           'Island of Hearts Main Theme',
-      game:            'Dating Simulator',
-      gameUrl:         '',
-      genre:           'Electronic / Drum & Bass',
-      duration:        134,
-      durationStr:     '2:14',
-      src:             'ioh_theme.mp3',
-      waveformProfile: 'flowing-electronic',
+      title:       'STREAM_LINE (Branched)',
+      game:        'Platformer',
+      gameUrl:     '',
+      genre:       'Electronic / Drum & Bass',
+      durationStr: '1:23',
+      src:         'STREAM__LINE_Flow.wav',
     },
     {
-      title:           'Battle the Beast!',
-      game:            'Action Roguelite',
-      gameUrl:         '',
-      genre:           'Cinematic / Orchestral',
-      duration:        163,
-      durationStr:     '2:43',
-      src:             'whaleboss.wav',
-      waveformProfile: 'sweeping-orchestral',
+      title:       'Battle the Beast!',
+      game:        'Action Roguelite',
+      gameUrl:     '',
+      genre:       'Cinematic / Orchestral',
+      durationStr: '2:43',
+      src:         'whaleboss.wav',
     },
     {
-      title:           'Reconnaissance',
-      game:            'Bullet Hell Shooter',
-      gameUrl:         '',
-      genre:           'Electronic',
-      duration:        128,
-      durationStr:     '2:08',
-      src:             'recon.wav',
-      waveformProfile: 'sparse-electronic',
+      title:       'Stained Glass',
+      game:        'JRPG',
+      gameUrl:     '',
+      genre:       'Battle / Piano',
+      durationStr: '1:11',
+      src:         'stainedglass_piano.wav',
     },
     {
-      title:           'Sweet Dreaming',
-      game:            'Dating Simulator',
-      gameUrl:         '',
-      genre:           'Piano',
-      duration:        102,
-      durationStr:     '1:42',
-      src:             'sweet_dreaming.wav',
-      waveformProfile: 'sparse-melodic',
+      title:       'Windy Hut',
+      game:        'Retro Platformer',
+      gameUrl:     '',
+      genre:       'Chiptune',
+      durationStr: '1:55',
+      src:         'WindyHut.wav',
     },
   ],
 
