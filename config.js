@@ -86,7 +86,7 @@ const SITE_CONFIG = {
       gameUrl:     '',
       genre:       'Battle / Piano',
       durationStr: '1:11',
-      src:         'stainedglass_piano.wav',
+      src:         'StainedGlass_piano.wav',
     },
     {
       title:       'Windy Hut',
