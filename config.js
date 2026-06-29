@@ -36,26 +36,6 @@ const SITE_CONFIG = {
 
   /* ── Audio tracks ─────────────────────────────────────── */
   TRACKS: [
-    // {
-    //   title:           'Realm of Taiwu Trailer Theme',
-    //   game:            'Action Roguelite',
-    //   gameUrl:         '',
-    //   genre:           'Game Trailer / Rock',
-    //   duration:        74,
-    //   durationStr:     '1:14',
-    //   src:             'TaiwuSurvivorPV.wav',
-    //   waveformProfile: 'dense-rhythmic',
-    // },
-    // {
-    //   title:           'Island of Hearts Main Theme',
-    //   game:            'Dating Simulator',
-    //   gameUrl:         '',
-    //   genre:           'Electronic / Drum & Bass',
-    //   duration:        134,
-    //   durationStr:     '2:14',
-    //   src:             'ioh_theme.mp3',
-    //   waveformProfile: 'flowing-electronic',
-    // },
     {
       title:       'Reconnaissance',
       game:        'Bullet Hell Shooter',
@@ -122,21 +102,6 @@ const SITE_CONFIG = {
         year:      2025,
         url:       'https://store.steampowered.com/app/3452720/Realm_of_Taiwu/',
         page:      '/games/realm-of-taiwu',
-      },
-    ],
-    musicals: [],
-  },
-
-  /* ── Video reel ───────────────────────────────────────── */
-  /* youtubeId: the part after ?v= in a YouTube URL.
-     e.g. https://www.youtube.com/watch?v=dQw4w9WgXcQ
-          → youtubeId: 'dQw4w9WgXcQ'
-     Leave the array empty to hide the reel section.        */
-  VIDEOS: {
-    games: [
-      {
-        youtubeId: 'dQw4w9WgXcQ',
-        title:     'Demo Reel 2025',
       },
     ],
     musicals: [],

@@ -60,9 +60,8 @@ const _QUAD_PATHS = {
   br: '/musicals',
 };
 
-const _SPRING     = 'cubic-bezier(0.16, 1, 0.3, 1)'; /* corner label nudge */
-const _EASE_HOVER = 'power2.out';                    /* diagonal hover ease */
-const _EASE_OUT   = 'power2.out';                     /* idle-reset ease */
+const _SPRING   = 'cubic-bezier(0.16, 1, 0.3, 1)'; /* corner label nudge */
+const _EASE_OUT = 'power2.out';                     /* hover + idle-reset ease */
 
 /* ── Live line state in CSS px — mutated by GSAP ────── */
 const _st = {
@@ -145,7 +144,6 @@ function _initMobileQuads() {
 
   /* restoreOpacity=false when called from _armQuad — opacity is handled there instead */
   function _deactivateAll(restoreOpacity = true) {
-    console.log('[mobile] _deactivateAll', new Error().stack.split('\n').slice(1,4).join(' | '));
     clearTimeout(_resetTimer);
     _armedQuad = null;
     document.querySelectorAll('.quad-overlay').forEach(el => el.classList.remove('is-active'));
@@ -253,7 +251,7 @@ function _target(quad) {
 
 /* Animate lines to target.
    dur/ease default to power3.out hover; idle reset passes slower ease-in. */
-function _animateLines(tgt, dur = 0.5, ease = _EASE_HOVER) {
+function _animateLines(tgt, dur = 0.5, ease = _EASE_OUT) {
   if (typeof gsap === 'undefined') return;
   gsap.killTweensOf(_st.a);
   gsap.killTweensOf(_st.b);
@@ -395,7 +393,6 @@ const _STOPS = `
 
 const HomePage = {
   mount(el) {
-    console.log('[home] mount called', new Error().stack.split('\n').slice(1,5).join(' | '));
     const lang     = getCurrentLang();
     const isMobile = window.matchMedia('(max-width: 768px)').matches;
 
@@ -432,16 +429,16 @@ const HomePage = {
 
       <!-- Quadrant photo overlays — clip-path defines tap zone on mobile -->
       <div class="quad-overlay" id="quadTL">
-        <img src="${imgs[0]}" alt="" class="quad-overlay__img"/>
+        <img src="${imgs[0]}" alt="" class="quad-overlay__img" fetchpriority="high"/>
       </div>
       <div class="quad-overlay" id="quadTR">
-        <img src="${imgs[1]}" alt="" class="quad-overlay__img"/>
+        <img src="${imgs[1]}" alt="" class="quad-overlay__img" fetchpriority="high"/>
       </div>
       <div class="quad-overlay" id="quadBL">
-        <img src="${imgs[2]}" alt="" class="quad-overlay__img"/>
+        <img src="${imgs[2]}" alt="" class="quad-overlay__img" fetchpriority="high"/>
       </div>
       <div class="quad-overlay" id="quadBR">
-        <img src="${imgs[3]}" alt="" class="quad-overlay__img"/>
+        <img src="${imgs[3]}" alt="" class="quad-overlay__img" fetchpriority="high"/>
       </div>
 
       <!-- Dead zone: blocks quadrant interaction in the title region -->
@@ -455,9 +452,17 @@ const HomePage = {
       </div>
     `;
 
-    /* Pre-decode all quad images so first hover is smooth — decode() runs
-       off the main thread and resolves before the user can hover */
-    el.querySelectorAll('.quad-overlay__img').forEach(img => img.decode().catch(() => {}));
+    /* Mark each image ready only once fully loaded so a partially-downloaded
+       image never paints through the opacity transition */
+    el.querySelectorAll('.quad-overlay__img').forEach(img => {
+      const markReady = () => img.classList.add('is-ready');
+      if (img.complete && img.naturalWidth) {
+        markReady();
+      } else {
+        img.addEventListener('load', markReady, { once: true });
+        img.addEventListener('error', markReady, { once: true }); /* show on broken img */
+      }
+    });
 
     if (isMobile) {
       _initMobileQuads();

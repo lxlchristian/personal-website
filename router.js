@@ -82,9 +82,7 @@ const Router = (() => {
   }
 
   /* ── Full render cycle ─────────────────────────────────── */
-  let _renderCount = 0;
   function render(pathname) {
-    console.log('[router] render #' + (++_renderCount) + ' path=' + pathname, new Error().stack.split('\n').slice(1,5).join(' | '));
     const section    = getSection(pathname); // getSection strips the lang prefix internally
     const navSection = getNavKey(section);
 

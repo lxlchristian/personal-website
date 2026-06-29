@@ -175,7 +175,7 @@ body:not([data-section="home"]) {
   will-change: opacity;
 }
 
-.quad-overlay.is-active .quad-overlay__img {
+.quad-overlay.is-active .quad-overlay__img.is-ready {
   opacity: 0.40;
 }
 
