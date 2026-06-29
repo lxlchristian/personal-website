@@ -31,9 +31,9 @@ const _SALOONEY_DATA = {
   /* Pre-release rough mixes — shown before the Spotify cast recording goes live.
      Add { title, src, durationStr } entries; only rows with a src are rendered. */
   tracks: [
-    { title: 'I Just Want To Be Wanted', src: 'musical_song1.mp3', durationStr: '5:24' },
-    // { title: '...', src: '...', durationStr: '...' },
-    // { title: '...', src: '...', durationStr: '...' },
+    { title: 'Want To Be Wanted', src: 'WantToBeWanted_rough.wav', durationStr: '5:20' },
+    { title: 'Rodeo and Juliet', src: 'Rodeo_rough.wav', durationStr: '3:09' },
+    { title: 'Salooney Tunes', src: 'SalooneyTunes_rough.wav', durationStr: '4:08' },
   ],
 };
 
