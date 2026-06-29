@@ -66,7 +66,7 @@ const _PRODUCTIONS_INDEX = [
     title:      'Salooney Tunes',
     path:       '/musicals/salooney-tunes',
     year:       2026,
-    producer:   'Hasty Pudding Theatricals',
+    producer:   'The Hasty Pudding Theatricals',
     role:       'Music by Christian Liu',
     teaser:     'A high-energy comic western heist musical that ran in Cambridge, New York, and Bermuda.',
     poster:     'salooneytunes-poster.jpg',
@@ -172,42 +172,42 @@ const MusicalsPage = {
         <div class="subpage-content">
 
           <section class="content-section mus-reveal" aria-labelledby="feat-label">
-            <span class="section-label" id="feat-label">Featured Tracks</span>
+            <span class="section-label" id="feat-label">${t('section.tracks', lang)}</span>
             <div class="track-list" id="mus-track-list" role="list"></div>
           </section>
 
           <section class="content-section mus-reveal" aria-labelledby="prod-label">
-            <span class="section-label" id="prod-label">Productions</span>
+            <span class="section-label" id="prod-label">${t('section.productions', lang)}</span>
             <div class="mus-prod-cards">
               ${_PRODUCTIONS_INDEX.map(_prodCard).join('')}
             </div>
           </section>
 
           <section class="content-section mus-reveal" aria-labelledby="orch-label">
-            <span class="section-label" id="orch-label">Additional Credits</span>
+            <span class="section-label" id="orch-label">${t('section.additionalCredits', lang)}</span>
             <div class="mus-orch-list">
               <div class="mus-orch-item">
                 <h3 class="mus-orch-title">Be Cozy</h3>
-                <p class="mus-orch-meta">Sound Design / Scoring · 2025 · Harvard-Radcliffe Dramatic Club</p>
+                <p class="mus-orch-meta">${t('credit.field.Sound Design / Scoring', lang)} · 2025 · Harvard-Radcliffe Dramatic Club</p>
               </div>
               <div class="mus-orch-item">
                 <h3 class="mus-orch-title">White House Princess</h3>
-                <p class="mus-orch-meta">Music Direction · 2023 · Harvard-Radcliffe Dramatic Club</p>
+                <p class="mus-orch-meta">${t('credit.field.Music Direction', lang)} · 2023 · Harvard-Radcliffe Dramatic Club</p>
               </div>
               <div class="mus-orch-item">
                 <h3 class="mus-orch-title">Iscariot</h3>
-                <p class="mus-orch-meta">Orchestration · 2022 · Harvard-Radcliffe Dramatic Club</p>
+                <p class="mus-orch-meta">${t('credit.field.Orchestration', lang)} · 2022 · Harvard-Radcliffe Dramatic Club</p>
               </div>
             </div>
           </section>
 
           <section class="content-section mus-reveal">
-            <a href="/contact" data-link="/contact" class="cta-btn">Let's work together!</a>
+            <a href="/contact" data-link="/contact" class="cta-btn">${t('cta.workTogether', lang)}</a>
           </section>
 
           <footer class="subpage-footer">
             <span class="footer-copy">${t('footer.copy', lang)}</span>
-            <a href="/games" data-link="/games" class="footer-sibling">I also score games →</a>
+            <a href="/games" data-link="/games" class="footer-sibling">${t('footer.gamesLink', lang)}</a>
           </footer>
 
         </div>

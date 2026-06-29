@@ -24,7 +24,7 @@ const _COP_DATA = {
     { dates: 'December 5–7, 2025', venue: 'Agassiz Theater, Cambridge, MA' },
   ],
 
-  synopsis: 'City of Peace is a dark musical drama set in the cursed village of Myrhorod, loosely based on the stories of Nikolai Gogol. When Khoma Brut, an orphaned painter-philosopher, wanders into the wrong khutir on a summer holiday, he finds himself bound by promise to pray over the body of a girl he knows he killed. With his theologian companion Khaliava detained nearby, Khoma navigates three nights of haunting, manipulation, and moral collapse — beginning to question not only what he owes the dead, but what kind of man he is willing to become.',
+  synopsis: 'City of Peace is a dark musical drama set in the cursed village of Myrhorod, loosely based on the stories of Nikolai Gogol. When Khoma Brut, an orphaned painter-philosopher, wanders into the wrong khutir on a summer holiday, he finds himself bound by promise to pray over the body of a girl he knows he killed. With his theologian companion Khaliava detained nearby, Khoma navigates three nights of haunting, manipulation, and moral collapse, faced with the question of what kind of man he is willing to become.',
 
   /* YouTube embed: replace YOUTUBE_ID with the actual video ID from the URL (?v=...) */
   youtubeId: '7GpOX9bDCwk',
@@ -58,7 +58,7 @@ const CityOfPeacePage = {
                <rect x="2" y="5" width="20" height="14" rx="2"/>
                <polygon points="10,9 16,12 10,15" fill="currentColor" stroke="none"/>
              </svg>
-             <p class="show-yt-placeholder__label">Video coming soon</p>
+             <p class="show-yt-placeholder__label">${t('show.videoComingSoon', lang)}</p>
            </div>
          </div>`;
 
@@ -74,27 +74,27 @@ const CityOfPeacePage = {
                 <img class="show-hero__poster" src="${d.poster}" alt="${d.posterAlt}" loading="eager"/>
               </div>
               <div class="show-hero__info">
-                <span class="show-hero__label">Musical Theater · ${d.year}</span>
+                <span class="show-hero__label">${t('show.musicalTheater', lang)} · ${d.year}</span>
                 <h1 class="show-hero__title">${d.title}</h1>
                 <p class="show-hero__role">${d.role}</p>
-                <p class="show-hero__producer">Produced by ${d.producer}</p>
+                <p class="show-hero__producer">${t('show.producedBy', lang)} ${d.producer}</p>
               </div>
             </div>
           </header>
 
           <section class="content-section" aria-labelledby="credits-cop">
-            <span class="section-label" id="credits-cop">Credits</span>
+            <span class="section-label" id="credits-cop">${t('show.credits', lang)}</span>
             <dl class="show-credits__grid">
               ${d.credits.map(c => `
                 <div class="show-credits__row">
-                  <dt class="show-credits__label">${c.label}</dt>
+                  <dt class="show-credits__label">${t('credit.field.' + c.label, lang) || c.label}</dt>
                   <dd class="show-credits__value">${c.value}</dd>
                 </div>`).join('')}
             </dl>
           </section>
 
           <section class="content-section" aria-labelledby="perf-cop">
-            <span class="section-label" id="perf-cop">Performances</span>
+            <span class="section-label" id="perf-cop">${t('show.performances', lang)}</span>
             <ol class="show-perf-list">
               ${d.performances.map(p => `
                 <li class="show-perf-item">
@@ -105,19 +105,19 @@ const CityOfPeacePage = {
           </section>
 
           <section class="content-section" aria-labelledby="synopsis-cop">
-            <span class="section-label" id="synopsis-cop">Synopsis</span>
+            <span class="section-label" id="synopsis-cop">${t('show.synopsis', lang)}</span>
             <p class="show-synopsis__text">${d.synopsis}</p>
           </section>
 
           <section class="content-section" aria-labelledby="media-cop">
-            <span class="section-label" id="media-cop">Media</span>
+            <span class="section-label" id="media-cop">${t('show.media', lang)}</span>
             <div class="show-media__video-wrap">
               ${mediaSection}
             </div>
           </section>
 
           <section class="content-section" aria-labelledby="tracks-cop">
-            <span class="section-label" id="tracks-cop">Featured Tracks</span>
+            <span class="section-label" id="tracks-cop">${t('section.tracks', lang)}</span>
             <div class="track-list" id="cop-track-list" role="list"></div>
             <div class="mus-spotify-placeholder" style="margin-top: var(--sp-xl)">
               <div class="mus-spotify-inner">
@@ -130,18 +130,18 @@ const CityOfPeacePage = {
                     7.192-.516 9.939 1.329a.78.78 0 01.256 1.072zm.105-2.834C15.16 9.15 10.535 9 7.2
                     9.984a.937.937 0 01-.517-1.8C10.4 7.08 15.503 7.25 18.9 9.387a.938.938 0 01-.986 1.481z"/>
                 </svg>
-                <p class="mus-spotify-label">Spotify album coming soon</p>
+                <p class="mus-spotify-label">${t('show.spotifyComingSoon', lang)}</p>
               </div>
             </div>
           </section>
 
           <section class="content-section">
-            <a href="/contact" data-link="/contact" class="cta-btn">Let's work together!</a>
+            <a href="/contact" data-link="/contact" class="cta-btn">${t('cta.workTogether', lang)}</a>
           </section>
 
           <footer class="subpage-footer">
             <span class="footer-copy">${t('footer.copy', lang)}</span>
-            <a href="/musicals" data-link="/musicals" class="footer-sibling">← All Musicals</a>
+            <a href="/musicals" data-link="/musicals" class="footer-sibling">${t('footer.backMusicals', lang)}</a>
           </footer>
 
         </div>

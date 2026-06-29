@@ -19,6 +19,13 @@
       "runtimeExecutable": "python3",
       "runtimeArgs": ["-m", "http.server", "3008"],
       "port": 3008
+    },
+    {
+      "name": "portfolio-ja",
+      "runtimeExecutable": "python3",
+      "runtimeArgs": ["-m", "http.server"],
+      "port": 3012,
+      "autoPort": true
     }
   ]
 }

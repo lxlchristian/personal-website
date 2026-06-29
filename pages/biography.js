@@ -61,7 +61,7 @@ const BiographyPage = {
               <div class="bio-credits__group">
                 <span class="bio-credits__cat">${t('bio.credits.musicals', lang)}</span>
                 <ul class="bio-credits__list">
-                  <li><a href="/musicals/salooney-tunes" data-link="/musicals/salooney-tunes">Salooney Tunes ↗</a> <em>— Music · Hasty Pudding Theatricals · 2026</em></li>
+                  <li><a href="/musicals/salooney-tunes" data-link="/musicals/salooney-tunes">Salooney Tunes ↗</a> <em>— Music · <a href="https://www.hastypudding.org/" target="_blank" rel="noopener" class="bio-credits__org-link">Hasty Pudding Theatricals</a> · 2026</em></li>
                   <li><a href="/musicals/city-of-peace" data-link="/musicals/city-of-peace">City of Peace ↗</a> <em>— Music · Harvard Office for Fine Arts · 2025</em></li>
                   <li><a href="/musicals/post-mortem" data-link="/musicals/post-mortem">Post Mortem ↗</a> <em>— Music · Harvard Office for Fine Arts · 2023</em></li>
                 </ul>
@@ -78,7 +78,7 @@ const BiographyPage = {
           </section>
 
           <section class="content-section section-cta">
-            <a href="/contact" data-link="/contact" class="cta-btn">Let's work together!</a>
+            <a href="/contact" data-link="/contact" class="cta-btn">${t('cta.workTogether', lang)}</a>
           </section>
 
           <footer class="subpage-footer">

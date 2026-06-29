@@ -7,7 +7,7 @@ const _SALOONEY_DATA = {
   title:     'Salooney Tunes',
   year:      2026,
   role:      'Music by Christian Liu',
-  producer:  'Hasty Pudding Theatricals',
+  producer:  'the Hasty Pudding Theatricals',
   poster:    'salooneytunes-poster.jpg',
   posterAlt: 'Salooney Tunes — 2026 Hasty Pudding Theatricals production poster',
 
@@ -16,7 +16,7 @@ const _SALOONEY_DATA = {
     { label: 'Lyrics',          value: 'Olivia Data' },
     { label: 'Music',           value: 'Christian Liu' },
     { label: 'Orchestrations',  value: 'Allen Feinstein, Peter Mansfield, Benjamin Green, Fraser Weist, Christian Liu' },
-    { label: 'Direction',       value: 'Larry Souza' },
+    { label: 'Direction',       value: 'Larry Sousa' },
     { label: 'Music Direction', value: 'Jose Degaldos' },
   ],
 
@@ -50,27 +50,27 @@ const SalooneyTunesPage = {
                 <img class="show-hero__poster" src="${d.poster}" alt="${d.posterAlt}" loading="eager"/>
               </div>
               <div class="show-hero__info">
-                <span class="show-hero__label">Musical Theater · ${d.year}</span>
+                <span class="show-hero__label">${t('show.musicalTheater', lang)} · ${d.year}</span>
                 <h1 class="show-hero__title">${d.title}</h1>
                 <p class="show-hero__role">${d.role}</p>
-                <p class="show-hero__producer">Produced by ${d.producer}</p>
+                <p class="show-hero__producer">${t('show.producedBy', lang)} <a href="https://www.hastypudding.org/" target="_blank" rel="noopener" class="show-hero__producer-link">${d.producer}</a></p>
               </div>
             </div>
           </header>
 
           <section class="content-section" aria-labelledby="credits-st">
-            <span class="section-label" id="credits-st">Credits</span>
+            <span class="section-label" id="credits-st">${t('show.credits', lang)}</span>
             <dl class="show-credits__grid">
               ${d.credits.map(c => `
                 <div class="show-credits__row">
-                  <dt class="show-credits__label">${c.label}</dt>
+                  <dt class="show-credits__label">${t('credit.field.' + c.label, lang) || c.label}</dt>
                   <dd class="show-credits__value">${c.value}</dd>
                 </div>`).join('')}
             </dl>
           </section>
 
           <section class="content-section" aria-labelledby="perf-st">
-            <span class="section-label" id="perf-st">Performances</span>
+            <span class="section-label" id="perf-st">${t('show.performances', lang)}</span>
             <ol class="show-perf-list">
               ${d.performances.map(p => `
                 <li class="show-perf-item">
@@ -81,16 +81,16 @@ const SalooneyTunesPage = {
           </section>
 
           <section class="content-section" aria-labelledby="synopsis-st">
-            <span class="section-label" id="synopsis-st">Synopsis</span>
+            <span class="section-label" id="synopsis-st">${t('show.synopsis', lang)}</span>
             <p class="show-synopsis__text">${d.synopsis}</p>
           </section>
 
           <section class="content-section" aria-labelledby="music-st">
-            <span class="section-label" id="music-st">Music</span>
+            <span class="section-label" id="music-st">${t('show.music', lang)}</span>
 
             ${d.featuredSong.src ? `
             <div class="show-media__local">
-              <span class="show-media__sub-label">Featured Recording</span>
+              <span class="show-media__sub-label">${t('show.featuredRecording', lang)}</span>
               <div class="show-feat-row">
                 <button class="mus-feat-play" data-src="${d.featuredSong.src}"
                         aria-label="Play ${d.featuredSong.title}">
@@ -126,19 +126,19 @@ const SalooneyTunesPage = {
                       7.192-.516 9.939 1.329a.78.78 0 01.256 1.072zm.105-2.834C15.16 9.15 10.535 9 7.2
                       9.984a.937.937 0 01-.517-1.8C10.4 7.08 15.503 7.25 18.9 9.387a.938.938 0 01-.986 1.481z"/>
                   </svg>
-                  <p class="mus-spotify-label">Spotify album coming soon</p>
+                  <p class="mus-spotify-label">${t('show.spotifyComingSoon', lang)}</p>
                 </div>
               </div>
             </div>
           </section>
 
           <section class="content-section">
-            <a href="/contact" data-link="/contact" class="cta-btn">Let's work together!</a>
+            <a href="/contact" data-link="/contact" class="cta-btn">${t('cta.workTogether', lang)}</a>
           </section>
 
           <footer class="subpage-footer">
             <span class="footer-copy">${t('footer.copy', lang)}</span>
-            <a href="/musicals" data-link="/musicals" class="footer-sibling">← All Musicals</a>
+            <a href="/musicals" data-link="/musicals" class="footer-sibling">${t('footer.backMusicals', lang)}</a>
           </footer>
 
         </div>

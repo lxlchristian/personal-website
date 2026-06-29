@@ -4,8 +4,9 @@
 ══════════════════════════════════════════════════════════ */
 
 const _IOH_DATA = {
-  title:      'Island of Hearts',
-  titleLabel: 'Dating Simulator · 2026',
+  title: 'Island of Hearts',
+  genre: 'Dating Simulator',
+  year:  2026,
 
   credits: [
     { label: 'Developer', value: 'Titan Digital Media' },
@@ -43,7 +44,7 @@ const IslandOfHeartsPage = {
         <div class="subpage-content">
 
           <header class="game-hero">
-            <span class="game-hero__label">${d.titleLabel}</span>
+            <span class="game-hero__label">${t('track.game.' + d.genre, lang)} · ${d.year}</span>
             <h1 class="game-hero__title">${d.title}</h1>
           </header>
 
@@ -56,26 +57,26 @@ const IslandOfHeartsPage = {
           </div>
 
           <a href="${d.steamUrl}" class="game-hero__steam" target="_blank" rel="noopener noreferrer"
-             style="display:block; margin-bottom: var(--sp-2xl)">View on Steam ↗</a>
+             style="display:block; margin-bottom: var(--sp-2xl)">${t('show.viewOnSteam', lang)}</a>
 
           <section class="content-section" aria-labelledby="credits-ioh">
-            <span class="section-label" id="credits-ioh">Credits</span>
+            <span class="section-label" id="credits-ioh">${t('show.credits', lang)}</span>
             <dl class="show-credits__grid">
               ${d.credits.map(c => `
                 <div class="show-credits__row">
-                  <dt class="show-credits__label">${c.label}</dt>
+                  <dt class="show-credits__label">${t('credit.field.' + c.label, lang) || c.label}</dt>
                   <dd class="show-credits__value">${c.value}</dd>
                 </div>`).join('')}
             </dl>
           </section>
 
           <section class="content-section" aria-labelledby="desc-ioh">
-            <span class="section-label" id="desc-ioh">About</span>
+            <span class="section-label" id="desc-ioh">${t('show.about', lang)}</span>
             <p class="game-description">${d.description}</p>
           </section>
 
           <section class="content-section" aria-labelledby="screens-ioh">
-            <span class="section-label" id="screens-ioh">Screenshots</span>
+            <span class="section-label" id="screens-ioh">${t('show.screenshots', lang)}</span>
             <div class="game-screenshot-strip">
               ${d.screenshots.map(s => `
                 <img class="game-screenshot-strip__img" src="${s.src}" alt="${s.alt}" loading="lazy"/>`).join('')}
@@ -83,17 +84,17 @@ const IslandOfHeartsPage = {
           </section>
 
           <section class="content-section" aria-labelledby="tracks-ioh">
-            <span class="section-label" id="tracks-ioh">Featured Tracks</span>
+            <span class="section-label" id="tracks-ioh">${t('section.tracks', lang)}</span>
             <div class="track-list" id="ioh-track-list" role="list"></div>
           </section>
 
           <section class="content-section">
-            <a href="/contact" data-link="/contact" class="cta-btn">Let's work together!</a>
+            <a href="/contact" data-link="/contact" class="cta-btn">${t('cta.workTogether', lang)}</a>
           </section>
 
           <footer class="subpage-footer">
             <span class="footer-copy">${t('footer.copy', lang)}</span>
-            <a href="/games" data-link="/games" class="footer-sibling">← All Games</a>
+            <a href="/games" data-link="/games" class="footer-sibling">${t('footer.backGames', lang)}</a>
           </footer>
 
         </div>

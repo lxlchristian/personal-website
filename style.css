@@ -1227,6 +1227,15 @@ html[data-lang="ja"] .nav-item__title {
   letter-spacing: 0.03em;
   opacity: 0.7;
 }
+.show-hero__producer-link {
+  color: inherit;
+  border-bottom: 1px dotted currentColor;
+  transition: border-bottom-style 150ms ease, opacity 150ms ease;
+}
+.show-hero__producer-link:hover {
+  border-bottom-style: solid;
+  opacity: 1.4;
+}
 
 /* ── Credits definition list ─────────────────────────────── */
 .show-credits__grid {
@@ -1771,6 +1780,16 @@ a.credit-card:hover .credit-title { color: var(--color-play); }
   transition: color 200ms ease;
 }
 .bio-credits__list a:hover { color: var(--color-play); }
+
+.bio-credits__org-link {
+  color: inherit;
+  border-bottom: 1px dotted currentColor;
+  transition: color 200ms ease, border-bottom-style 150ms ease;
+}
+.bio-credits__org-link:hover {
+  color: var(--color-ink);
+  border-bottom-style: solid;
+}
 
 /* Biography — responsive */
 @media (max-width: 1024px) {

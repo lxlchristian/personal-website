@@ -92,7 +92,7 @@ const GamesPage = {
           </section>
 
           <section class="content-section section-cta">
-            <a href="/contact" data-link="/contact" class="cta-btn">Let's work together!</a>
+            <a href="/contact" data-link="/contact" class="cta-btn">${t('cta.workTogether', lang)}</a>
           </section>
 
           <footer class="subpage-footer">

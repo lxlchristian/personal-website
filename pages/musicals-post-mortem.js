@@ -48,27 +48,27 @@ const PostMortemPage = {
                 <img class="show-hero__poster" src="${d.poster}" alt="${d.posterAlt}" loading="eager"/>
               </div>
               <div class="show-hero__info">
-                <span class="show-hero__label">Musical Theater · ${d.year}</span>
+                <span class="show-hero__label">${t('show.musicalTheater', lang)} · ${d.year}</span>
                 <h1 class="show-hero__title">${d.title}</h1>
                 <p class="show-hero__role">${d.role}</p>
-                <p class="show-hero__producer">Produced by ${d.producer}</p>
+                <p class="show-hero__producer">${t('show.producedBy', lang)} ${d.producer}</p>
               </div>
             </div>
           </header>
 
           <section class="content-section" aria-labelledby="credits-pm">
-            <span class="section-label" id="credits-pm">Credits</span>
+            <span class="section-label" id="credits-pm">${t('show.credits', lang)}</span>
             <dl class="show-credits__grid">
               ${d.credits.map(c => `
                 <div class="show-credits__row">
-                  <dt class="show-credits__label">${c.label}</dt>
+                  <dt class="show-credits__label">${t('credit.field.' + c.label, lang) || c.label}</dt>
                   <dd class="show-credits__value">${c.value}</dd>
                 </div>`).join('')}
             </dl>
           </section>
 
           <section class="content-section" aria-labelledby="perf-pm">
-            <span class="section-label" id="perf-pm">Performances</span>
+            <span class="section-label" id="perf-pm">${t('show.performances', lang)}</span>
             <ol class="show-perf-list">
               ${d.performances.map(p => `
                 <li class="show-perf-item">
@@ -79,24 +79,24 @@ const PostMortemPage = {
           </section>
 
           <section class="content-section" aria-labelledby="synopsis-pm">
-            <span class="section-label" id="synopsis-pm">Synopsis</span>
+            <span class="section-label" id="synopsis-pm">${t('show.synopsis', lang)}</span>
             <p class="show-synopsis__text">${d.synopsis}</p>
           </section>
 
           <section class="content-section" aria-labelledby="recordings-pm">
-            <span class="section-label" id="recordings-pm">Music</span>
+            <span class="section-label" id="recordings-pm">${t('show.music', lang)}</span>
             <div class="show-recordings-forthcoming">
-              <p class="show-recordings-forthcoming__text">Recordings forthcoming.</p>
+              <p class="show-recordings-forthcoming__text">${t('show.recordingsForthcoming', lang)}</p>
             </div>
           </section>
 
           <section class="content-section">
-            <a href="/contact" data-link="/contact" class="cta-btn">Let's work together!</a>
+            <a href="/contact" data-link="/contact" class="cta-btn">${t('cta.workTogether', lang)}</a>
           </section>
 
           <footer class="subpage-footer">
             <span class="footer-copy">${t('footer.copy', lang)}</span>
-            <a href="/musicals" data-link="/musicals" class="footer-sibling">← All Musicals</a>
+            <a href="/musicals" data-link="/musicals" class="footer-sibling">${t('footer.backMusicals', lang)}</a>
           </footer>
 
         </div>

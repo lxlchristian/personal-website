@@ -4,8 +4,8 @@
 ══════════════════════════════════════════════════════════ */
 
 const _ROT_DATA = {
-  title:      'Realm of Taiwu: Teaser Trailer',
-  titleLabel: 'Action Roguelite',
+  title: 'Realm of Taiwu: Teaser Trailer',
+  genre: 'Action Roguelite',
 
   credits: [
     { label: 'Developer',       value: 'Leap Studio' },
@@ -32,7 +32,7 @@ const RealmOfTaiwuPage = {
         <div class="subpage-content">
 
           <header class="game-hero">
-            <span class="game-hero__label">${d.titleLabel}</span>
+            <span class="game-hero__label">${t('track.game.' + d.genre, lang)}</span>
             <h1 class="game-hero__title">${d.title}</h1>
           </header>
 
@@ -45,31 +45,31 @@ const RealmOfTaiwuPage = {
           </div>
 
           <a href="${d.steamUrl}" class="game-hero__steam" target="_blank" rel="noopener noreferrer"
-             style="display:block; margin-bottom: var(--sp-2xl)">View on Steam ↗</a>
+             style="display:block; margin-bottom: var(--sp-2xl)">${t('show.viewOnSteam', lang)}</a>
 
           <section class="content-section" aria-labelledby="credits-rot">
-            <span class="section-label" id="credits-rot">Credits</span>
+            <span class="section-label" id="credits-rot">${t('show.credits', lang)}</span>
             <dl class="show-credits__grid">
               ${d.credits.map(c => `
                 <div class="show-credits__row">
-                  <dt class="show-credits__label">${c.label}</dt>
+                  <dt class="show-credits__label">${t('credit.field.' + c.label, lang) || c.label}</dt>
                   <dd class="show-credits__value">${c.value}</dd>
                 </div>`).join('')}
             </dl>
           </section>
 
           <section class="content-section" aria-labelledby="desc-rot">
-            <span class="section-label" id="desc-rot">About</span>
+            <span class="section-label" id="desc-rot">${t('show.about', lang)}</span>
             <p class="game-description">${d.description}</p>
           </section>
 
           <section class="content-section">
-            <a href="/contact" data-link="/contact" class="cta-btn">Let's work together!</a>
+            <a href="/contact" data-link="/contact" class="cta-btn">${t('cta.workTogether', lang)}</a>
           </section>
 
           <footer class="subpage-footer">
             <span class="footer-copy">${t('footer.copy', lang)}</span>
-            <a href="/games" data-link="/games" class="footer-sibling">← All Games</a>
+            <a href="/games" data-link="/games" class="footer-sibling">${t('footer.backGames', lang)}</a>
           </footer>
 
         </div>
