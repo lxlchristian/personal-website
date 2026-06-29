@@ -419,6 +419,10 @@ const HomePage = {
       </div>
     `;
 
+    /* Pre-decode all quad images so first hover is smooth — decode() runs
+       off the main thread and resolves before the user can hover */
+    el.querySelectorAll('.quad-overlay__img').forEach(img => img.decode().catch(() => {}));
+
     if (isMobile) {
       _initMobileQuads();
       window.addEventListener('resize', () => {

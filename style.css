@@ -22,8 +22,8 @@
   --font-body:    'Satoshi', 'Inter', system-ui, sans-serif;
 
   /* Type scale */
-  --text-xs:   0.6875rem;   /* 11px — lang toggle, captions */
-  --text-sm:   0.8125rem;   /* 13px — track meta, timestamps */
+  --text-xs:   0.8125rem;   /* 13px — lang toggle, captions */
+  --text-sm:   0.875rem;    /* 14px — track meta, timestamps */
   --text-base: 1rem;        /* 16px — body copy */
   --text-lg:   1.25rem;     /* 20px */
   --text-xl:   1.5rem;      /* 24px — inactive nav labels */
@@ -172,6 +172,7 @@ body:not([data-section="home"]) {
   opacity: 0;
   transition: opacity 300ms ease 150ms;
   display: block;
+  will-change: opacity;
 }
 
 .quad-overlay.is-active .quad-overlay__img {
@@ -758,6 +759,14 @@ html[data-lang="ja"] .nav-item__title {
   margin-top: 36px;
 }
 
+/* ── CTA section social icons (below "Let's work together") ── */
+.cta-social {
+  display: flex;
+  gap: 18px;
+  margin-top: 16px;
+  align-items: center;
+}
+
 .social-icon-link {
   display: flex;
   align-items: center;
@@ -815,45 +824,42 @@ html[data-lang="ja"] .nav-item__title {
   transform: translateY(0);
 }
 
-/* Quarter note icon */
-.success-note {
-  width: 24px;
-  height: 56px;
+/* Success checkmark icon */
+.success-icon {
+  width: 44px;
+  height: 44px;
 }
 
-.note-svg {
+.check-svg {
   width: 100%;
   height: 100%;
-  overflow: visible;
 }
 
-/* Notehead: pops in with spring */
-.note-svg .note-head {
-  transform-box: fill-box;
-  transform-origin: center;
-  transform: scale(0);
+/* Circle: draws in */
+.check-svg .check-circle {
+  stroke-dasharray: 114;
+  stroke-dashoffset: 114;
 }
 
-.contact-success-overlay.is-visible .note-svg .note-head {
-  animation: note-head-pop 300ms var(--ease-spring) 330ms both;
+.contact-success-overlay.is-visible .check-svg .check-circle {
+  animation: check-circle-draw 420ms var(--ease-out) 280ms both;
 }
 
-@keyframes note-head-pop {
-  from { transform: scale(0); }
-  to   { transform: scale(1); }
+@keyframes check-circle-draw {
+  to { stroke-dashoffset: 0; }
 }
 
-/* Stem: draws upward from notehead */
-.note-svg .note-stem {
-  stroke-dasharray: 42;
-  stroke-dashoffset: 42;
+/* Checkmark: draws in after circle completes */
+.check-svg .check-mark {
+  stroke-dasharray: 28;
+  stroke-dashoffset: 28;
 }
 
-.contact-success-overlay.is-visible .note-svg .note-stem {
-  animation: note-stem-draw 340ms var(--ease-out) 580ms both;
+.contact-success-overlay.is-visible .check-svg .check-mark {
+  animation: check-mark-draw 280ms var(--ease-out) 640ms both;
 }
 
-@keyframes note-stem-draw {
+@keyframes check-mark-draw {
   to { stroke-dashoffset: 0; }
 }
 
@@ -875,7 +881,7 @@ html[data-lang="ja"] .nav-item__title {
   margin-top: calc(-1 * var(--sp-sm));
 }
 
-.success-close { margin-top: var(--sp-sm); }
+.success-close { margin-top: var(--sp-sm); align-self: center; }
 
 /* Reduced-motion: skip all popup animations */
 @media (prefers-reduced-motion: reduce) {
@@ -887,11 +893,11 @@ html[data-lang="ja"] .nav-item__title {
     opacity: 1;
     transform: none;
   }
-  .contact-success-overlay.is-visible .note-svg .note-head {
+  .contact-success-overlay.is-visible .check-svg .check-circle {
     animation: none;
-    transform: scale(1);
+    stroke-dashoffset: 0;
   }
-  .contact-success-overlay.is-visible .note-svg .note-stem {
+  .contact-success-overlay.is-visible .check-svg .check-mark {
     animation: none;
     stroke-dashoffset: 0;
   }
@@ -1858,14 +1864,16 @@ a.credit-card:hover .credit-title { color: var(--color-play); }
 /* ── Mobile/portrait tablet — subpage nav (≤ 1024px) ─────── */
 @media (max-width: 1024px), (max-height: 500px) and (min-width: 1025px) {
 
-  /* Spine container: 36px left column replacing the full sidebar */
+  /* Spine container: 36px left column replacing the full sidebar.
+     z-index must exceed the audio player (50) so the overlay panel,
+     which is a child of this element, paints above it. */
   .nav-subpage {
     position: fixed;
     top: 0; left: 0;
     width: 36px;
     height: 100vh;
     background: var(--color-ground);
-    z-index: 20;
+    z-index: 60;
     display: block;
     padding: 0;
   }
@@ -1907,6 +1915,24 @@ a.credit-card:hover .credit-title { color: var(--color-play); }
   }
 
   .nav-spine:hover .nav-spine__tab { border-color: rgba(200, 169, 122, 0.65); }
+
+  /* Right-facing triangle inside the tab nub — tap affordance hint */
+  .nav-spine__tab::after {
+    content: '';
+    position: absolute;
+    left: 1px;
+    top: 50%;
+    transform: translateY(-50%);
+    width: 0;
+    height: 0;
+    border-style: solid;
+    border-width: 3px 0 3px 4px;
+    border-color: transparent transparent transparent var(--color-ink);
+    opacity: 0.22;
+    transition: opacity 200ms ease;
+  }
+
+  .nav-spine:hover .nav-spine__tab::after { opacity: 0.50; }
 
   /* Vertical section title — echoes the desktop sidebar's vertical Bodoni */
   .nav-spine__title {
@@ -1968,7 +1994,7 @@ a.credit-card:hover .credit-title { color: var(--color-play); }
     position: fixed;
     inset: 0;
     background: var(--color-ground);
-    z-index: 22;
+    z-index: 60;
     padding: 60px 0 60px 48px;
     opacity: 0;
     visibility: hidden;

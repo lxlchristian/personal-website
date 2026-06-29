@@ -38,25 +38,20 @@ function _initMusReveals(el) {
    Set src to a local mp3 path and available: true to enable. */
 const _FEATURED_TRACKS = [
   {
-    title:     'I Just Want To Be Wanted',
-    show:      'Salooney Tunes',
-    showPath:  '/musicals/salooney-tunes',
-    src:       'musical_song1.mp3',
-    available: true,
+    title:       'I Just Want To Be Wanted',
+    show:        'Salooney Tunes',
+    showPath:    '/musicals/salooney-tunes',
+    src:         'musical_song1.mp3',
+    durationStr: '5:24',
+    available:   true,
   },
   {
-    title:     'Never Die',
-    show:      'City of Peace',
-    showPath:  '/musicals/city-of-peace',
-    src:       'musical_song2.mp3',
-    available: true,
-  },
-  {
-    title:     'Maybe It\'s Best to Tie',
-    show:      'Post Mortem',
-    showPath:  '/musicals/post-mortem',
-    src:       '',
-    available: false,
+    title:       'Never Die',
+    show:        'City of Peace',
+    showPath:    '/musicals/city-of-peace',
+    src:         'musical_song2.mp3',
+    durationStr: '5:24',
+    available:   true,
   },
 ];
 
@@ -171,11 +166,6 @@ const MusicalsPage = {
         <div class="subpage-divider" aria-hidden="true">${_DIVIDER_SVG}</div>
         <div class="subpage-content">
 
-          <section class="content-section mus-reveal" aria-labelledby="feat-label">
-            <span class="section-label" id="feat-label">${t('section.tracks', lang)}</span>
-            <div class="track-list" id="mus-track-list" role="list"></div>
-          </section>
-
           <section class="content-section mus-reveal" aria-labelledby="prod-label">
             <span class="section-label" id="prod-label">${t('section.productions', lang)}</span>
             <div class="mus-prod-cards">
@@ -201,8 +191,14 @@ const MusicalsPage = {
             </div>
           </section>
 
+          <section class="content-section mus-reveal" aria-labelledby="feat-label">
+            <span class="section-label" id="feat-label">${t('section.tracks', lang)}</span>
+            <div class="track-list" id="mus-track-list" role="list"></div>
+          </section>
+
           <section class="content-section mus-reveal">
             <a href="/contact" data-link="/contact" class="cta-btn">${t('cta.workTogether', lang)}</a>
+            ${_ctaSocialHTML()}
           </section>
 
           <footer class="subpage-footer">
@@ -219,6 +215,7 @@ const MusicalsPage = {
       trackList.appendChild(buildTrackRow({
         title:     track.title,
         meta:      track.show,
+        duration:  track.durationStr,
         available: track.available,
       }));
     });

@@ -141,12 +141,13 @@ const ContactPage = {
 
     overlay.innerHTML = `
       <div class="contact-success-card">
-        <div class="success-note" aria-hidden="true">
-          <svg viewBox="0 0 24 56" class="note-svg" xmlns="http://www.w3.org/2000/svg">
-            <line class="note-stem" x1="19" y1="46" x2="19" y2="5"
-                  stroke="var(--color-gold)" stroke-width="2.5" stroke-linecap="round"/>
-            <ellipse class="note-head" cx="11" cy="49" rx="8.5" ry="5.5"
-                     transform="rotate(-15 11 49)" fill="var(--color-gold)"/>
+        <div class="success-icon" aria-hidden="true">
+          <svg viewBox="0 0 44 44" class="check-svg" xmlns="http://www.w3.org/2000/svg">
+            <circle class="check-circle" cx="22" cy="22" r="18"
+                    stroke="var(--color-gold)" stroke-width="1.5" fill="none" stroke-linecap="round"/>
+            <path class="check-mark" d="M13 22 L19.5 28.5 L31 15"
+                  stroke="var(--color-gold)" stroke-width="2.2" fill="none"
+                  stroke-linecap="round" stroke-linejoin="round"/>
           </svg>
         </div>
         <h2 class="success-heading" id="contact-success-heading">

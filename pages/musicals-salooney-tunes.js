@@ -30,7 +30,7 @@ const _SALOONEY_DATA = {
 
   /* Featured song: add a local mp3 path to enable the player before Spotify goes live.
      Leave src empty and it won't render.                                                */
-  featuredSong: { title: 'I Just Want To Be Wanted', src: '' /* ← add mp3 path */ },
+  featuredSong: { title: 'I Just Want To Be Wanted', src: 'musical_song1.mp3' /* ← add mp3 path */ },
 };
 
 const SalooneyTunesPage = {
@@ -134,6 +134,7 @@ const SalooneyTunesPage = {
 
           <section class="content-section">
             <a href="/contact" data-link="/contact" class="cta-btn">${t('cta.workTogether', lang)}</a>
+            ${_ctaSocialHTML()}
           </section>
 
           <footer class="subpage-footer">

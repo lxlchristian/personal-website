@@ -90,6 +90,7 @@ const IslandOfHeartsPage = {
 
           <section class="content-section">
             <a href="/contact" data-link="/contact" class="cta-btn">${t('cta.workTogether', lang)}</a>
+            ${_ctaSocialHTML()}
           </section>
 
           <footer class="subpage-footer">

@@ -93,7 +93,7 @@ const TRANSLATIONS = {
     'contact.sending': 'Sending…',
     'contact.error':   'Something went wrong — please email me directly.',
     'contact.success.heading': 'Message sent.',
-    'contact.success.body':    "I'll be in touch soon.",
+    'contact.success.body':    "I'll be in touch soon!",
     'contact.success.close':   'Close',
 
     /* ── Biography ── */
@@ -322,7 +322,7 @@ const TRANSLATIONS = {
     'bio.credits.orchestrations': 'その他の実績',
 
     /* ── Footer ── */
-    'footer.copy':         '© 2026 Christian Liu. 無断転載禁止。',
+    'footer.copy':         '© 2026 Christian Liu. 転載禁止。',
     'footer.sibling':      'ミュージカル作品はこちら →',
     'footer.gamesLink':    'ゲーム音楽はこちら →',
     'footer.backMusicals': '← ミュージカル一覧',
