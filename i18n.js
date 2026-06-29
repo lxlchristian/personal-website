@@ -48,6 +48,7 @@ const TRANSLATIONS = {
     'show.spotifyComingSoon':     'Spotify cast recording coming soon',
     'show.videoComingSoon':       'Video coming soon',
     'show.recordingsForthcoming': 'Recordings forthcoming.',
+    'show.roughMixNote':          'Pre-release rough mixes · Full cast recording coming soon on Spotify.',
 
     /* ── CTA ── */
     'cta.workTogether': "Let's work together!",
@@ -153,6 +154,7 @@ const TRANSLATIONS = {
     'show.spotifyComingSoon':     'Spotify专辑即将上线',
     'show.videoComingSoon':       '视频即将上线',
     'show.recordingsForthcoming': '录音即将发布。',
+    'show.roughMixNote':          '预发布粗混版 · 完整卡司录音即将登陆 Spotify',
 
     /* ── CTA ── */
     'cta.workTogether': '期待与您合作！',
@@ -258,6 +260,7 @@ const TRANSLATIONS = {
     'show.spotifyComingSoon':     'Spotifyアルバム、近日公開',
     'show.videoComingSoon':       'ビデオ近日公開',
     'show.recordingsForthcoming': '録音近日公開。',
+    'show.roughMixNote':          'プレリリース版ラフミックス · 正式音源は近日Spotifyにて公開',
 
     /* ── CTA ── */
     'cta.workTogether': 'ぜひ一緒にお仕事しましょう！',

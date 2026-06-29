@@ -17,9 +17,9 @@ const Nav = (() => {
   /* Fixed order — never changes across pages */
   const NAV_ITEMS = [
     { key: 'home',      path: '/',          labelKey: 'nav.home'      },
-    { key: 'games',     path: '/games',     labelKey: 'nav.games'     },
-    { key: 'musicals',  path: '/musicals',  labelKey: 'nav.musicals'  },
     { key: 'biography', path: '/biography', labelKey: 'nav.biography' },
+    { key: 'musicals',  path: '/musicals',  labelKey: 'nav.musicals'  },
+    { key: 'games',     path: '/games',     labelKey: 'nav.games'     },
     { key: 'contact',   path: '/contact',   labelKey: 'nav.contact'   },
   ];
 

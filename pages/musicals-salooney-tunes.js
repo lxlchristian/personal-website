@@ -15,9 +15,9 @@ const _SALOONEY_DATA = {
     { label: 'Book',            value: 'Benjamin Langman and Gunnar Sizemore' },
     { label: 'Lyrics',          value: 'Olivia Data' },
     { label: 'Music',           value: 'Christian Liu' },
-    { label: 'Orchestrations',  value: 'Allen Feinstein, Peter Mansfield, Benjamin Green, Fraser Weist, Christian Liu' },
+    { label: 'Orchestrations',  value: 'Allen Feinstein, Peter Mansfield, Ben Green, Fraser Weist, Christian Liu' },
     { label: 'Direction',       value: 'Larry Sousa' },
-    { label: 'Music Direction', value: 'Jose Degaldos' },
+    { label: 'Music Direction', value: 'José Degaldo' },
   ],
 
   performances: [
@@ -28,9 +28,13 @@ const _SALOONEY_DATA = {
 
   synopsis: 'Salooney Tunes is a knee-slapping, nail-biting heist-gone-wrong that follows notorious outlaw Robin Yablind and his fame-hungry sidekick Wyatt Aintme. They must find a way to avoid Mayor Gerri Mandarin and pregnant Sheriff Carrie N Twins, who are on the hunt to put them behind bars. Chock-full of lovable characters like skittish saloon owner Bart Ender, sultry saloon-singer Sarah Problem, and twelve-year-old dancer Anna Fivesix-Fivesixseveneight, Salooney Tunes\'s twists and turns will keep you on the edge of your seat.',
 
-  /* Featured song: add a local mp3 path to enable the player before Spotify goes live.
-     Leave src empty and it won't render.                                                */
-  featuredSong: { title: 'I Just Want To Be Wanted', src: 'musical_song1.mp3' /* ← add mp3 path */ },
+  /* Pre-release rough mixes — shown before the Spotify cast recording goes live.
+     Add { title, src, durationStr } entries; only rows with a src are rendered. */
+  tracks: [
+    { title: 'I Just Want To Be Wanted', src: 'musical_song1.mp3', durationStr: '5:24' },
+    // { title: '...', src: '...', durationStr: '...' },
+    // { title: '...', src: '...', durationStr: '...' },
+  ],
 };
 
 const SalooneyTunesPage = {
@@ -87,24 +91,10 @@ const SalooneyTunesPage = {
 
           <section class="content-section" aria-labelledby="music-st">
             <span class="section-label" id="music-st">${t('show.music', lang)}</span>
+            <p class="show-roughmix-note">${t('show.roughMixNote', lang)}</p>
+            <div class="track-list" id="salooney-track-list" role="list"></div>
 
-            ${d.featuredSong.src ? `
-            <div class="show-media__local">
-              <span class="show-media__sub-label">${t('show.featuredRecording', lang)}</span>
-              <div class="show-feat-row">
-                <button class="mus-feat-play" data-src="${d.featuredSong.src}"
-                        aria-label="Play ${d.featuredSong.title}">
-                  <svg class="icon-play" width="15" height="15" viewBox="0 0 24 24"
-                       fill="currentColor" aria-hidden="true"><polygon points="5,3 19,12 5,21"/></svg>
-                  <svg class="icon-pause" width="15" height="15" viewBox="0 0 24 24"
-                       fill="currentColor" aria-hidden="true"
-                       style="display:none"><rect x="6" y="4" width="4" height="16"/><rect x="14" y="4" width="4" height="16"/></svg>
-                </button>
-                <p class="show-feat-title">${d.featuredSong.title}</p>
-              </div>
-            </div>` : ''}
-
-            <div id="spotify-salooney">
+            <div id="spotify-salooney" style="margin-top: var(--sp-xl)">
               <!--
                 SPOTIFY EMBED — replace this entire <div> with the Spotify iframe when the album is live.
 
@@ -145,15 +135,41 @@ const SalooneyTunesPage = {
         </div>
       </div>`;
 
-    /* Local audio buttons (when featuredSong.src is set, wire to global AudioPlayer) */
-    el.querySelectorAll('.mus-feat-play[data-src]').forEach(btn => {
-      const src = btn.dataset.src;
-      if (!src) return;
-      btn.addEventListener('click', () => {
-        AudioPlayer.setLastTrigger(btn);
-        AudioPlayer.play({ src, title: btn.closest('[data-title]')?.dataset.title || '', source: 'Salooney Tunes', available: true });
+    /* Build pre-release track rows and wire to AudioPlayer */
+    const trackList = el.querySelector('#salooney-track-list');
+    const rows = d.tracks
+      .filter(tr => tr.src)
+      .map(tr => {
+        const audioConfig = { src: tr.src, title: tr.title, source: 'Salooney Tunes', available: true };
+        const rowEl = buildTrackRow({ title: tr.title, meta: 'Salooney Tunes', duration: tr.durationStr, available: true });
+        const iconEl = rowEl.querySelector('.track-row__play-icon');
+        rowEl.querySelector('.track-row__play').addEventListener('click', () => {
+          AudioPlayer.setLastTrigger(iconEl);
+          AudioPlayer.play(audioConfig);
+        });
+        trackList.appendChild(rowEl);
+        return { el: rowEl, config: audioConfig };
       });
-    });
+
+    function _syncRows() {
+      const current = AudioPlayer.getCurrentTrack();
+      const playing = AudioPlayer.isPlaying();
+      rows.forEach(({ el: rowEl, config }) => {
+        if (!rowEl.isConnected) return;
+        const isActive = !!(current && current.src === config.src);
+        rowEl.classList.toggle('track-row--active', isActive);
+        const iconPlay  = rowEl.querySelector('.ap-row-icon-play');
+        const iconPause = rowEl.querySelector('.ap-row-icon-pause');
+        if (iconPlay)  iconPlay.style.display  = (isActive && playing) ? 'none' : '';
+        if (iconPause) iconPause.style.display = (isActive && playing) ? ''     : 'none';
+        const btn = rowEl.querySelector('.track-row__play');
+        if (btn) btn.setAttribute('aria-label',
+          (isActive && playing) ? `Pause ${config.title}` : `Play ${config.title}`);
+      });
+    }
+    AudioPlayer.onTrackChange(_syncRows);
+    AudioPlayer.onPlayStateChange(_syncRows);
+    _syncRows();
 
     _initMusLinks(el);
     _initMusReveals(el);

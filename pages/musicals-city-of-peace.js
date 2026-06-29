@@ -15,9 +15,9 @@ const _COP_DATA = {
     { label: 'Book and Lyrics',  value: 'Paul Palmer' },
     { label: 'Music',            value: 'Christian Liu' },
     { label: 'Orchestrations',   value: 'Quinn McMath, Charlie Melton, Tyler Doucette, Martín Schnell Sanchez' },
-    { label: 'Direction',        value: 'Jolana Kampfova' },
+    { label: 'Direction',        value: 'Jolana Kampfová' },
     { label: 'Music Direction',  value: 'Christian Liu' },
-    { label: 'Choreography',     value: 'Leonard Walletzky' },
+    { label: 'Choreography',     value: 'Leonard Walletzký' },
   ],
 
   performances: [
@@ -30,9 +30,9 @@ const _COP_DATA = {
   youtubeId: '7GpOX9bDCwk',
 
   tracks: [
-    { title: 'The Cards',      src: 'cop_thecards.mp3',     durationStr: '' },
-    { title: "A Devil's Born", src: 'cop_adevilsborn.mp3',  durationStr: '' },
-    { title: 'The Bell Knell', src: 'cop_thebellknell.mp3', durationStr: '' },
+    { title: 'The Cards',      src: 'TheCards_live.mp3',     durationStr: '03:43' },
+    { title: 'Once More',      src: 'OnceMore_live.mp3',     durationStr: '04:58' },
+    { title: 'The Bell Knell', src: 'TheBellKnell_live.mp3', durationStr: '05:02' },
   ],
 };
 
