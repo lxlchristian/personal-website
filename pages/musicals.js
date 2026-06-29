@@ -188,15 +188,15 @@ const MusicalsPage = {
             <div class="mus-orch-list">
               <div class="mus-orch-item">
                 <h3 class="mus-orch-title">Be Cozy</h3>
-                <p class="mus-orch-meta">${t('credit.field.Sound Design / Scoring', lang)} · 2025 · Harvard-Radcliffe Dramatic Club</p>
+                <p class="mus-orch-meta">${t('credit.field.Sound Design / Scoring', lang)} · Harvard-Radcliffe Dramatic Club · 2025</p>
               </div>
               <div class="mus-orch-item">
                 <h3 class="mus-orch-title">White House Princess</h3>
-                <p class="mus-orch-meta">${t('credit.field.Orchestration', lang)} & ${t('credit.field.Music Direction', lang)} · 2023 · Harvard-Radcliffe Dramatic Club</p>
+                <p class="mus-orch-meta">${t('credit.field.Orchestration', lang)} & ${t('credit.field.Music Direction', lang)} · Harvard-Radcliffe Dramatic Club · 2023</p>
               </div>
               <div class="mus-orch-item">
                 <h3 class="mus-orch-title">ISCARIOT: The Musical</h3>
-                <p class="mus-orch-meta">${t('credit.field.Orchestration', lang)} · 2022 · Harvard-Radcliffe Dramatic Club</p>
+                <p class="mus-orch-meta">${t('credit.field.Orchestration', lang)} · Harvard-Radcliffe Dramatic Club · 2022</p>
               </div>
             </div>
           </section>

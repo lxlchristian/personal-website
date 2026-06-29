@@ -110,21 +110,22 @@ const GamesPage = {
             <span class="section-label" id="addl-credits-label">${t('section.additionalCredits', lang)}</span>
             <div class="mus-orch-list">
               <div class="mus-orch-item">
-                <h3 class="mus-orch-title">outrun the moon!</h3>
-                <p class="mus-orch-meta">${t('credit.field.Original Soundtrack + Interactive Audio', lang)} · Harvard</p>
+                  <h3 class="mus-orch-title">Chasing Lunar</h3>
+                  <p class="mus-orch-meta">${t('credit.field.Contributed Tracks', lang)} · Berklee/USC · 2025</p>
+                </div>
+              <div class="mus-orch-item">
+                  <h3 class="mus-orch-title">Scythe of Sidereal</h3>
+                  <p class="mus-orch-meta">${t('credit.field.Sound Design', lang)} · Berklee/USC · 2025</p>
+                </div>
+              
+                <div class="mus-orch-item">
+                  <h3 class="mus-orch-title">outrun the moon!</h3>
+                  <p class="mus-orch-meta">${t('credit.field.Original Soundtrack + Interactive Audio', lang)} · Harvard · 2025</p>
               </div>
               <div class="mus-orch-item">
-                <h3 class="mus-orch-title">Tempo Takedown</h3>
-                <p class="mus-orch-meta">${t('credit.field.Original Soundtrack', lang)} · MIT</p>
-              </div>
-              <div class="mus-orch-item">
-                <h3 class="mus-orch-title">Chasing Lunar</h3>
-                <p class="mus-orch-meta">${t('credit.field.Contributed Tracks', lang)} · Berklee/USC</p>
-              </div>
-              <div class="mus-orch-item">
-                <h3 class="mus-orch-title">Scythe of Sidereal</h3>
-                <p class="mus-orch-meta">${t('credit.field.Sound Design', lang)} · Berklee/USC</p>
-              </div>
+                  <h3 class="mus-orch-title">Tempo Takedown</h3>
+                  <p class="mus-orch-meta">${t('credit.field.Original Soundtrack', lang)} · MIT · 2024</p>
+                </div>
             </div>
           </section>
 
