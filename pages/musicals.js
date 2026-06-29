@@ -192,7 +192,7 @@ const MusicalsPage = {
               </div>
               <div class="mus-orch-item">
                 <h3 class="mus-orch-title">White House Princess</h3>
-                <p class="mus-orch-meta">${t('credit.field.Music Direction', lang)} · 2023 · Harvard-Radcliffe Dramatic Club</p>
+                <p class="mus-orch-meta">${t('credit.field.Orchestration', lang)} & ${t('credit.field.Music Direction', lang)} · 2023 · Harvard-Radcliffe Dramatic Club</p>
               </div>
               <div class="mus-orch-item">
                 <h3 class="mus-orch-title">ISCARIOT: The Musical</h3>

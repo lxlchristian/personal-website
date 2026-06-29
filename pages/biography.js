@@ -69,13 +69,13 @@ const BiographyPage = {
               <div class="bio-credits__group">
                 <span class="bio-credits__cat">${t('bio.credits.orchestrations', lang)}</span>
                 <ul class="bio-credits__list">
-                  <li>outrun the moon! <em>— ${t('credit.field.Original Soundtrack + Interactive Audio', lang)} · Harvard</em></li>
-                  <li>Tempo Takedown <em>— ${t('credit.field.Original Soundtrack', lang)} · MIT</em></li>
-                  <li>Chasing Lunar <em>— ${t('credit.field.Contributed Tracks', lang)} · Berklee/USC</em></li>
-                  <li>Scythe of Sidereal <em>— ${t('credit.field.Sound Design', lang)} · Berklee/USC</em></li>
                   <li>Be Cozy <em>— ${t('credit.field.Sound Design / Scoring', lang)} · Harvard-Radcliffe Dramatic Club · 2025</em></li>
-                  <li>White House Princess <em>— ${t('credit.field.Music Direction', lang)} · Harvard-Radcliffe Dramatic Club · 2023</em></li>
-                  <li>Iscariot <em>— ${t('credit.field.Orchestration', lang)} · Harvard-Radcliffe Dramatic Club · 2022</em></li>
+                  <li>Chasing Lunar <em>— ${t('credit.field.Contributed Tracks', lang)} · Berklee/USC · 2025</em></li>
+                  <li>Scythe of Sidereal <em>— ${t('credit.field.Sound Design', lang)} · Berklee/USC</em> · 2025</li>
+                  <li>outrun the moon! <em>— ${t('credit.field.Original Soundtrack + Interactive Audio', lang)} · Harvard · 2024</em></li>
+                  <li>Tempo Takedown <em>— ${t('credit.field.Original Soundtrack', lang)} · MIT · 2024</em></li>
+                  <li>White House Princess <em>— ${t('credit.field.Orchestration', lang)} & ${t('credit.field.Music Direction', lang)} · Harvard-Radcliffe Dramatic Club · 2023</em></li>
+                  <li>ISCARIOT: The Musical <em>— ${t('credit.field.Orchestration', lang)} · Harvard-Radcliffe Dramatic Club · 2022</em></li>
                 </ul>
               </div>
             </div>
