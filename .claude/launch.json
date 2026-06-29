@@ -31,6 +31,12 @@
       "runtimeArgs": ["-m", "http.server"],
       "port": 3012,
       "autoPort": true
+    },
+    {
+      "name": "portfolio-3032",
+      "runtimeExecutable": "python3",
+      "runtimeArgs": ["-m", "http.server", "3032"],
+      "port": 3032
     }
   ]
 }

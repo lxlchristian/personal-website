@@ -81,7 +81,11 @@ const TRANSLATIONS = {
     'credit.field.Role':                   'Role',
     'credit.field.Released':               'Released',
     'credit.field.Teaser Released':        'Teaser Released',
-    'credit.field.Sound Design / Scoring': 'Sound Design / Scoring',
+    'credit.field.Sound Design / Scoring':                  'Sound Design / Scoring',
+    'credit.field.Sound Design':                            'Sound Design',
+    'credit.field.Original Soundtrack':                     'Original Soundtrack',
+    'credit.field.Original Soundtrack + Interactive Audio': 'Original Soundtrack + Interactive Audio',
+    'credit.field.Contributed Tracks':                      'Contributed Tracks',
 
     /* ── Track game / genre descriptors ── */
     'track.game.Action Roguelite':    'Action Roguelite',
@@ -201,7 +205,11 @@ const TRANSLATIONS = {
     'credit.field.Role':                   '职责',
     'credit.field.Released':               '发行日期',
     'credit.field.Teaser Released':        '预告片发布',
-    'credit.field.Sound Design / Scoring': '音效设计 / 配乐',
+    'credit.field.Sound Design / Scoring':                  '音效设计 / 配乐',
+    'credit.field.Sound Design':                            '音效设计',
+    'credit.field.Original Soundtrack':                     '原声带',
+    'credit.field.Original Soundtrack + Interactive Audio': '原声带 + 互动音频',
+    'credit.field.Contributed Tracks':                      '参与曲目',
 
     /* ── Track game / genre descriptors ── */
     'track.game.Action Roguelite':    '动作肉鸽游戏',
@@ -321,7 +329,11 @@ const TRANSLATIONS = {
     'credit.field.Role':                   '担当',
     'credit.field.Released':               'リリース日',
     'credit.field.Teaser Released':        'ティーザー公開',
-    'credit.field.Sound Design / Scoring': 'サウンドデザイン / 音楽',
+    'credit.field.Sound Design / Scoring':                  'サウンドデザイン / 音楽',
+    'credit.field.Sound Design':                            'サウンドデザイン',
+    'credit.field.Original Soundtrack':                     'オリジナルサウンドトラック',
+    'credit.field.Original Soundtrack + Interactive Audio': 'オリジナルサウンドトラック + インタラクティブオーディオ',
+    'credit.field.Contributed Tracks':                      '楽曲提供',
 
     /* ── Track game / genre descriptors ── */
     'track.game.Action Roguelite':    'アクションローグライト',

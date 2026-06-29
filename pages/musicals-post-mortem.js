@@ -27,7 +27,7 @@ const _POSTMORTEM_DATA = {
     },
   ],
 
-  synopsis: 'Post Mortem takes place in the basement archives of a crumbling Classics department at a fictional liberal arts college. When beleaguered doctoral student Sylvia accidentally summons the ghost of Gaius Valerius Catullus while pulling an all-nighter, the Roman poet refuses to leave until his works are properly catalogued and his reputation restored.',
+  synopsis: 'Post Mortem takes place in the basement archives of a crumbling Classics department at a fictional liberal arts college. When beleaguered doctoral student Tracie accidentally summons the ghost of Gaius Valerius Catullus while pulling an all-nighter, the Roman poet refuses to leave until his works are properly catalogued and his reputation restored.',
 
   /* Featured song — no audio yet */
   featuredSong: { title: 'Maybe It\'s Best to Tie', desc: 'pop ballad', src: '' },

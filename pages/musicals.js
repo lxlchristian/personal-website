@@ -51,7 +51,7 @@ const _FEATURED_TRACKS = [
     show:        'Salooney Tunes',
     meta:        'Salooney Tunes / The Hasty Pudding Cast & Band',
     showPath:    '/musicals/salooney-tunes',
-    src:         'Rodeo_rough.wav.mp3',
+    src:         'Rodeo_rough.wav',
     durationStr: '3:09',
     available:   true,
   },
@@ -195,7 +195,7 @@ const MusicalsPage = {
                 <p class="mus-orch-meta">${t('credit.field.Music Direction', lang)} · 2023 · Harvard-Radcliffe Dramatic Club</p>
               </div>
               <div class="mus-orch-item">
-                <h3 class="mus-orch-title">Iscariot</h3>
+                <h3 class="mus-orch-title">ISCARIOT: The Musical</h3>
                 <p class="mus-orch-meta">${t('credit.field.Orchestration', lang)} · 2022 · Harvard-Radcliffe Dramatic Club</p>
               </div>
             </div>
