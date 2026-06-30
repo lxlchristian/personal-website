@@ -268,11 +268,21 @@ const Nav = (() => {
   function _wireHomeSheetSwipe(sheet) {
     let startY = 0;
     let dragging = false;
-    const DEAD_ZONE = 20;       /* px of slack before sheet starts moving */
-    const DISMISS_THRESHOLD = 120; /* total px down required to dismiss */
+    const DEAD_ZONE = 20;
+    const DISMISS_THRESHOLD = 120;
+
+    function _reset() {
+      dragging = false;
+      sheet.style.transition = '';
+      sheet.style.transform = '';
+    }
 
     sheet.addEventListener('touchstart', e => {
-      startY = e.touches[0].clientY;
+      /* Skip swipe gesture when touch originates on an interactive element
+         (nav links, close button, lang buttons) so tapping them never
+         races with the dismiss threshold. */
+      if (e.target.closest('a, button, select, input')) return;
+      startY = e.changedTouches[0].clientY;
       dragging = true;
       sheet.style.transition = 'none';
     }, { passive: true });
@@ -280,7 +290,6 @@ const Nav = (() => {
     sheet.addEventListener('touchmove', e => {
       if (!dragging) return;
       const deltaY = e.touches[0].clientY - startY;
-      /* Only track movement past the dead zone so normal taps never move the sheet */
       if (deltaY > DEAD_ZONE) {
         sheet.style.transform = `translateY(${deltaY - DEAD_ZONE}px)`;
       }
@@ -288,12 +297,12 @@ const Nav = (() => {
 
     sheet.addEventListener('touchend', e => {
       if (!dragging) return;
-      dragging = false;
       const deltaY = e.changedTouches[0].clientY - startY;
-      sheet.style.transition = '';
-      sheet.style.transform = '';
+      _reset();
       if (deltaY > DISMISS_THRESHOLD) _closeHomeSheet();
     });
+
+    sheet.addEventListener('touchcancel', _reset);
   }
 
   /* ── Close all mobile panels ───────────────────────────── */
