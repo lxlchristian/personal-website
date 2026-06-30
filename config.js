@@ -37,22 +37,6 @@ const SITE_CONFIG = {
   /* ── Audio tracks ─────────────────────────────────────── */
   TRACKS: [
     {
-      title:       'Reconnaissance',
-      game:        'Bullet Hell Shooter',
-      gameUrl:     '',
-      genre:       'Electronic',
-      durationStr: '2:08',
-      src:         'recon.wav',
-    },
-    {
-      title:       'STREAM_LINE (Branched)',
-      game:        'Platformer',
-      gameUrl:     '',
-      genre:       'Electronic / Drum & Bass',
-      durationStr: '1:23',
-      src:         'STREAM__LINE_Flow.wav',
-    },
-    {
       title:       'Battle the Beast!',
       game:        'Action Roguelite',
       gameUrl:     '',
@@ -61,12 +45,29 @@ const SITE_CONFIG = {
       src:         'whaleboss.wav',
     },
     {
-      title:       'Stained Glass',
-      game:        'JRPG',
+      title:       'ARACHNOPHOBIA_A',
+      game:        'Rhythm Battler',
       gameUrl:     '',
-      genre:       'Battle / Piano',
-      durationStr: '1:11',
-      src:         'StainedGlass_piano.wav',
+      genre:       'Electronic',
+      durationStr: '2:48',
+      src:         'ARACHNOPHOBIA_A.wav',
+    },
+    {
+      title:       'Reconnaissance',
+      game:        'Bullet Hell Shooter',
+      gameUrl:     '',
+      genre:       'Electronic',
+      durationStr: '2:08',
+      src:         'recon.wav',
+    },
+
+    {
+      title:       'STREAM_LINE (Branched)',
+      game:        'Platformer',
+      gameUrl:     '',
+      genre:       'Drum & Bass',
+      durationStr: '1:23',
+      src:         'STREAM__LINE_Flow.wav',
     },
     {
       title:       'Windy Hut',
