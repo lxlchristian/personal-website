@@ -246,6 +246,14 @@ const Nav = (() => {
     if (!sheet || sheet.classList.contains('is-open')) return;
     sheet.classList.add('is-open');
     sheet.setAttribute('aria-hidden', 'false');
+    /* iOS Safari routes synthesized clicks through the hit-test tree, which
+       skips pointer-events:none parents even when children have pointer-events:all.
+       Setting auto here lets taps on nav links reach their click handlers. */
+    navEl.style.pointerEvents = 'auto';
+    /* The .diag-deadzone sits at z-index:12 on mobile (above nav-home's z-index:10)
+       and the audio player is at z-index:50. Raise the nav container above both so
+       the sheet's links are not intercepted by elements behind them in the DOM. */
+    navEl.style.zIndex = '55';
     if (typeof gsap !== 'undefined' &&
         !window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
       const items = sheet.querySelectorAll('.nav-mobile-panel__item');
@@ -263,6 +271,8 @@ const Nav = (() => {
     sheet.style.transition = '';
     sheet.classList.remove('is-open');
     sheet.setAttribute('aria-hidden', 'true');
+    navEl.style.pointerEvents = '';
+    navEl.style.zIndex = '';
   }
 
   function _wireHomeSheetSwipe(sheet) {
