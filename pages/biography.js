@@ -41,7 +41,7 @@ const BiographyPage = {
                 <p class="bio-body">${t('bio.p3', lang)}</p>
 
                 <div class="bio-milestone">
-                  <span class="bio-milestone__number" aria-hidden="true">1.2M</span>
+                  <span class="bio-milestone__number" aria-hidden="true">${t('bio.milestoneNumber', lang)}</span>
                   <span class="bio-milestone__label">${t('bio.milestone', lang)}</span>
                 </div>
 
@@ -71,7 +71,7 @@ const BiographyPage = {
                 <ul class="bio-credits__list">
                   <li>Be Cozy <em>— ${t('credit.field.Sound Design / Scoring', lang)} · Harvard-Radcliffe Dramatic Club · 2025</em></li>
                   <li>Chasing Lunar <em>— ${t('credit.field.Contributed Tracks', lang)} · Berklee/USC · 2025</em></li>
-                  <li>Scythe of Sidereal <em>— ${t('credit.field.Sound Design', lang)} · Berklee/USC</em> · 2025</li>
+                  <li>Scythe of Sidereal <em>— ${t('credit.field.Sound Design', lang)} · Berklee/USC · 2025</em></li>
                   <li>outrun the moon! <em>— ${t('credit.field.Original Soundtrack + Interactive Audio', lang)} · Harvard · 2024</em></li>
                   <li>Tempo Takedown <em>— ${t('credit.field.Original Soundtrack', lang)} · MIT · 2024</em></li>
                   <li>White House Princess <em>— ${t('credit.field.Orchestration', lang)} & ${t('credit.field.Music Direction', lang)} · Harvard-Radcliffe Dramatic Club · 2023</em></li>

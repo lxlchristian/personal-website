@@ -79,7 +79,7 @@ const PostMortemPage = {
 
           <section class="content-section" aria-labelledby="synopsis-pm">
             <span class="section-label" id="synopsis-pm">${t('show.synopsis', lang)}</span>
-            <p class="show-synopsis__text">${d.synopsis}</p>
+            <p class="show-synopsis__text">${t('show.postmortem.synopsis', lang)}</p>
           </section>
 
           <section class="content-section" aria-labelledby="recordings-pm">

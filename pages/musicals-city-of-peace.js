@@ -108,7 +108,7 @@ const CityOfPeacePage = {
 
           <section class="content-section" aria-labelledby="synopsis-cop">
             <span class="section-label" id="synopsis-cop">${t('show.synopsis', lang)}</span>
-            <p class="show-synopsis__text">${d.synopsis}</p>
+            <p class="show-synopsis__text">${t('show.cop.synopsis', lang)}</p>
           </section>
 
           <section class="content-section" aria-labelledby="media-cop">

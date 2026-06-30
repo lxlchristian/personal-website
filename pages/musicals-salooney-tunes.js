@@ -94,7 +94,7 @@ const SalooneyTunesPage = {
 
           <section class="content-section" aria-labelledby="synopsis-st">
             <span class="section-label" id="synopsis-st">${t('show.synopsis', lang)}</span>
-            <p class="show-synopsis__text">${d.synopsis}</p>
+            <p class="show-synopsis__text">${t('show.salooney.synopsis', lang)}</p>
           </section>
 
           <section class="content-section" aria-labelledby="music-st">

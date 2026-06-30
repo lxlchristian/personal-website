@@ -5,7 +5,7 @@
    All translated UI strings live here.
 
    NOT translated: "CHRISTIAN LIU" display name, track titles,
-   game titles, show synopses, production credits (names) —
+   game titles, production credits (names) —
    these are proper nouns or authored content that stays as-is.
 
    To add a language: duplicate one block below, translate,
@@ -23,7 +23,7 @@ const TRANSLATIONS = {
     'nav.contact':   'Contact',
 
     /* ── Homepage ── */
-    'home.subtitle': 'composer · songwriter · arranger',
+    'home.subtitle': 'composer · songwriter · producer',
 
     /* ── Section labels ── */
     'section.reel':              'Reel',
@@ -88,19 +88,16 @@ const TRANSLATIONS = {
     'credit.field.Contributed Tracks':                      'Contributed Tracks',
 
     /* ── Track game / genre descriptors ── */
-    'track.game.Action Roguelite':    'Action Roguelite',
-    'track.game.Dating Simulator':    'Dating Simulator',
-    'track.game.Bullet Hell Shooter': 'Bullet Hell Shooter',
-    'track.game.Platformer':          'Platformer',
-    'track.game.JRPG':                'JRPG',
-    'track.game.Retro Platformer':    'Retro Platformer',
-    'track.genre.Game Trailer / Rock':      'Game Trailer / Rock',
-    'track.genre.Electronic / Drum & Bass': 'Electronic / Drum & Bass',
-    'track.genre.Cinematic / Orchestral':   'Cinematic / Orchestral',
-    'track.genre.Electronic':               'Electronic',
-    'track.genre.Piano':                    'Piano',
-    'track.genre.Battle / Piano':           'Battle / Piano',
-    'track.genre.Chiptune':                 'Chiptune',
+    'track.game.Action Roguelite': 'Action Roguelite',
+    'track.game.Dating Simulator': 'Dating Simulator',
+    'track.game.Bullet Hell':      'Bullet Hell',
+    'track.game.Speed Platformer': 'Speed Platformer',
+    'track.game.Rhythm Battler':   'Rhythm Battler',
+    'track.game.Retro':            'Retro',
+    'track.genre.Cinematic / Orchestral': 'Cinematic / Orchestral',
+    'track.genre.Electronic':             'Electronic',
+    'track.genre.Drum & Bass':            'Drum & Bass',
+    'track.genre.Chiptune':               'Chiptune',
 
     /* ── Contact ── */
     'contact.framing': 'Let\'s get to work!',
@@ -126,9 +123,15 @@ const TRANSLATIONS = {
     'bio.langLabel':              'Languages',
     'bio.langValue':              'English · Mandarin · Japanese',
     'bio.milestone':              'views on Bilibili — Realm of Taiwu teaser trailer',
+    'bio.milestoneNumber':        '1.2M',
     'bio.credits.games':          'Games',
     'bio.credits.musicals':       'Musicals',
     'bio.credits.orchestrations': 'Additional Credits',
+
+    /* ── Show synopses ── */
+    'show.salooney.synopsis':   "Salooney Tunes is a knee-slapping, nail-biting heist-gone-wrong that follows notorious outlaw Robin Yablind and his fame-hungry sidekick Wyatt Aintme. They must find a way to avoid Mayor Gerri Mandarin and pregnant Sheriff Carrie N Twins, who are on the hunt to put them behind bars. Chock-full of lovable characters like skittish saloon owner Bart Ender, sultry saloon-singer Sarah Problem, and twelve-year-old dancer Anna Fivesix-Fivesixseveneight, Salooney Tunes's twists and turns will keep you on the edge of your seat.",
+    'show.cop.synopsis':        "City of Peace is a dark musical drama set in the cursed village of Myrhorod, loosely based on the stories of Nikolai Gogol. When Khoma Brut, an orphaned painter-philosopher, wanders into the wrong khutir on a summer holiday, he finds himself bound by promise to pray over the body of a girl he knows he killed. With his theologian companion Khaliava detained nearby, Khoma spends three nights in a locked church, haunted and manipulated until the question becomes less whether he survives than what's left of him if he does.",
+    'show.postmortem.synopsis': "Post Mortem takes place in the basement archives of a crumbling Classics department at a fictional liberal arts college. When beleaguered doctoral student Tracie accidentally summons the ghost of Gaius Valerius Catullus while pulling an all-nighter, the Roman poet refuses to leave until his works are properly catalogued and his reputation restored.",
 
     /* ── Footer ── */
     'footer.copy':         '© 2026 Christian Liu. All rights reserved.',
@@ -212,19 +215,16 @@ const TRANSLATIONS = {
     'credit.field.Contributed Tracks':                      '参与曲目',
 
     /* ── Track game / genre descriptors ── */
-    'track.game.Action Roguelite':    '动作肉鸽游戏',
-    'track.game.Dating Simulator':    '恋爱模拟器',
-    'track.game.Bullet Hell Shooter': '弹幕射击游戏',
-    'track.game.Platformer':          '平台游戏',
-    'track.game.JRPG':                '日式RPG',
-    'track.game.Retro Platformer':    '复古平台游戏',
-    'track.genre.Game Trailer / Rock':      '游戏预告 / 摇滚',
-    'track.genre.Electronic / Drum & Bass': '电子 / 鼓打贝斯',
-    'track.genre.Cinematic / Orchestral':   '电影风格 / 管弦乐',
-    'track.genre.Electronic':               '电子音乐',
-    'track.genre.Piano':                    '钢琴',
-    'track.genre.Battle / Piano':           '战斗 / 钢琴',
-    'track.genre.Chiptune':                 '芯片音乐',
+    'track.game.Action Roguelite': '动作肉鸽游戏',
+    'track.game.Dating Simulator': '恋爱模拟器',
+    'track.game.Bullet Hell':      '弹幕射击',
+    'track.game.Speed Platformer': '速度平台游戏',
+    'track.game.Rhythm Battler':   '音乐格斗',
+    'track.game.Retro':            '复古游戏',
+    'track.genre.Cinematic / Orchestral': '电影风格 / 管弦乐',
+    'track.genre.Electronic':             '电子音乐',
+    'track.genre.Drum & Bass':            '鼓打贝斯',
+    'track.genre.Chiptune':               '芯片音乐',
 
     /* ── Contact ── */
     'contact.framing': '欢迎告诉我您的项目。',
@@ -250,9 +250,15 @@ const TRANSLATIONS = {
     'bio.langLabel':              '语言',
     'bio.langValue':              '英语 · 普通话 · 日语',
     'bio.milestone':              '哔哩哔哩播放量——《太吾绘卷》宣传片',
+    'bio.milestoneNumber':        '120万',
     'bio.credits.games':          '游戏',
     'bio.credits.musicals':       '音乐剧',
     'bio.credits.orchestrations': '其他作品',
+
+    /* ── Show synopses ── */
+    'show.salooney.synopsis':   '《Salooney Tunes》是一出令人捧腹、扣人心弦的西部喜剧音乐剧，讲述了臭名昭著的亡命之徒Robin Yablind与他贪图名利的搭档Wyatt Aintme的跌宕旅程。两人疲于应付步步紧逼的Gerri Mandarin市长与怀有身孕的Carrie N Twins警长的追缉。剧中角色个个生动鲜活——胆小的沙龙老板Bart Ender、风情万种的驻唱歌手Sarah Problem、年仅十二岁的舞蹈神童Anna Fivesix-Fivesixseveneight……笑料与惊喜接踵而至，让人目不暇接。',
+    'show.cop.synopsis':        '《City of Peace》是一部以乌克兰民间传说为灵感的黑暗音乐剧，改编自尼古拉·果戈里的短篇小说。孤儿画家兼哲学家霍马在夏日闲游中误闯他乡庄园，被迫连续三夜在锁闭的教堂里为一具少女遗体守夜祈祷——而那个少女，正是死于他手。在幽灵威逼与人心操弄的双重折磨下，霍马面临的问题已不再是能否生还，而是若能幸存，那时的自己究竟还剩下什么。',
+    'show.postmortem.synopsis': '《Post Mortem》发生在一所虚构文理学院行将崩塌的古典学系地下档案室。博士生Tracie在通宵备考时，意外召唤出古罗马诗人盖乌斯·瓦勒里乌斯·卡图卢斯的鬼魂。这位桀骜的诗人拒绝离去，执意要求Tracie整理其著作、恢复其声誉，方肯罢休。',
 
     /* ── Footer ── */
     'footer.copy':         '© 2026 Christian Liu 版权所有。',
@@ -271,7 +277,7 @@ const TRANSLATIONS = {
     'nav.contact':   'お問い合わせ',
 
     /* ── Homepage ── */
-    'home.subtitle': '作曲家 · ソングライター · アレンジャー',
+    'home.subtitle': '作曲家 · ソングライター · プロデューサー',
 
     /* ── Section labels ── */
     'section.reel':              'リール',
@@ -296,12 +302,12 @@ const TRANSLATIONS = {
     'show.musicBy':               '音楽',
     'show.viewOnSteam':           'Steamで見る ↗',
     'show.spotifyComingSoon':     'Spotifyアルバム、近日公開',
-    'show.videoComingSoon':       'ビデオ近日公開',
-    'show.recordingsForthcoming': '録音近日公開。',
-    'show.roughMixNote':          'プレリリース版ラフミックス · 正式音源は近日Spotifyにて公開',
+    'show.videoComingSoon':       '動画は近日公開予定',
+    'show.recordingsForthcoming': '音源は近日公開予定。',
+    'show.roughMixNote':          'リリース前ラフミックス · フルキャスト録音は近日Spotifyにて公開予定',
 
     /* ── Production teasers ── */
-    'prod.teaser.salooney-tunes': 'ハーバード第177回Hasty Pudding年度ミュージカル：米国最古の大学劇団による新作ワイルドウエストアドベンチャー。',
+    'prod.teaser.salooney-tunes': 'ハーバード大学 Hasty Pudding Theatricals 第177回ミュージカル：米国最古の大学劇団が贈る新作ワイルドウェスト冒険譚。',
     'prod.teaser.city-of-peace':  '19世紀ウクライナのゴシック文学から着想を得た、悪・民話・人間の本質を探るオリジナルオペレッタ。',
     'prod.teaser.post-mortem':    '廃れていくクラシック学科を舞台に、偶然の幽霊召喚が必死の救出計画を狂わせるコメディ・ミュージカル。',
 
@@ -309,10 +315,10 @@ const TRANSLATIONS = {
     'cta.workTogether': 'ぜひ一緒にお仕事しましょう！',
 
     /* ── Credit role descriptors ── */
-    'credit.role.trailerMusic':          'ティーザートレーラー楽曲',
+    'credit.role.trailerMusic':          'PV楽曲',
     'credit.role.originalSoundtrack':    'オリジナルサウンドトラック',
     'credit.role.composerSoundDesigner': '作曲・サウンドデザイン',
-    'credit.role.composerTeaserTrailer': '作曲（ティーザートレーラー）',
+    'credit.role.composerTeaserTrailer': '作曲（PV）',
 
     /* ── Credit field labels ── */
     'credit.field.Book':                   '台本',
@@ -336,22 +342,19 @@ const TRANSLATIONS = {
     'credit.field.Contributed Tracks':                      '楽曲提供',
 
     /* ── Track game / genre descriptors ── */
-    'track.game.Action Roguelite':    'アクションローグライト',
-    'track.game.Dating Simulator':    '恋愛シミュレーション',
-    'track.game.Bullet Hell Shooter': '弾幕シューター',
-    'track.game.Platformer':          'プラットフォーマー',
-    'track.game.JRPG':                'JRPG',
-    'track.game.Retro Platformer':    'レトロプラットフォーマー',
-    'track.genre.Game Trailer / Rock':      'ゲームトレーラー / ロック',
-    'track.genre.Electronic / Drum & Bass': 'エレクトロニック / ドラムンベース',
-    'track.genre.Cinematic / Orchestral':   'シネマティック / オーケストラ',
-    'track.genre.Electronic':               'エレクトロニック',
-    'track.genre.Piano':                    'ピアノ',
-    'track.genre.Battle / Piano':           'バトル / ピアノ',
-    'track.genre.Chiptune':                 'チップチューン',
+    'track.game.Action Roguelite': 'アクションローグライト',
+    'track.game.Dating Simulator': '恋愛シミュレーション',
+    'track.game.Bullet Hell':      '弾幕シューター',
+    'track.game.Speed Platformer': 'スピードアクション',
+    'track.game.Rhythm Battler':   'リズムバトル',
+    'track.game.Retro':            'レトロゲーム',
+    'track.genre.Cinematic / Orchestral': 'シネマティック / オーケストラ',
+    'track.genre.Electronic':             'エレクトロニック',
+    'track.genre.Drum & Bass':            'ドラムンベース',
+    'track.genre.Chiptune':               'チップチューン',
 
     /* ── Contact ── */
-    'contact.framing': 'プロジェクトについて、ぜひお聞かせください。',
+    'contact.framing': 'ぜひ一緒にお仕事しましょう！',
     'contact.name':    'お名前',
     'contact.email':   'メールアドレス',
     'contact.message': 'プロジェクトについて教えてください',
@@ -367,19 +370,25 @@ const TRANSLATIONS = {
     'bio.label': 'プロフィール',
     'bio.p1': 'シンガポール出身、東京を拠点に活動する作曲家、Christian Liuです。ビデオゲーム音楽とミュージカルを中心に、物語を彩る音楽を創り続けています。ハーバード大学×バークリー音楽院の合同プログラムを修了。',
     'bio.p2': '学内はコンピュータサイエンスを学びながら創作にも情熱を注ぎ、2幕構成のオリジナル・ミュージカルを3作品完成。',
-    'bio.p3': 'ゲーム音楽では、オリジナルサウンドトラック『Island of Hearts』（全17曲）を制作しました。さらに担当した『太吾絵巻』ティーザートレーラーは、Bilibiliで120万回以上再生されるなど、大きな反響を獲得しています。バークリー音楽院のGames and Interactive Scoring Programを通じて世界中の開発者と協働し、ソニー・インタラクティブエンタテインメント（東京）およびLEAP Studio（北京）でのインターンシップも経験。国際的な現場で実践を重ねてきました。',
+    'bio.p3': 'ゲーム音楽では、オリジナルサウンドトラック『Island of Hearts』（全17曲）を制作しました。さらに担当した『太吾絵巻』PVは、Bilibiliで120万回以上再生されるなど、大きな反響を獲得しています。バークリー音楽院のGames and Interactive Scoring Programを通じて世界中の開発者と協働し、ソニー・インタラクティブエンタテインメント（東京）およびLEAP Studio（北京）でのインターンシップも経験。国際的な現場で実践を重ねてきました。',
     'bio.p4': '現在は東京を拠点に、世界中のクライアントとリモートでコラボレーションを行っています。心を動かし、世界観を広げる音楽を。ぜひあなたのプロジェクトでご一緒できれば嬉しいです。お気軽にご連絡ください！',
     'bio.basedLabel':             '拠点',
     'bio.basedValue':             '東京 · リモート対応可',
     'bio.langLabel':              '言語',
     'bio.langValue':              '英語 · 中国語 · 日本語',
-    'bio.milestone':              'Bilibili再生回数 — 太吾絵巻 ティーザートレーラー',
+    'bio.milestone':              'Bilibili再生回数 — 太吾絵巻 PV',
+    'bio.milestoneNumber':        '120万',
     'bio.credits.games':          'ゲーム',
     'bio.credits.musicals':       'ミュージカル',
     'bio.credits.orchestrations': 'その他の実績',
 
+    /* ── Show synopses ── */
+    'show.salooney.synopsis':   '笑いとハラハラが止まらない西部劇コメディ・ミュージカル。悪名高き無法者Robin Yablindと名声に目がくらんだ相棒Wyatt Aintmeが繰り広げる大失敗の強盗劇を軸に、Gerri Mandarin市長と大きなお腹を抱えたCarrie N Twins保安官の執拗な追跡をかわしながら物語は転がっていく。腰の引けたサルーン亭主Bart Ender、妖艶な歌姫Sarah Problem、12歳のダンス天才少女Anna Fivesix-Fivesixseveneightら個性豊かな面々が次々登場——波乱万丈の展開に、観客は一瞬たりとも目が離せない。',
+    'show.cop.synopsis':        'ニコライ・ゴーゴリの物語を原案に、呪われたウクライナの村Myrhorodを舞台とした闇のミュージカル・ドラマ。夏の旅の途中、見知らぬ農家に迷い込んだ孤児の画家兼哲学者Khoma Brutは、自らの手にかけた少女の遺体のそばで三夜にわたる祈りを捧げることを強いられてしまう。仲間の神学者Khaliavaが近くで拘束される中、錠のかかった教会にひとり残されたKhomaは、幽霊に苛まれ、人の悪意に翻弄されていく。やがて問いは「生き延びられるか」から「もし生き延びたとして、自分の中に何が残るのか」へと変わっていく。',
+    'show.postmortem.synopsis': '舞台は、ある架空のリベラルアーツ大学、崩れかけた古典学科の地下書庫。追い詰められた博士課程学生Tracieが徹夜作業中に偶然Gaius Valerius Catullusの幽霊を呼び出してしまう。自作の整理と名声の回復を要求するこの古代ローマの詩人は、その条件が満たされるまで一向に成仏しようとしない。',
+
     /* ── Footer ── */
-    'footer.copy':         '© 2026 Christian Liu. 転載禁止。',
+    'footer.copy':         '© 2026 Christian Liu. 無断転載禁止。',
     'footer.sibling':      'ミュージカル作品はこちら →',
     'footer.gamesLink':    'ゲーム音楽はこちら →',
     'footer.backMusicals': '← ミュージカル一覧',

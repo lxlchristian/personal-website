@@ -45,16 +45,8 @@ const SITE_CONFIG = {
       src:         'whaleboss.wav',
     },
     {
-      title:       'ARACHNOPHOBIA_A',
-      game:        'Rhythm Battler',
-      gameUrl:     '',
-      genre:       'Electronic',
-      durationStr: '2:48',
-      src:         'ARACHNOPHOBIA_A.wav',
-    },
-    {
       title:       'Reconnaissance',
-      game:        'Bullet Hell Shooter',
+      game:        'Bullet Hell',
       gameUrl:     '',
       genre:       'Electronic',
       durationStr: '2:08',
@@ -63,15 +55,23 @@ const SITE_CONFIG = {
 
     {
       title:       'STREAM_LINE (Branched)',
-      game:        'Platformer',
+      game:        'Speed Platformer',
       gameUrl:     '',
       genre:       'Drum & Bass',
       durationStr: '1:23',
       src:         'STREAM__LINE_Flow.wav',
     },
     {
+      title:       'ARACHNOPHOBIA_A',
+      game:        'Rhythm Battler',
+      gameUrl:     '',
+      genre:       'Electronic',
+      durationStr: '2:48',
+      src:         'ARACHNOPHOBIA_A.wav',
+    },
+    {
       title:       'Windy Hut',
-      game:        'Retro Platformer',
+      game:        'Retro',
       gameUrl:     '',
       genre:       'Chiptune',
       durationStr: '1:55',

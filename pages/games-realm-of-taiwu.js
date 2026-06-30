@@ -17,7 +17,7 @@ const _ROT_DATA = {
   description: {
     en: 'I composed the score for the teaser trailer of Realm of Taiwu (太吾弄世劫), a long-awaited return to one of China\'s most celebrated indie IPs. Built on Chinese mythology and wuxia tradition, the game pairs hand-painted ink-wash visuals with kinetic top-down combat, a world that I found demanded music rooted in classical Chinese instrumentation combined with a modern, electric energy. The trailer crossed 1.2 million views on Bilibili.',
     zh: '我为《太吾弄世劫》的宣传片配乐——这是国产独立游戏史上最受期待的IP之一的归来之作。游戏以中国神话与武侠传统为基础，将手绘水墨画风与动感的俯视角战斗相结合。这个世界令我深感需要一种扎根于中国传统乐器、却又充满现代与电气精神的音乐。宣传片在哔哩哔哩获得超过120万次播放。',
-    ja: '太吾弄世劫のティーザートレーラーの音楽を担当しました。中国で最も注目されるインディーIPの一つが、長い沈黙を経て帰還した作品です。中国神話と武侠の伝統に基づき、手書き水墨画のビジュアルとダイナミックな見下ろし型戦闘を組み合わせたこの世界は、古典的な中国楽器を軸に据えながら現代的でエレクトリックな精神を持つ音楽を必要としていると感じました。トレーラーはBilibiliで120万回以上の再生回数を記録しました。',
+    ja: '太吾弄世劫のPVの音楽を担当しました。中国で最も注目されるインディーIPの一つが、長い沈黙を経て帰還した作品です。中国神話と武侠の伝統に基づき、手書き水墨画のビジュアルとダイナミックな見下ろし型戦闘を組み合わせたこの世界は、古典的な中国楽器を軸に据えながら現代的でエレクトリックな精神を持つ音楽を必要としていると感じました。トレーラーはBilibiliで120万回以上の再生回数を記録しました。',
   },
 
   youtubeId: 'uAmEFJ3UL3Q',
