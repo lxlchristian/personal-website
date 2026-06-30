@@ -18,7 +18,7 @@
 const SITE_CONFIG = {
 
   /* ── Contact ──────────────────────────────────────────── */
-  EMAIL: 'xile.liu@gmail.com',
+  EMAIL: 'xilebile.music@gmail.com',
 
   /* Formspree endpoint — sign up at formspree.io, create a form,
      and paste the full URL here, e.g.:

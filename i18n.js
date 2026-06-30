@@ -150,10 +150,10 @@ const TRANSLATIONS = {
     'nav.contact':   '联系',
 
     /* ── Homepage ── */
-    'home.subtitle': '作曲家 · 词曲作者 · 编曲人',
+    'home.subtitle': '作曲家 · 词曲作者 · 制作人',
 
     /* ── Section labels ── */
-    'section.reel':              '视频',
+    'section.reel':              '精选样片',
     'section.credits':           '专业履历',
     'section.tracks':            '精选曲目',
     'section.specTracks':        '精选示范曲目',
@@ -174,14 +174,14 @@ const TRANSLATIONS = {
     'show.producedBy':            '出品方',
     'show.musicBy':               '作曲',
     'show.viewOnSteam':           '在Steam查看 ↗',
-    'show.spotifyComingSoon':     'Spotify专辑即将上线',
+    'show.spotifyComingSoon':     '完整演员录音即将登陆 Spotify',
     'show.videoComingSoon':       '视频即将上线',
     'show.recordingsForthcoming': '录音即将发布。',
-    'show.roughMixNote':          '预发布粗混版 · 完整卡司录音即将登陆 Spotify',
+    'show.roughMixNote':          '预发行初混版 · 完整演员录音即将登陆 Spotify',
 
     /* ── Production teasers ── */
-    'prod.teaser.salooney-tunes': '哈佛第177届Hasty Pudding年度音乐剧：来自美国历史最悠久的大学剧社的全新西部冒险故事。',
-    'prod.teaser.city-of-peace':  '灵感来自19世纪乌克兰哥特文学，一部探索邪恶、民间传说与人类处境的原创歌剧。',
+    'prod.teaser.salooney-tunes': '哈佛第177届Hasty Pudding年度大戏：来自美国历史最悠久大学剧团的全新西部冒险音乐剧。',
+    'prod.teaser.city-of-peace':  '灵感来自19世纪乌克兰哥特文学，一部探索邪恶、民间传说与人类处境的原创轻歌剧。',
     'prod.teaser.post-mortem':    '一部喜剧音乐剧，发生在行将崩塌的古典系——一场意外的召鬼事件打乱了绝望的救援计划。',
 
     /* ── CTA ── */
@@ -227,7 +227,7 @@ const TRANSLATIONS = {
     'track.genre.Chiptune':               '芯片音乐',
 
     /* ── Contact ── */
-    'contact.framing': '欢迎告诉我您的项目。',
+    'contact.framing': '来聊聊您的项目吧！',
     'contact.name':    '姓名',
     'contact.email':   '邮箱',
     'contact.message': '请介绍您的项目',
@@ -241,12 +241,12 @@ const TRANSLATIONS = {
 
     /* ── Biography ── */
     'bio.label': '个人简介',
-    'bio.p1': '我是Christian Liu——一位游戏与音乐剧作曲家，毕业于哈佛大学与伯克利音乐学院联合学习项目。',
-    'bio.p2': '我在新加坡长大，最初来哈佛攻读计算机科学。毕业时，我已创作了三部完整的两幕音乐剧——包括我与Hasty Pudding Theatricals合作的毕业制作，该剧先后在剑桥、纽约和百慕大公演——并决定以音乐为职业。',
-    'bio.p3': '我的游戏作品包括《心之岛》（17首曲目原声带）以及为LEAP工作室的《太吾绘卷》制作的预告片音乐，该预告片在哔哩哔哩累计播放超过120万次。期间，我曾在东京索尼PlayStation及北京LEAP工作室实习。',
-    'bio.p4': '我目前定居东京，欢迎全球范围内的远程合作。如有作曲需求，欢迎随时联系我。',
+    'bio.p1': '嗨！我叫Christian，是一位来自新加坡的作曲家，热爱游戏配乐与音乐剧创作，毕业于哈佛-伯克利音乐学院联合课程。',
+    'bio.p2': '本科主修计算机科学，但投在音乐创作上的时间或许更多。毕业时，我已完成三部两幕长篇音乐剧——其中包括与百年名社<a href="https://www.hastypudding.org/hasty-pudding-theatricals/" target="_blank" rel="noopener">Hasty Pudding Theatricals</a>联合制作的一部，先后在剑桥、纽约和百慕大演出整整40场。',
+    'bio.p3': '我还发行了Island of Hearts的17首完整原声带，并为动作肉鸽游戏《太吾绘卷》制作了宣传片配乐——该视频在哔哩哔哩播放量突破120万次。此外，我通过伯克利音乐学院游戏与互动配乐项目与众多开发者深度合作，并分别在东京索尼PlayStation及北京LEAP工作室完成实习。',
+    'bio.p4': '目前定居东京，欢迎全球范围内的远程合作。如果您正在筹备需要作曲的项目，随时欢迎联系！',
     'bio.basedLabel':             '所在地',
-    'bio.basedValue':             '东京 — 支持远程合作',
+    'bio.basedValue':             '东京 · 欢迎远程合作',
     'bio.langLabel':              '语言',
     'bio.langValue':              '英语 · 普通话 · 日语',
     'bio.milestone':              '哔哩哔哩播放量——《太吾绘卷》宣传片',
