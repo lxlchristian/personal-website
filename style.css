@@ -389,6 +389,7 @@ body:not([data-section="home"]) {
     font-size: var(--text-sm);
     margin-top: 0.6rem;
   }
+
 }
 
 /* ══════════════════════════════════════════════════════════
@@ -1817,6 +1818,24 @@ a.credit-card:hover .credit-title { color: var(--color-play); }
   border-bottom-style: solid;
 }
 
+/* Tools tag chips */
+.bio-fact-tags {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.3em 0.4em;
+  margin-top: 0.15em;
+}
+
+.bio-tool-tag {
+  font-size: var(--text-xs);
+  color: var(--color-muted);
+  border: 1px solid rgba(200, 169, 122, 0.45);
+  padding: 0.2em 0.6em;
+  border-radius: 2px;
+  letter-spacing: 0.04em;
+  white-space: nowrap;
+}
+
 /* Biography — responsive */
 @media (max-width: 1024px) {
   .bio-grid {
@@ -1845,7 +1864,7 @@ a.credit-card:hover .credit-title { color: var(--color-play); }
   .bio-image-frame { width: 100%; }
   .bio-img { aspect-ratio: 4 / 3; object-position: center center; }
   .bio-facts { flex-direction: row; gap: var(--sp-lg) var(--sp-xl); flex-wrap: wrap; }
-  .bio-facts .fact { flex: 1; min-width: 0; }
+  .bio-facts .fact { flex: 1 0 40%; min-width: 0; }
 
   .bio-credits__group {
     grid-template-columns: 1fr;
@@ -1878,6 +1897,34 @@ a.credit-card:hover .credit-title { color: var(--color-play); }
 .nav-mobile-globe { display: none; }
 .nav-mobile-panel,
 .nav-mobile-lang-panel { display: none; }
+.nav-home-sheet { display: none; }
+
+/* ── Home nav sheet: mobile only, must come after display:none above ── */
+@media (max-width: 768px) {
+  .nav-home-sheet {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    position: fixed;
+    inset: 0;
+    background: var(--color-ground);
+    z-index: 60;
+    padding: 60px 0 60px 48px;
+    transform: translateY(100%);
+    visibility: hidden;
+    transition: transform 380ms var(--ease-spring),
+                visibility 0ms 380ms;
+    pointer-events: none;
+  }
+
+  .nav-home-sheet.is-open {
+    transform: translateY(0);
+    visibility: visible;
+    transition: transform 380ms var(--ease-spring),
+                visibility 0ms;
+    pointer-events: all;
+  }
+}
 
 /* ── Mobile/portrait tablet — subpage nav (≤ 1024px) ─────── */
 @media (max-width: 1024px), (max-height: 500px) and (min-width: 1025px) {

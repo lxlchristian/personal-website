@@ -117,9 +117,9 @@ const TRANSLATIONS = {
     'bio.p1': "Hi! My name is Christian, and I'm a composer from Singapore who loves scoring video games and writing for musical theatre. I'm also a recent graduate of the Harvard–Berklee Joint Studies Program.",
     'bio.p2': "Though much of my time as an undergraduate was spent studying Computer Science, perhaps even more of it was spent writing music. By graduation, I'd written three full-length, two-act musicals, including one with <a href=\"https://www.hastypudding.org/hasty-pudding-theatricals/\" target=\"_blank\" rel=\"noopener\">the Hasty Pudding Theatricals</a>, which ran 40 shows throughout Cambridge, New York, and Bermuda.",
     'bio.p3': "I also released my first full 17-track original video game soundtrack with Island of Hearts, and made contributions to action roguelite Realm of Taiwu, whose teaser trailer I scored crossed 1.2 million views on Bilibili. I've also collaborated with numerous game devs through Berklee's Games and Interactive Scoring Program, as well as interned at Sony PlayStation in Tokyo and Leap Studio in Beijing.",
-    'bio.p4': "I'm now based in Tokyo and open to collaboration worldwide. If you're working on something that needs a composer, I'd love to hear about it!",
+    'bio.p4': "I'm now based in Tokyo and Singapore, and open to collaboration worldwide. If you're working on something that needs a composer, I'd love to hear about it!",
     'bio.basedLabel':             'Based in',
-    'bio.basedValue':             'Tokyo · Open to Remote',
+    'bio.basedValue':             'Tokyo · Singapore · Open to Remote',
     'bio.langLabel':              'Languages',
     'bio.langValue':              'English · Mandarin · Japanese',
     'bio.milestone':              'views on Bilibili — Realm of Taiwu teaser trailer',
@@ -127,6 +127,8 @@ const TRANSLATIONS = {
     'bio.credits.games':          'Games',
     'bio.credits.musicals':       'Musicals',
     'bio.credits.orchestrations': 'Additional Credits',
+    'bio.toolsLabel': 'Software',
+    'bio.codeLabel':  'Code',
 
     /* ── Show synopses ── */
     'show.salooney.synopsis':   "Salooney Tunes is a knee-slapping, nail-biting heist-gone-wrong that follows notorious outlaw Robin Yablind and his fame-hungry sidekick Wyatt Aintme. They must find a way to avoid Mayor Gerri Mandarin and pregnant Sheriff Carrie N Twins, who are on the hunt to put them behind bars. Chock-full of lovable characters like skittish saloon owner Bart Ender, sultry saloon-singer Sarah Problem, and twelve-year-old dancer Anna Fivesix-Fivesixseveneight, Salooney Tunes's twists and turns will keep you on the edge of your seat.",
@@ -244,9 +246,9 @@ const TRANSLATIONS = {
     'bio.p1': '嗨！我叫Christian，是一位来自新加坡的作曲家，热爱游戏配乐与音乐剧创作，毕业于哈佛-伯克利音乐学院联合课程。',
     'bio.p2': '本科主修计算机科学，但投在音乐创作上的时间或许更多。毕业时，我已完成三部两幕长篇音乐剧——其中包括与百年名社<a href="https://www.hastypudding.org/hasty-pudding-theatricals/" target="_blank" rel="noopener">Hasty Pudding Theatricals</a>联合制作的一部，先后在剑桥、纽约和百慕大演出整整40场。',
     'bio.p3': '我还发行了Island of Hearts的17首完整原声带，并为动作肉鸽游戏《太吾绘卷》制作了宣传片配乐——该视频在哔哩哔哩播放量突破120万次。此外，我通过伯克利音乐学院游戏与互动配乐项目与众多开发者深度合作，并分别在东京索尼PlayStation及北京LEAP工作室完成实习。',
-    'bio.p4': '目前定居东京，欢迎全球范围内的远程合作。如果您正在筹备需要作曲的项目，随时欢迎联系！',
+    'bio.p4': '目前定居于东京与新加坡，欢迎全球范围内的远程合作。如果您正在筹备需要作曲的项目，随时欢迎联系！',
     'bio.basedLabel':             '所在地',
-    'bio.basedValue':             '东京 · 欢迎远程合作',
+    'bio.basedValue':             '东京 · 新加坡 · 欢迎远程合作',
     'bio.langLabel':              '语言',
     'bio.langValue':              '英语 · 普通话 · 日语',
     'bio.milestone':              '哔哩哔哩播放量——《太吾绘卷》宣传片',
@@ -254,6 +256,8 @@ const TRANSLATIONS = {
     'bio.credits.games':          '游戏',
     'bio.credits.musicals':       '音乐剧',
     'bio.credits.orchestrations': '其他作品',
+    'bio.toolsLabel': '工具',
+    'bio.codeLabel':  '编程',
 
     /* ── Show synopses ── */
     'show.salooney.synopsis':   '《Salooney Tunes》是一出令人捧腹、扣人心弦的西部喜剧音乐剧，讲述了臭名昭著的亡命之徒Robin Yablind与他贪图名利的搭档Wyatt Aintme的跌宕旅程。两人疲于应付步步紧逼的Gerri Mandarin市长与怀有身孕的Carrie N Twins警长的追缉。剧中角色个个生动鲜活——胆小的沙龙老板Bart Ender、风情万种的驻唱歌手Sarah Problem、年仅十二岁的舞蹈神童Anna Fivesix-Fivesixseveneight……笑料与惊喜接踵而至，让人目不暇接。',
@@ -371,9 +375,9 @@ const TRANSLATIONS = {
     'bio.p1': 'シンガポール出身、東京を拠点に活動する作曲家、Christian Liuです。ビデオゲーム音楽とミュージカルを中心に、物語を彩る音楽を創り続けています。ハーバード大学×バークリー音楽院の合同プログラムを修了。',
     'bio.p2': '学内はコンピュータサイエンスを学びながら創作にも情熱を注ぎ、2幕構成のオリジナル・ミュージカルを3作品完成。',
     'bio.p3': 'ゲーム音楽では、オリジナルサウンドトラック『Island of Hearts』（全17曲）を制作しました。さらに担当した『太吾絵巻』PVは、Bilibiliで120万回以上再生されるなど、大きな反響を獲得しています。バークリー音楽院のGames and Interactive Scoring Programを通じて世界中の開発者と協働し、ソニー・インタラクティブエンタテインメント（東京）およびLEAP Studio（北京）でのインターンシップも経験。国際的な現場で実践を重ねてきました。',
-    'bio.p4': '現在は東京を拠点に、世界中のクライアントとリモートでコラボレーションを行っています。心を動かし、世界観を広げる音楽を。ぜひあなたのプロジェクトでご一緒できれば嬉しいです。お気軽にご連絡ください！',
+    'bio.p4': '現在は東京とシンガポールを拠点に、世界中のクライアントとリモートでコラボレーションを行っています。心を動かし、世界観を広げる音楽を。ぜひあなたのプロジェクトでご一緒できれば嬉しいです。お気軽にご連絡ください！',
     'bio.basedLabel':             '拠点',
-    'bio.basedValue':             '東京 · リモート対応可',
+    'bio.basedValue':             '東京 · シンガポール · リモート対応可',
     'bio.langLabel':              '言語',
     'bio.langValue':              '英語 · 中国語 · 日本語',
     'bio.milestone':              'Bilibili再生回数 — 太吾絵巻 PV',
@@ -381,6 +385,8 @@ const TRANSLATIONS = {
     'bio.credits.games':          'ゲーム',
     'bio.credits.musicals':       'ミュージカル',
     'bio.credits.orchestrations': 'その他の実績',
+    'bio.toolsLabel': 'ソフトウェア',
+    'bio.codeLabel':  'コード',
 
     /* ── Show synopses ── */
     'show.salooney.synopsis':   '笑いとハラハラが止まらない西部劇コメディ・ミュージカル。悪名高き無法者Robin Yablindと名声に目がくらんだ相棒Wyatt Aintmeが繰り広げる大失敗の強盗劇を軸に、Gerri Mandarin市長と大きなお腹を抱えたCarrie N Twins保安官の執拗な追跡をかわしながら物語は転がっていく。腰の引けたサルーン亭主Bart Ender、妖艶な歌姫Sarah Problem、12歳のダンス天才少女Anna Fivesix-Fivesixseveneightら個性豊かな面々が次々登場——波乱万丈の展開に、観客は一瞬たりとも目が離せない。',

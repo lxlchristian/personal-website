@@ -32,6 +32,26 @@ const BiographyPage = {
                     <dt class="fact-label">${t('bio.langLabel', lang)}</dt>
                     <dd class="fact-value">${t('bio.langValue', lang)}</dd>
                   </div>
+                  <div class="fact">
+                    <dt class="fact-label">${t('bio.toolsLabel', lang)}</dt>
+                    <dd class="fact-value bio-fact-tags">
+                      <span class="bio-tool-tag">Cubase</span>
+                      <span class="bio-tool-tag">Logic</span>
+                      <span class="bio-tool-tag">Dorico</span>
+                      <span class="bio-tool-tag">Wwise</span>
+                      <span class="bio-tool-tag">FMOD</span>
+                      <span class="bio-tool-tag">Unity</span>
+                    </dd>
+                  </div>
+                  <div class="fact">
+                    <dt class="fact-label">${t('bio.codeLabel', lang)}</dt>
+                    <dd class="fact-value bio-fact-tags">
+                      <span class="bio-tool-tag">C++</span>
+                      <span class="bio-tool-tag">C#</span>
+                      <span class="bio-tool-tag">Python</span>
+                      <span class="bio-tool-tag">JavaScript</span>
+                    </dd>
+                  </div>
                 </dl>
               </div>
 

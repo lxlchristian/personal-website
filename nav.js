@@ -49,6 +49,16 @@ const Nav = (() => {
   function renderHome() {
     const lang = getCurrentLang();
     navEl.className = 'nav-home';
+
+    const homeSheetItems = NAV_ITEMS.map(item => {
+      const isCurrent = item.key === 'home';
+      return `<a href="${item.path}" data-link="${item.path}"
+                 class="nav-mobile-panel__item${isCurrent ? ' is-current' : ''}"
+                 ${isCurrent ? 'aria-current="page"' : ''}>
+                 ${t(item.labelKey, lang)}
+               </a>`;
+    }).join('');
+
     navEl.innerHTML = `
       <a class="corner-label corner-tl" href="/biography" data-link="/biography" data-quad="tl"
          aria-label="${t('nav.biography', lang)}">${t('nav.biography', lang)}</a>
@@ -59,6 +69,24 @@ const Nav = (() => {
       <a class="corner-label corner-br" href="/musicals"  data-link="/musicals"  data-quad="br"
          aria-label="${t('nav.musicals', lang)}">${t('nav.musicals', lang)}</a>
       <div class="nav-lang-home">${langToggleHTML()}</div>
+
+      <!-- Mobile: swipe-up nav sheet (homepage only) -->
+      <div class="nav-home-sheet" id="nav-home-sheet" aria-hidden="true">
+        <svg class="nav-mobile-panel__diag" viewBox="0 0 100 100" preserveAspectRatio="none"
+             aria-hidden="true">
+          <line x1="33" y1="0" x2="60" y2="100" stroke="rgba(200,169,122,0.18)" stroke-width="0.4"/>
+          <line x1="0" y1="60" x2="100" y2="40" stroke="rgba(200,169,122,0.12)" stroke-width="0.3"/>
+        </svg>
+        <button class="nav-mobile-panel__close" aria-label="Close navigation">
+          <svg width="16" height="16" viewBox="0 0 16 16" fill="none" stroke="currentColor"
+               stroke-width="1.4" stroke-linecap="round" aria-hidden="true">
+            <line x1="2" y1="2" x2="14" y2="14"/>
+            <line x1="14" y1="2" x2="2" y2="14"/>
+          </svg>
+        </button>
+        <nav class="nav-mobile-panel__items">${homeSheetItems}</nav>
+        <div class="nav-mobile-panel__lang">${langToggleHTML()}</div>
+      </div>
     `;
   }
 
@@ -212,12 +240,69 @@ const Nav = (() => {
     });
   }
 
+  /* ── Homepage swipe-up nav sheet ────────────────────────── */
+  function _openHomeSheet() {
+    const sheet = navEl.querySelector('.nav-home-sheet');
+    if (!sheet || sheet.classList.contains('is-open')) return;
+    sheet.classList.add('is-open');
+    sheet.setAttribute('aria-hidden', 'false');
+    if (typeof gsap !== 'undefined' &&
+        !window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
+      const items = sheet.querySelectorAll('.nav-mobile-panel__item');
+      gsap.from(items, {
+        y: 16, duration: 0.30, ease: 'power2.out',
+        stagger: 0.045, delay: 0.06, clearProps: 'all',
+      });
+    }
+  }
+
+  function _closeHomeSheet() {
+    const sheet = navEl.querySelector('.nav-home-sheet');
+    if (!sheet) return;
+    sheet.style.transform = '';
+    sheet.style.transition = '';
+    sheet.classList.remove('is-open');
+    sheet.setAttribute('aria-hidden', 'true');
+  }
+
+  function _wireHomeSheetSwipe(sheet) {
+    let startY = 0;
+    let dragging = false;
+    const DEAD_ZONE = 20;       /* px of slack before sheet starts moving */
+    const DISMISS_THRESHOLD = 120; /* total px down required to dismiss */
+
+    sheet.addEventListener('touchstart', e => {
+      startY = e.touches[0].clientY;
+      dragging = true;
+      sheet.style.transition = 'none';
+    }, { passive: true });
+
+    sheet.addEventListener('touchmove', e => {
+      if (!dragging) return;
+      const deltaY = e.touches[0].clientY - startY;
+      /* Only track movement past the dead zone so normal taps never move the sheet */
+      if (deltaY > DEAD_ZONE) {
+        sheet.style.transform = `translateY(${deltaY - DEAD_ZONE}px)`;
+      }
+    }, { passive: true });
+
+    sheet.addEventListener('touchend', e => {
+      if (!dragging) return;
+      dragging = false;
+      const deltaY = e.changedTouches[0].clientY - startY;
+      sheet.style.transition = '';
+      sheet.style.transform = '';
+      if (deltaY > DISMISS_THRESHOLD) _closeHomeSheet();
+    });
+  }
+
   /* ── Close all mobile panels ───────────────────────────── */
   function _closeMobilePanels() {
     const panel = navEl.querySelector('.nav-mobile-panel');
     const spine = navEl.querySelector('.nav-spine');
     if (panel) { panel.classList.remove('is-open'); panel.setAttribute('aria-hidden', 'true'); }
     if (spine) spine.setAttribute('aria-expanded', 'false');
+    _closeHomeSheet();
   }
 
   /* ── Attach link + lang button event listeners ─────────── */
@@ -287,6 +372,10 @@ const Nav = (() => {
       closeBtn.addEventListener('click', () => _closeMobilePanels());
     }
 
+    /* ── Home sheet: swipe-down dismiss ─────────────────── */
+    const homeSheet = navEl.querySelector('.nav-home-sheet');
+    if (homeSheet) _wireHomeSheetSwipe(homeSheet);
+
     /* ── Mobile: first-visit spine shimmer hint ───────────── */
     if (spine && spine.offsetWidth > 0 && !localStorage.getItem('cl-spine-hint')) {
       const tid = setTimeout(() => {
@@ -344,6 +433,6 @@ const Nav = (() => {
     _wireOutsideClick();
   }
 
-  return { render };
+  return { render, openHomeSheet: _openHomeSheet };
 
 })();

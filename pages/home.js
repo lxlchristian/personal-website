@@ -358,6 +358,30 @@ function _initHover() {
   window.addEventListener('resize', () => { _setResting(); _render(); });
 }
 
+/* Detect upward swipe on the homepage content to open the mobile nav sheet */
+function _initHomeSwipe(el) {
+  let startY = 0;
+  let startX = 0;
+
+  el.addEventListener('touchstart', e => {
+    startY = e.touches[0].clientY;
+    startX = e.touches[0].clientX;
+  }, { passive: true });
+
+  el.addEventListener('touchend', e => {
+    if (document.body.dataset.section !== 'home') return;
+    const sheet = document.getElementById('nav-home-sheet');
+    if (sheet && sheet.classList.contains('is-open')) return;
+    const endY  = e.changedTouches[0].clientY;
+    const endX  = e.changedTouches[0].clientX;
+    const deltaY = startY - endY;            /* positive = upward swipe */
+    const deltaX = Math.abs(endX - startX);
+    if (deltaY > 60 && deltaX < 60) {
+      if (typeof Nav !== 'undefined') Nav.openHomeSheet();
+    }
+  }, { passive: true });
+}
+
 /* Page-load entrance: all four corner labels nudge outward simultaneously,
    then snap back with an elastic release — like a single breath. */
 function _initEntrance() {
@@ -466,6 +490,7 @@ const HomePage = {
 
     if (isMobile) {
       _initMobileQuads();
+      _initHomeSwipe(el);
       window.addEventListener('resize', () => {
         if (window.matchMedia('(max-width: 768px)').matches) {
           _setResting();
