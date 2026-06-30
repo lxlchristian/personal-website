@@ -391,9 +391,25 @@ const Nav = (() => {
       closeBtn.addEventListener('click', () => _closeMobilePanels());
     }
 
-    /* ── Home sheet: swipe-down dismiss ─────────────────── */
+    /* ── Subpage panel: tap background to close ──────────── */
+    if (navPanel) {
+      navPanel.addEventListener('click', e => {
+        if (!e.target.closest('[data-link], .lang-btn, .lang-select, .nav-mobile-panel__close')) {
+          _closeMobilePanels();
+        }
+      });
+    }
+
+    /* ── Home sheet: swipe-down dismiss + tap bg to close ── */
     const homeSheet = navEl.querySelector('.nav-home-sheet');
-    if (homeSheet) _wireHomeSheetSwipe(homeSheet);
+    if (homeSheet) {
+      _wireHomeSheetSwipe(homeSheet);
+      homeSheet.addEventListener('click', e => {
+        if (!e.target.closest('[data-link], .lang-btn, .lang-select, .nav-mobile-panel__close')) {
+          _closeHomeSheet();
+        }
+      });
+    }
 
     /* ── Mobile: first-visit spine shimmer hint ───────────── */
     if (spine && spine.offsetWidth > 0 && !localStorage.getItem('cl-spine-hint')) {
@@ -439,6 +455,10 @@ const Nav = (() => {
 
   /* ── Public ─────────────────────────────────────────────── */
   function render(section, opts) {
+    /* Clear any inline styles left by _openHomeSheet() so a re-render
+       (e.g. language change) never leaves the container absorbing clicks. */
+    navEl.style.pointerEvents = '';
+    navEl.style.zIndex = '';
     const fromSubpage = navEl.classList.contains('nav-subpage');
     if (section === 'home') renderHome();
     else {

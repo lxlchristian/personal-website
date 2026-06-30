@@ -358,25 +358,30 @@ function _initHover() {
   window.addEventListener('resize', () => { _setResting(); _render(); });
 }
 
-/* Detect upward swipe on the homepage content to open the mobile nav sheet */
+/* Detect upward swipe on the homepage content to open the mobile nav sheet.
+   Uses touchmove so slow deliberate drags register before finger-lift —
+   touchend-only detection fails on iOS when the browser enters scroll-
+   consideration mode and issues touchcancel instead of touchend. */
 function _initHomeSwipe(el) {
   let startY = 0;
   let startX = 0;
+  let triggered = false;
 
   el.addEventListener('touchstart', e => {
     startY = e.touches[0].clientY;
     startX = e.touches[0].clientX;
+    triggered = false;
   }, { passive: true });
 
-  el.addEventListener('touchend', e => {
+  el.addEventListener('touchmove', e => {
+    if (triggered) return;
     if (document.body.dataset.section !== 'home') return;
     const sheet = document.getElementById('nav-home-sheet');
     if (sheet && sheet.classList.contains('is-open')) return;
-    const endY  = e.changedTouches[0].clientY;
-    const endX  = e.changedTouches[0].clientX;
-    const deltaY = startY - endY;            /* positive = upward swipe */
-    const deltaX = Math.abs(endX - startX);
+    const deltaY = startY - e.touches[0].clientY;   /* positive = upward */
+    const deltaX = Math.abs(e.touches[0].clientX - startX);
     if (deltaY > 60 && deltaX < 60) {
+      triggered = true;
       if (typeof Nav !== 'undefined') Nav.openHomeSheet();
     }
   }, { passive: true });
