@@ -79,6 +79,12 @@ let _activateTimer = null;
 let _pageLoadAnimDone = false;
 let _isDrifting       = false;
 
+/* Per-quad image load/arm state.
+   _imgReady: image is fully decoded (persists across navigations — browser cache).
+   _imgPending: quad is armed and waiting for image to load (reset on each mount). */
+const _imgReady   = { TL: false, TR: false, BL: false, BR: false };
+const _imgPending = { TL: false, TR: false, BL: false, BR: false };
+
 /* Intersection of the two infinite lines (line-line formula) */
 function _intersect() {
   const { a, b } = _st;
@@ -148,7 +154,7 @@ function _initMobileQuads() {
     clearTimeout(_resetTimer);
     _armedQuad = null;
     _stopIdleDrift();
-    document.querySelectorAll('.quad-overlay').forEach(el => el.classList.remove('is-active'));
+    ['TL', 'TR', 'BL', 'BR'].forEach(Q => _setImgVisible(Q, false));
     document.querySelectorAll('.corner-label').forEach(el => {
       el.classList.remove('is-armed');
       if (typeof gsap !== 'undefined') {
@@ -186,8 +192,9 @@ function _initMobileQuads() {
     }
 
     /* Reveal background image */
-    const overlay = document.getElementById('quad' + quad.toUpperCase());
-    if (overlay) overlay.classList.add('is-active');
+    /* Reveal background image — GSAP handles timing; shows immediately if loaded,
+       or fires when the image finishes loading (only if quad is still armed). */
+    _setImgVisible(quad.toUpperCase(), true);
 
     /* Shift diagonals — slower, softer ease on mobile */
     _animateLines(_target(quad), 0.85, 'power2.inOut');
@@ -278,7 +285,7 @@ function _activateQuad(quad) {
 
   /* Deactivate previous */
   if (_activeQuad) {
-    document.getElementById('quad' + _activeQuad.toUpperCase())?.classList.remove('is-active');
+    _setImgVisible(_activeQuad.toUpperCase(), false);
     const prev = document.querySelector('.corner-' + _activeQuad);
     if (prev && typeof gsap !== 'undefined') {
       gsap.to(prev, { x: 0, y: 0, duration: 0.5, ease: _SPRING });
@@ -291,7 +298,7 @@ function _activateQuad(quad) {
     _stopIdleDrift();
     /* Activate new quadrant: spring-animate lines + show overlay + nudge label */
     _animateLines(_target(quad));
-    document.getElementById('quad' + quad.toUpperCase())?.classList.add('is-active');
+    _setImgVisible(quad.toUpperCase(), true);
     const label = document.querySelector('.corner-' + quad);
     const nudge = _CORNER_NUDGE[quad];
     if (label && nudge && typeof gsap !== 'undefined') {
@@ -301,7 +308,7 @@ function _activateQuad(quad) {
     _stopIdleDrift();
     /* Idle reset: slower ease-in return to rest */
     _animateLines(_target(null), 0.8, _EASE_OUT);
-    document.querySelectorAll('.quad-overlay').forEach(el => el.classList.remove('is-active'));
+    ['TL', 'TR', 'BL', 'BR'].forEach(Q => _setImgVisible(Q, false));
     document.querySelectorAll('.corner-label').forEach(el => {
       if (typeof gsap !== 'undefined') {
         gsap.to(el, { x: 0, y: 0, duration: 0.8, ease: _EASE_OUT });
@@ -374,6 +381,33 @@ function _stopIdleDrift() {
   if (typeof gsap !== 'undefined') {
     gsap.killTweensOf(_st.a);
     gsap.killTweensOf(_st.b);
+  }
+}
+
+/* GSAP-controlled image reveal. Never use CSS transitions for this — GSAP owns the
+   opacity so timing stays in sync with the line animations and late-loading images
+   only reveal when their quad is still armed.
+     show=true  → animate to 0.19 (if image loaded) or queue reveal for when it is
+     show=false → animate to 0 and clear any pending reveal                         */
+function _setImgVisible(Q, show) {
+  const img = document.querySelector(`#quad${Q} .quad-overlay__img`);
+  if (!img) return;
+  if (show) {
+    _imgPending[Q] = true;
+    if (_imgReady[Q] && typeof gsap !== 'undefined') {
+      _imgPending[Q] = false;
+      gsap.killTweensOf(img);
+      gsap.to(img, { opacity: 0.19, duration: 0.4, ease: 'power2.out', delay: 0.1 });
+    }
+    /* else: markReady callback will trigger the reveal once the image loads */
+  } else {
+    _imgPending[Q] = false;
+    if (typeof gsap !== 'undefined') {
+      gsap.killTweensOf(img);
+      gsap.to(img, { opacity: 0, duration: 0.35, ease: 'power2.out' });
+    } else {
+      img.style.opacity = '0';
+    }
   }
 }
 
@@ -545,25 +579,69 @@ const HomePage = {
       </div>
     `;
 
-    /* Mark each image ready only once fully loaded so a partially-downloaded
-       image never paints through the opacity transition */
-    el.querySelectorAll('.quad-overlay__img').forEach(img => {
-      const markReady = () => img.classList.add('is-ready');
+    /* Reset arm state for this mount (stale pending state from a previous navigation
+       could otherwise cause a background to reveal itself when no quad is armed). */
+    _imgPending.TL = _imgPending.TR = _imgPending.BL = _imgPending.BR = false;
+
+    /* Track per-quad image readiness. GSAP (not CSS transition) controls opacity, so
+       _setImgVisible can only fire the reveal once both the image is decoded AND the
+       quad is still armed — eliminating both the "blank first tap" and "jitter on
+       mid-animation load" bugs.                                                        */
+    ['TL', 'TR', 'BL', 'BR'].forEach(Q => {
+      const img = el.querySelector(`#quad${Q} .quad-overlay__img`);
+      if (!img) return;
+      const markReady = () => {
+        _imgReady[Q] = true;
+        img.classList.add('is-ready');
+        /* Reveal only if this quad is still armed (guards against late loads
+           arriving after the user has already reset/navigated away). */
+        if (_imgPending[Q] && typeof gsap !== 'undefined') {
+          _imgPending[Q] = false;
+          gsap.killTweensOf(img);
+          gsap.to(img, { opacity: 0.19, duration: 0.5, ease: 'power2.out' });
+        }
+      };
       if (img.complete && img.naturalWidth) {
         markReady();
       } else {
         img.addEventListener('load', markReady, { once: true });
-        img.addEventListener('error', markReady, { once: true }); /* show on broken img */
+        img.addEventListener('error', markReady, { once: true });
       }
     });
 
     if (isMobile) {
       _initMobileQuads();
       _initHomeSwipe(el);
+
+      /* Size the deadzone to the actual rendered text bounds so it never
+         bleeds below the subtitle or outside the name's width.            */
+      function _sizeDeadzone() {
+        const dz    = el.querySelector('.diag-deadzone');
+        const first = el.querySelector('.home-roles');
+        const last  = el.querySelector('.home-sub');
+        const wide  = el.querySelector('.home-name');
+        if (!dz || !first || !last || !wide) return;
+        const pad  = 14; /* px breathing room on each side */
+        const tR   = first.getBoundingClientRect();
+        const bR   = last.getBoundingClientRect();
+        const wR   = wide.getBoundingClientRect();
+        dz.style.top    = (tR.top    - pad) + 'px';
+        dz.style.left   = (wR.left   - pad) + 'px';
+        dz.style.width  = (wR.width  + pad * 2) + 'px';
+        dz.style.height = (bR.bottom - tR.top + pad * 2) + 'px';
+        dz.style.bottom = '';  /* override any CSS bottom */
+      }
+
+      /* Sync call — getBoundingClientRect triggers a layout flush so measurements
+         are valid immediately. Re-runs after web fonts load in case Bodoni shifts
+         the name width. */
+      _sizeDeadzone();
+      document.fonts?.ready?.then?.(_sizeDeadzone);
       window.addEventListener('resize', () => {
         if (window.matchMedia('(max-width: 768px)').matches) {
           _setResting();
           _render();
+          _sizeDeadzone();
         }
       });
     } else {

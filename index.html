@@ -16,6 +16,17 @@
   <link href="https://fonts.googleapis.com/css2?family=Bodoni+Moda:ital,opsz,wght@0,6..96,400;0,6..96,700;1,6..96,400&family=Noto+Sans+JP:wght@400;500;700&family=Noto+Sans+SC:wght@400;500;700&display=swap" rel="stylesheet" />
   <link href="https://api.fontshare.com/v2/css?f[]=satoshi@400,500,700&display=swap" rel="stylesheet" />
 
+  <!-- Homepage background images: preload so browser starts fetching during HTML parse,
+       before JS creates the <img> tags. Media queries mirror the mobile/desktop split in home.js. -->
+  <link rel="preload" as="image" href="/home_bg1m.jpeg" media="(max-width: 768px)">
+  <link rel="preload" as="image" href="/home_bg2m.jpeg" media="(max-width: 768px)">
+  <link rel="preload" as="image" href="/home_bg3m.jpeg" media="(max-width: 768px)">
+  <link rel="preload" as="image" href="/home_bg4m.jpeg" media="(max-width: 768px)">
+  <link rel="preload" as="image" href="/home_bg1.jpeg" media="(min-width: 769px)">
+  <link rel="preload" as="image" href="/home_bg2.jpeg" media="(min-width: 769px)">
+  <link rel="preload" as="image" href="/home_bg3.jpeg" media="(min-width: 769px)">
+  <link rel="preload" as="image" href="/home_bg4.jpeg" media="(min-width: 769px)">
+
   <!-- GSAP · loaded early, guarded with typeof gsap check at use sites -->
   <script src="https://cdn.jsdelivr.net/npm/gsap@3/dist/gsap.min.js" defer></script>
   <script src="https://cdn.jsdelivr.net/npm/gsap@3/dist/ScrollTrigger.min.js" defer></script>

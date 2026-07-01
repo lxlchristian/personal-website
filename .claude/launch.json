@@ -55,6 +55,12 @@
       "runtimeExecutable": "python3",
       "runtimeArgs": ["-m", "http.server", "3055"],
       "port": 3055
+    },
+    {
+      "name": "portfolio-imgfix",
+      "runtimeExecutable": "python3",
+      "runtimeArgs": ["-m", "http.server", "3060"],
+      "port": 3060
     }
   ]
 }

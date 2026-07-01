@@ -171,13 +171,8 @@ body:not([data-section="home"]) {
   height: 100%;
   object-fit: cover;
   opacity: 0;
-  transition: opacity 300ms ease 150ms;
   display: block;
   will-change: opacity;
-}
-
-.quad-overlay.is-active .quad-overlay__img.is-ready {
-  opacity: 0.19;
 }
 
 /* ── Homepage page container ────────────────────────────── */
