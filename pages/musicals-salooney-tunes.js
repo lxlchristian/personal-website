@@ -14,9 +14,9 @@ const _SALOONEY_DATA = {
     { label: 'Book',            value: 'Benjamin Langman and Gunnar Sizemore' },
     { label: 'Lyrics',          value: 'Olivia Data' },
     { label: 'Music',           value: 'Christian Liu' },
-    { label: 'Orchestrations',  value: 'Allen Feinstein, Peter Mansfield, Ben Green, Fraser Weist, Christian Liu' },
+    { label: 'Orchestrations',  value: 'Allen Feinstein, Ben Green, Dan Ring, Peter Mansfield, Fraser Weist, Christian Liu' },
     { label: 'Direction',       value: 'Larry Sousa' },
-    { label: 'Music Direction', value: 'José Degaldo' },
+    { label: 'Music Direction', value: 'José Delgado' },
   ],
 
   performances: [

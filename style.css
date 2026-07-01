@@ -176,7 +176,7 @@ body:not([data-section="home"]) {
 }
 
 .quad-overlay.is-active .quad-overlay__img.is-ready {
-  opacity: 0.40;
+  opacity: 0.19;
 }
 
 /* ── Homepage page container ────────────────────────────── */
@@ -215,6 +215,15 @@ body:not([data-section="home"]) {
   color: var(--color-ink);
   margin-top: 0.8rem;
   letter-spacing: 0.04em;
+}
+
+.home-roles {
+  font-family: var(--font-body);
+  font-size: var(--text-xs);
+  color: var(--color-muted);
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  margin-top: 0.55rem;
 }
 
 /* ── Homepage nav — corner labels + lang toggle ─────────── */
@@ -321,7 +330,7 @@ body:not([data-section="home"]) {
     display: block;
     padding: 0;
     font-size: 1.0625rem;
-    transition: color 200ms ease;
+    transition: color 200ms ease, font-size 650ms var(--ease-out);
     pointer-events: none;
   }
 
@@ -330,21 +339,25 @@ body:not([data-section="home"]) {
   .corner-bl { bottom: 68px; left: 44px;  }
   .corner-br { bottom: 68px; right: 44px; }
 
-  /* Armed state: color change + a brief gold underline signals "tap again to enter" */
-  .corner-label.is-armed { color: var(--color-ink); }
-
-  .corner-label.is-armed::after {
-    content: '';
-    display: block;
-    height: 1px;
-    background: var(--color-gold);
-    margin-top: 4px;
-    opacity: 0;
-    animation: tap-hint-line 0.2s 0.3s ease forwards;
+  /* Armed state: zoom + bold + underline + arrow signals "tap again to enter" */
+  .corner-label.is-armed {
+    color: var(--color-ink);
+    font-weight: 700;
+    font-size: 1.7rem;
+    text-decoration: underline;
+    text-decoration-color: var(--color-gold);
+    text-decoration-thickness: 2px;
+    text-underline-offset: 7px;
   }
 
-  @keyframes tap-hint-line {
-    to { opacity: 0.6; }
+  .corner-label.is-armed::after {
+    content: ' →';
+    color: var(--color-gold);
+    font-size: 0.8em;
+    font-family: var(--font-body);
+    font-weight: 400;
+    font-style: normal;
+    letter-spacing: 0;
   }
 
   /* Diagonal SVG lines serve as the visual dividers instead of borders */
@@ -388,6 +401,10 @@ body:not([data-section="home"]) {
   .home-sub {
     font-size: var(--text-sm);
     margin-top: 0.6rem;
+  }
+
+  .home-roles {
+    margin-top: 0.4rem;
   }
 
 }

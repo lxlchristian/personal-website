@@ -37,6 +37,12 @@
       "runtimeExecutable": "python3",
       "runtimeArgs": ["-m", "http.server", "3032"],
       "port": 3032
+    },
+    {
+      "name": "portfolio-tagline",
+      "runtimeExecutable": "python3",
+      "runtimeArgs": ["-m", "http.server", "3041"],
+      "port": 3041
     }
   ]
 }

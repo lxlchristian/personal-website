@@ -31,7 +31,7 @@ const _REST_MOBILE = {
 };
 
 const _HOVER_MOBILE = {
-  tl: { a: { x1: 0.40, x2: 0.79 }, b: { y1: 0.70, y2: 0.82 } },
+  tl: { a: { x1: 0.63, x2: 0.63 }, b: { y1: 0.70, y2: 0.82 } },
   tr: { a: { x1: 0.10, x2: 0.52 }, b: { y1: 0.82, y2: 0.58 } },
   bl: { a: { x1: 0.48, x2: 0.86 }, b: { y1: 0.52, y2: 0.06 } },
   br: { a: { x1: 0.08, x2: 0.48 }, b: { y1: 0.40, y2: 0.22 } },
@@ -45,12 +45,12 @@ const _CORNER_NUDGE = {
   br: { x:  10, y:  10 },
 };
 
-/* ── Mobile armed nudge — moves label outward to signal "tap again to enter" */
+/* ── Mobile armed nudge — font-size zoom handles the expansion; no translation needed */
 const _MOBILE_ARMED_NUDGE = {
-  tl: { x: -16, y: -16 },
-  tr: { x:  16, y: -16 },
-  bl: { x: -16, y:  16 },
-  br: { x:  16, y:  16 },
+  tl: { x: 0, y: 0 },
+  tr: { x: 0, y: 0 },
+  bl: { x: 0, y: 0 },
+  br: { x: 0, y: 0 },
 };
 
 const _QUAD_PATHS = {
@@ -475,9 +475,10 @@ const HomePage = {
 
       <!-- Name block: absolutely centered, never moves -->
       <div class="home-center"
-           aria-label="Christian Liu — ${t('home.subtitle', lang)}">
+           aria-label="Christian Liu — ${t('home.subtitle', lang)} — ${t('home.roles', lang)}">
         <h1 class="home-name">CHRISTIAN LIU</h1>
         <p class="home-sub">${t('home.subtitle', lang)}</p>
+        <p class="home-roles">${t('home.roles', lang)}</p>
       </div>
     `;
 
