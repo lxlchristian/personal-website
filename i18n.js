@@ -23,7 +23,7 @@ const TRANSLATIONS = {
     'nav.contact':   'Contact',
 
     /* ── Homepage ── */
-    'home.subtitle': 'Scores for games. Songs for the stage.',
+    'home.subtitle': 'Music for stories on stage and screen.',
     'home.roles':    'composer · songwriter · producer',
 
     /* ── Section labels ── */
@@ -153,7 +153,7 @@ const TRANSLATIONS = {
     'nav.contact':   '联系',
 
     /* ── Homepage ── */
-    'home.subtitle': '游戏配乐 · 舞台词曲',
+    'home.subtitle': '舞台与银幕，故事的配乐。',
     'home.roles':    '作曲家 · 词曲作者 · 制作人',
 
     /* ── Section labels ── */
@@ -283,7 +283,7 @@ const TRANSLATIONS = {
     'nav.contact':   'お問い合わせ',
 
     /* ── Homepage ── */
-    'home.subtitle': 'ゲームに音楽を、舞台に歌を。',
+    'home.subtitle': '舞台とスクリーン、物語のための音楽。',
     'home.roles':    '作曲家 · ソングライター · プロデューサー',
 
     /* ── Section labels ── */

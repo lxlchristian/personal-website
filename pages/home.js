@@ -77,6 +77,7 @@ let _activeQuad    = null;
 let _idleTimer     = null;
 let _activateTimer = null;
 let _pageLoadAnimDone = false;
+let _isDrifting       = false;
 
 /* Intersection of the two infinite lines (line-line formula) */
 function _intersect() {
@@ -146,6 +147,7 @@ function _initMobileQuads() {
   function _deactivateAll(restoreOpacity = true) {
     clearTimeout(_resetTimer);
     _armedQuad = null;
+    _stopIdleDrift();
     document.querySelectorAll('.quad-overlay').forEach(el => el.classList.remove('is-active'));
     document.querySelectorAll('.corner-label').forEach(el => {
       el.classList.remove('is-armed');
@@ -161,6 +163,10 @@ function _initMobileQuads() {
       }
     });
     _animateLines(_target(null), 0.8, _EASE_OUT); /* return diagonals to rest */
+    /* Restart drift after reset animation — guard prevents restart if user re-armed quickly */
+    if (typeof gsap !== 'undefined') {
+      gsap.delayedCall(1.0, () => { if (_armedQuad === null) _startIdleDrift(); });
+    }
   }
 
   function _armQuad(quad) {
@@ -222,6 +228,8 @@ function _initMobileQuads() {
       _armQuad(quad);
     });
   });
+
+  _withGSAP(() => gsap.delayedCall(2.0, _startIdleDrift));
 }
 
 /* Reset _st to resting state for current viewport */
@@ -280,6 +288,7 @@ function _activateQuad(quad) {
   _activeQuad = quad;
 
   if (quad) {
+    _stopIdleDrift();
     /* Activate new quadrant: spring-animate lines + show overlay + nudge label */
     _animateLines(_target(quad));
     document.getElementById('quad' + quad.toUpperCase())?.classList.add('is-active');
@@ -289,6 +298,7 @@ function _activateQuad(quad) {
       gsap.to(label, { x: nudge.x, y: nudge.y, duration: 0.5, ease: _SPRING });
     }
   } else {
+    _stopIdleDrift();
     /* Idle reset: slower ease-in return to rest */
     _animateLines(_target(null), 0.8, _EASE_OUT);
     document.querySelectorAll('.quad-overlay').forEach(el => el.classList.remove('is-active'));
@@ -297,6 +307,8 @@ function _activateQuad(quad) {
         gsap.to(el, { x: 0, y: 0, duration: 0.8, ease: _EASE_OUT });
       }
     });
+    /* Restart drift after reset animation — guard prevents restart if user re-hovered quickly */
+    gsap.delayedCall(1.0, () => { if (_activeQuad === null) _startIdleDrift(); });
   }
 }
 
@@ -318,6 +330,51 @@ function _onLeave() {
   _activateTimer = null;
   clearTimeout(_idleTimer);
   _idleTimer = setTimeout(() => _activateQuad(null), 1500);
+}
+
+/* Idle drift: lines breathe slowly when no quadrant is active.
+   Endpoints slide along their screen edges (edge-to-edge constraint preserved).
+   Interrupted cleanly by any hover/tap via _stopIdleDrift + gsap.killTweensOf. */
+function _startIdleDrift() {
+  if (typeof gsap === 'undefined') return;
+  if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) return;
+  _isDrifting = true;
+  const D = 0.05; /* ±2.5 % of viewport per endpoint — subtle rotation + translation */
+
+  function nextDrift() {
+    if (!_isDrifting) return;
+    const W = window.innerWidth, H = window.innerHeight;
+    const isMob = window.matchMedia('(max-width: 768px)').matches;
+    const rest = isMob ? _REST_MOBILE : _REST;
+    const tgt = {
+      a: {                                              /* line A: x-intercepts slide along top/bottom edges */
+        x1: (rest.a.x1 + (Math.random() * 2 - 1) * D) * W,
+        y1: 0,
+        x2: (rest.a.x2 + (Math.random() * 2 - 1) * D) * W,
+        y2: H,
+      },
+      b: {                                              /* line B: y-intercepts slide along left/right edges */
+        x1: 0,
+        y1: (rest.b.y1 + (Math.random() * 2 - 1) * D) * H,
+        x2: W,
+        y2: (rest.b.y2 + (Math.random() * 2 - 1) * D) * H,
+      },
+    };
+    const dur = 7 + Math.random() * 6; /* 7–13 s per keyframe */
+    gsap.to(_st.a, { ...tgt.a, duration: dur, ease: 'sine.inOut', onUpdate: _render });
+    gsap.to(_st.b, { ...tgt.b, duration: dur, ease: 'sine.inOut', onUpdate: _render,
+                     onComplete: nextDrift });
+  }
+
+  nextDrift();
+}
+
+function _stopIdleDrift() {
+  _isDrifting = false;
+  if (typeof gsap !== 'undefined') {
+    gsap.killTweensOf(_st.a);
+    gsap.killTweensOf(_st.b);
+  }
 }
 
 /* Poll until GSAP is available (it's loaded with defer) */
@@ -355,7 +412,13 @@ function _initHover() {
     label.addEventListener('mouseleave', _onLeave);
   });
 
-  window.addEventListener('resize', () => { _setResting(); _render(); });
+  window.addEventListener('resize', () => {
+    _setResting();
+    _render();
+    if (_activeQuad === null) { _stopIdleDrift(); _startIdleDrift(); }
+  });
+
+  _withGSAP(() => gsap.delayedCall(2.0, _startIdleDrift));
 }
 
 /* Detect upward swipe on the homepage content to open the mobile nav sheet.
@@ -476,9 +539,9 @@ const HomePage = {
       <!-- Name block: absolutely centered, never moves -->
       <div class="home-center"
            aria-label="Christian Liu — ${t('home.subtitle', lang)} — ${t('home.roles', lang)}">
+        <p class="home-roles">${t('home.roles', lang)}</p>
         <h1 class="home-name">CHRISTIAN LIU</h1>
         <p class="home-sub">${t('home.subtitle', lang)}</p>
-        <p class="home-roles">${t('home.roles', lang)}</p>
       </div>
     `;
 
