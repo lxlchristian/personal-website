@@ -78,6 +78,7 @@ let _idleTimer     = null;
 let _activateTimer = null;
 let _pageLoadAnimDone = false;
 let _isDrifting       = false;
+let _entranceLocked   = false;
 
 /* Per-quad image load/arm state.
    _imgReady: image is fully decoded (persists across navigations — browser cache).
@@ -176,6 +177,7 @@ function _initMobileQuads() {
   }
 
   function _armQuad(quad) {
+    if (_entranceLocked) return;
     _deactivateAll(false); /* kills timers + resets position; opacity handled below */
     _armedQuad = quad;
 
@@ -226,6 +228,7 @@ function _initMobileQuads() {
 
     const quad = Q.toLowerCase();
     overlay.addEventListener('click', () => {
+      if (_entranceLocked) return;
       if (_armedQuad === quad) {
         clearTimeout(_resetTimer);
         _armedQuad = null;
@@ -236,7 +239,7 @@ function _initMobileQuads() {
     });
   });
 
-  _withGSAP(() => gsap.delayedCall(2.0, _startIdleDrift));
+  _withGSAP(() => gsap.delayedCall(2.5, _startIdleDrift));
 }
 
 /* Reset _st to resting state for current viewport */
@@ -321,6 +324,7 @@ function _activateQuad(quad) {
 
 /* Enter a quadrant — 300 ms intent delay from idle, immediate if switching */
 function _onEnter(quad) {
+  if (_entranceLocked) return;
   clearTimeout(_idleTimer);
   _idleTimer = null;
   clearTimeout(_activateTimer);
@@ -434,6 +438,7 @@ function _initHover() {
     el.addEventListener('mouseenter', () => _onEnter(quad));
     el.addEventListener('mouseleave', _onLeave);
     el.addEventListener('click', () => {
+      if (_entranceLocked) return;
       if (typeof Router !== 'undefined') Router.navigate(_QUAD_PATHS[quad]);
     });
   });
@@ -449,10 +454,10 @@ function _initHover() {
   window.addEventListener('resize', () => {
     _setResting();
     _render();
-    if (_activeQuad === null) { _stopIdleDrift(); _startIdleDrift(); }
+    if (_activeQuad === null && !_entranceLocked) { _stopIdleDrift(); _startIdleDrift(); }
   });
 
-  _withGSAP(() => gsap.delayedCall(2.0, _startIdleDrift));
+  _withGSAP(() => gsap.delayedCall(2.5, _startIdleDrift));
 }
 
 /* Detect upward swipe on the homepage content to open the mobile nav sheet.
@@ -472,6 +477,7 @@ function _initHomeSwipe(el) {
 
   el.addEventListener('touchmove', e => {
     if (triggered) return;
+    if (_entranceLocked) return;
     if (document.body.dataset.section !== 'home') return;
     const sheet = document.getElementById('nav-home-sheet');
     if (sheet && sheet.classList.contains('is-open')) return;
@@ -484,14 +490,89 @@ function _initHomeSwipe(el) {
   }, { passive: true });
 }
 
-/* Page-load entrance: all four corner labels nudge outward simultaneously,
-   then snap back with an elastic release — like a single breath. */
+/* Page-load entrance: lines draw outward from their intersection, text fades up
+   in a gentle stagger, corner labels fade in, then spring with an elastic nudge.
+   Interactions (hover, tap, swipe, click) are locked for the full duration. */
 function _initEntrance() {
   if (_pageLoadAnimDone) return;
+  _pageLoadAnimDone = true;
+  _entranceLocked   = true;
+
+  /* ── Synchronous pre-GSAP setup ─────────────────────────────────────────
+     Collapse lines to their resting intersection and hide text + corners
+     before the first paint, so no fully-visible layout frame ever shows. */
+  const W    = window.innerWidth,  H = window.innerHeight;
+  const isMob = window.matchMedia('(max-width: 768px)').matches;
+  const rest  = isMob ? _REST_MOBILE : _REST;
+  const ra = { x1: rest.a.x1*W, y1: rest.a.y1*H, x2: rest.a.x2*W, y2: rest.a.y2*H };
+  const rb = { x1: rest.b.x1*W, y1: rest.b.y1*H, x2: rest.b.x2*W, y2: rest.b.y2*H };
+
+  /* Intersection of the two resting lines */
+  const dxa = ra.x2-ra.x1, dya = ra.y2-ra.y1;
+  const dxb = rb.x2-rb.x1, dyb = rb.y2-rb.y1;
+  const den = dxa*dyb - dya*dxb;
+  const t   = den ? ((rb.x1-ra.x1)*dyb - (rb.y1-ra.y1)*dxb) / den : 0;
+  const ix  = ra.x1 + t*dxa;
+  const iy  = ra.y1 + t*dya;
+
+  /* Lines collapsed to a single point — zero-length lines render invisible */
+  _st.a = { x1: ix, y1: iy, x2: ix, y2: iy };
+  _st.b = { x1: ix, y1: iy, x2: ix, y2: iy };
+  _render();
+
+  /* Hide text */
+  ['.home-roles', '.home-name', '.home-sub'].forEach(sel => {
+    const el = document.querySelector(sel);
+    if (el) el.style.opacity = '0';
+  });
+
+  /* Hide corner labels AND block their pointer events so nav.js click
+     handlers cannot fire during the entrance sequence */
+  document.querySelectorAll('.corner-label').forEach(el => {
+    el.style.opacity       = '0';
+    el.style.pointerEvents = 'none';
+  });
+
+  /* ── GSAP animation ─────────────────────────────────────── */
   _withGSAP(() => {
+    const roles   = document.querySelector('.home-roles');
+    const name    = document.querySelector('.home-name');
+    const sub     = document.querySelector('.home-sub');
+    const corners = [...document.querySelectorAll('.corner-label')];
+
+    const _unlock = () => {
+      _entranceLocked = false;
+      corners.forEach(el => { el.style.pointerEvents = ''; });
+    };
+
     if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
-      _pageLoadAnimDone = true; return;
+      _setResting(); _render();
+      [roles, name, sub].filter(Boolean).forEach(el => gsap.set(el, { opacity: 1, y: 0 }));
+      gsap.set(corners, { opacity: 1 });
+      _unlock();
+      return;
     }
+
+    /* GSAP takes ownership of opacity/transform — supersedes the inline styles above */
+    gsap.set([roles, name, sub].filter(Boolean), { opacity: 0, y: 6 });
+    gsap.set(corners, { opacity: 0 });
+
+    const restTgt = _target(null);
+    const tl = gsap.timeline({ onComplete: _unlock });
+
+    /* Lines expand from intersection → resting positions (0 → 0.9 s) */
+    tl.to(_st.a, { ...restTgt.a, duration: 0.9, ease: 'power2.out', onUpdate: _render }, 0);
+    tl.to(_st.b, { ...restTgt.b, duration: 0.9, ease: 'power2.out', onUpdate: _render }, 0);
+
+    /* Text block — staggered fade-up */
+    if (roles) tl.to(roles, { opacity: 1, y: 0, duration: 0.55, ease: 'power2.out' }, 0.35);
+    if (name)  tl.to(name,  { opacity: 1, y: 0, duration: 0.65, ease: 'power2.out' }, 0.40);
+    if (sub)   tl.to(sub,   { opacity: 1, y: 0, duration: 0.60, ease: 'power2.out' }, 0.55);
+
+    /* Corner labels — fade in */
+    if (corners.length) tl.to(corners, { opacity: 1, duration: 0.55, ease: 'power2.out' }, 0.80);
+
+    /* Corner elastic nudge — sequenced in the same timeline */
     [
       { sel: '.corner-tl', dx: -4, dy: -4 },
       { sel: '.corner-tr', dx:  4, dy: -4 },
@@ -500,12 +581,11 @@ function _initEntrance() {
     ].forEach(({ sel, dx, dy }) => {
       const el = document.querySelector(sel);
       if (!el) return;
-      gsap.timeline({ delay: 1.2 })
-        .to(el, { x: dx, y: dy, duration: 0.08, ease: 'power1.in' })
-        .to(el, { x: 0,  y: 0,  duration: 0.65, ease: 'elastic.out(1.2, 0.4)' })
-        .set(el, { clearProps: 'transform' });
+      tl.to(el, { x: dx, y: dy, duration: 0.08, ease: 'power1.in' }, 1.20)
+        .to(el, { x: 0,  y: 0,  duration: 0.65, ease: 'elastic.out(1.2, 0.4)',
+                  onComplete: () => gsap.set(el, { clearProps: 'transform' }) }, 1.28);
     });
-    _pageLoadAnimDone = true;
+    /* Timeline ends at ~1.93 s; onComplete (_unlock) fires then */
   });
 }
 
@@ -519,6 +599,9 @@ const _STOPS = `
 
 const HomePage = {
   mount(el) {
+    /* If the user navigated away mid-entrance and returned, the lock must
+       not persist — entrance won't re-run (pageLoadAnimDone), so unlock now. */
+    _entranceLocked = false;
     const lang     = getCurrentLang();
     const isMobile = window.matchMedia('(max-width: 768px)').matches;
 
