@@ -84,6 +84,25 @@ const CityOfPeacePage = {
             </div>
           </header>
 
+          <section class="content-section" aria-labelledby="tracks-cop">
+            <span class="section-label" id="tracks-cop">${t('section.tracks', lang)}</span>
+            <div class="track-list" id="cop-track-list" role="list"></div>
+            <div class="mus-spotify-placeholder" style="margin-top: var(--sp-xl)">
+              <div class="mus-spotify-inner">
+                <svg class="mus-spotify-icon" width="22" height="22" viewBox="0 0 24 24"
+                     fill="currentColor" aria-hidden="true">
+                  <path d="M12 2C6.477 2 2 6.477 2 12s4.477 10 10 10 10-4.477 10-10S17.523 2 12
+                    2zm4.586 14.424a.622.622 0 01-.857.208c-2.348-1.435-5.304-1.76-8.785-.964a.623.623
+                    0 01-.277-1.215c3.809-.87 7.076-.496 9.712 1.115.294.181.387.564.207.856zm1.223-2.722a.78.78
+                    0 01-1.072.257C14.25 12.314 10.95 11.9 7.84 12.8a.78.78 0 01-.426-1.499c3.522-.999
+                    7.192-.516 9.939 1.329a.78.78 0 01.256 1.072zm.105-2.834C15.16 9.15 10.535 9 7.2
+                    9.984a.937.937 0 01-.517-1.8C10.4 7.08 15.503 7.25 18.9 9.387a.938.938 0 01-.986 1.481z"/>
+                </svg>
+                <p class="mus-spotify-label">${t('show.spotifyComingSoon', lang)}</p>
+              </div>
+            </div>
+          </section>
+
           <section class="content-section" aria-labelledby="credits-cop">
             <span class="section-label" id="credits-cop">${t('show.credits', lang)}</span>
             <dl class="show-credits__grid">
@@ -115,25 +134,6 @@ const CityOfPeacePage = {
             <span class="section-label" id="media-cop">${t('show.media', lang)}</span>
             <div class="show-media__video-wrap">
               ${mediaSection}
-            </div>
-          </section>
-
-          <section class="content-section" aria-labelledby="tracks-cop">
-            <span class="section-label" id="tracks-cop">${t('section.tracks', lang)}</span>
-            <div class="track-list" id="cop-track-list" role="list"></div>
-            <div class="mus-spotify-placeholder" style="margin-top: var(--sp-xl)">
-              <div class="mus-spotify-inner">
-                <svg class="mus-spotify-icon" width="22" height="22" viewBox="0 0 24 24"
-                     fill="currentColor" aria-hidden="true">
-                  <path d="M12 2C6.477 2 2 6.477 2 12s4.477 10 10 10 10-4.477 10-10S17.523 2 12
-                    2zm4.586 14.424a.622.622 0 01-.857.208c-2.348-1.435-5.304-1.76-8.785-.964a.623.623
-                    0 01-.277-1.215c3.809-.87 7.076-.496 9.712 1.115.294.181.387.564.207.856zm1.223-2.722a.78.78
-                    0 01-1.072.257C14.25 12.314 10.95 11.9 7.84 12.8a.78.78 0 01-.426-1.499c3.522-.999
-                    7.192-.516 9.939 1.329a.78.78 0 01.256 1.072zm.105-2.834C15.16 9.15 10.535 9 7.2
-                    9.984a.937.937 0 01-.517-1.8C10.4 7.08 15.503 7.25 18.9 9.387a.938.938 0 01-.986 1.481z"/>
-                </svg>
-                <p class="mus-spotify-label">${t('show.spotifyComingSoon', lang)}</p>
-              </div>
             </div>
           </section>
 

@@ -106,9 +106,10 @@ function _prodCard(prod, lang) {
        aria-label="${prod.title}, ${prod.year}. ${teaser}">
       <span class="mus-prod-card__year" aria-hidden="true">${prod.year}</span>
       <div class="mus-prod-card__body">
-        <h3 class="mus-prod-card__title">
-          ${prod.title}<span class="mus-prod-card__arrow" aria-hidden="true">↗</span>
-        </h3>
+        <div class="mus-prod-card__heading">
+          <h3 class="mus-prod-card__title">${prod.title}</h3>
+          <span class="card-link-arrow" aria-hidden="true">↗</span>
+        </div>
         <div class="mus-prod-card__rule" aria-hidden="true"></div>
         <p class="mus-prod-card__credits">
           <span class="mus-prod-card__year-mobile" aria-hidden="true">${prod.year}&ensp;·&ensp;</span>${prod.producer}&ensp;·&ensp;${role}
@@ -183,6 +184,11 @@ const MusicalsPage = {
             </div>
           </section>
 
+          <section class="content-section mus-reveal" aria-labelledby="feat-label">
+            <span class="section-label" id="feat-label">${t('section.tracks', lang)}</span>
+            <div class="track-list" id="mus-track-list" role="list"></div>
+          </section>
+
           <section class="content-section mus-reveal" aria-labelledby="orch-label">
             <span class="section-label" id="orch-label">${t('section.additionalCredits', lang)}</span>
             <div class="mus-orch-list">
@@ -201,19 +207,17 @@ const MusicalsPage = {
             </div>
           </section>
 
-          <section class="content-section mus-reveal" aria-labelledby="feat-label">
-            <span class="section-label" id="feat-label">${t('section.tracks', lang)}</span>
-            <div class="track-list" id="mus-track-list" role="list"></div>
-          </section>
-
           <section class="content-section mus-reveal">
             <a href="/contact" data-link="/contact" class="cta-btn">${t('cta.workTogether', lang)}</a>
             ${_ctaSocialHTML()}
           </section>
 
+          <div class="section-crosslink">
+            <a href="/games" data-link="/games" class="footer-sibling">${t('footer.gamesLink', lang)}</a>
+          </div>
+
           <footer class="subpage-footer">
             <span class="footer-copy">${t('footer.copy', lang)}</span>
-            <a href="/games" data-link="/games" class="footer-sibling">${t('footer.gamesLink', lang)}</a>
           </footer>
 
         </div>

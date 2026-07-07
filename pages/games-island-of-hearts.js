@@ -63,6 +63,11 @@ const IslandOfHeartsPage = {
           <a href="${d.steamUrl}" class="game-hero__steam" target="_blank" rel="noopener noreferrer"
              style="display:block; margin-bottom: var(--sp-2xl)">${t('show.viewOnSteam', lang)}</a>
 
+          <section class="content-section" aria-labelledby="tracks-ioh">
+            <span class="section-label" id="tracks-ioh">${t('section.tracks', lang)}</span>
+            <div class="track-list" id="ioh-track-list" role="list"></div>
+          </section>
+
           <section class="content-section" aria-labelledby="credits-ioh">
             <span class="section-label" id="credits-ioh">${t('show.credits', lang)}</span>
             <dl class="show-credits__grid">
@@ -85,11 +90,6 @@ const IslandOfHeartsPage = {
               ${d.screenshots.map(s => `
                 <img class="game-screenshot-strip__img" src="${s.src}" alt="${s.alt}" loading="lazy"/>`).join('')}
             </div>
-          </section>
-
-          <section class="content-section" aria-labelledby="tracks-ioh">
-            <span class="section-label" id="tracks-ioh">${t('section.tracks', lang)}</span>
-            <div class="track-list" id="ioh-track-list" role="list"></div>
           </section>
 
           <section class="content-section">

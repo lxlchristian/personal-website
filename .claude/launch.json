@@ -61,6 +61,18 @@
       "runtimeExecutable": "python3",
       "runtimeArgs": ["-m", "http.server", "3060"],
       "port": 3060
+    },
+    {
+      "name": "portfolio-cta",
+      "runtimeExecutable": "python3",
+      "runtimeArgs": ["-m", "http.server", "3091"],
+      "port": 3091
+    },
+    {
+      "name": "portfolio-tracks",
+      "runtimeExecutable": "python3",
+      "runtimeArgs": ["-m", "http.server", "3097"],
+      "port": 3097
     }
   ]
 }

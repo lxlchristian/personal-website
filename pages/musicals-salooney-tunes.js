@@ -70,33 +70,6 @@ const SalooneyTunesPage = {
             </div>
           </header>
 
-          <section class="content-section" aria-labelledby="credits-st">
-            <span class="section-label" id="credits-st">${t('show.credits', lang)}</span>
-            <dl class="show-credits__grid">
-              ${d.credits.map(c => `
-                <div class="show-credits__row">
-                  <dt class="show-credits__label">${t('credit.field.' + c.label, lang) || c.label}</dt>
-                  <dd class="show-credits__value">${c.value}</dd>
-                </div>`).join('')}
-            </dl>
-          </section>
-
-          <section class="content-section" aria-labelledby="perf-st">
-            <span class="section-label" id="perf-st">${t('show.performances', lang)}</span>
-            <ol class="show-perf-list">
-              ${d.performances.map(p => `
-                <li class="show-perf-item">
-                  <p class="show-perf-dates">${p.dates[lang] || p.dates.en}</p>
-                  <p class="show-perf-venue">${p.venue[lang] || p.venue.en}</p>
-                </li>`).join('')}
-            </ol>
-          </section>
-
-          <section class="content-section" aria-labelledby="synopsis-st">
-            <span class="section-label" id="synopsis-st">${t('show.synopsis', lang)}</span>
-            <p class="show-synopsis__text">${t('show.salooney.synopsis', lang)}</p>
-          </section>
-
           <section class="content-section" aria-labelledby="music-st">
             <span class="section-label" id="music-st">${t('show.music', lang)}</span>
             <p class="show-roughmix-note">${t('show.roughMixNote', lang)}</p>
@@ -128,6 +101,33 @@ const SalooneyTunesPage = {
                 </div>
               </div>
             </div>
+          </section>
+
+          <section class="content-section" aria-labelledby="credits-st">
+            <span class="section-label" id="credits-st">${t('show.credits', lang)}</span>
+            <dl class="show-credits__grid">
+              ${d.credits.map(c => `
+                <div class="show-credits__row">
+                  <dt class="show-credits__label">${t('credit.field.' + c.label, lang) || c.label}</dt>
+                  <dd class="show-credits__value">${c.value}</dd>
+                </div>`).join('')}
+            </dl>
+          </section>
+
+          <section class="content-section" aria-labelledby="perf-st">
+            <span class="section-label" id="perf-st">${t('show.performances', lang)}</span>
+            <ol class="show-perf-list">
+              ${d.performances.map(p => `
+                <li class="show-perf-item">
+                  <p class="show-perf-dates">${p.dates[lang] || p.dates.en}</p>
+                  <p class="show-perf-venue">${p.venue[lang] || p.venue.en}</p>
+                </li>`).join('')}
+            </ol>
+          </section>
+
+          <section class="content-section" aria-labelledby="synopsis-st">
+            <span class="section-label" id="synopsis-st">${t('show.synopsis', lang)}</span>
+            <p class="show-synopsis__text">${t('show.salooney.synopsis', lang)}</p>
           </section>
 
           <section class="content-section">
