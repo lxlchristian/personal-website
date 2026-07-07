@@ -1,0 +1,176 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>Homepage font pairings — mockup</title>
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,300;9..144,400;9..144,500&family=Karla:wght@400;500;600&family=Newsreader:ital,opsz,wght@0,6..72,400;0,6..72,500;1,6..72,400&family=Public+Sans:wght@400;500;600&family=Instrument+Serif:ital@0;1&family=Archivo:wght@400;500;600&display=swap" rel="stylesheet" />
+<style>
+  :root {
+    --color-ground:     #FDF9F4;
+    --color-ink:        #1C1812;
+    --color-gold:       #C8A97A;
+    --color-tagline:    #4B4030;
+    --color-muted:      #756C61;
+    --color-mid:        #5E5E5E;
+    --color-play:       #E8522A;
+    --color-line:       rgba(200, 169, 122, 0.55);
+    --color-line-faint: rgba(200, 169, 122, 0.20);
+    --text-hero: clamp(3.4rem, 10vw, 8rem);
+  }
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  html { -webkit-font-smoothing: antialiased; text-rendering: optimizeLegibility; }
+  body { background: var(--color-ground); color: var(--color-ink); }
+
+  /* ── Meta chrome — NOT part of the design, just orientation for review ── */
+  .mock-index {
+    position: sticky; top: 0; z-index: 50;
+    display: flex; align-items: center; gap: 1.5rem;
+    padding: 0.9rem 1.5rem;
+    background: #1C1812; color: #FDF9F4;
+    font: 500 12px/1 ui-monospace, 'SF Mono', Menlo, monospace;
+    letter-spacing: 0.03em;
+  }
+  .mock-index a { color: #FDF9F4; opacity: 0.65; text-decoration: none; }
+  .mock-index a:hover { opacity: 1; }
+  .mock-index span.brand { opacity: 0.5; margin-right: auto; }
+
+  .mock-tag {
+    position: absolute; top: 22px; left: 50%; transform: translateX(-50%);
+    z-index: 20;
+    font: 500 11px/1.4 ui-monospace, 'SF Mono', Menlo, monospace;
+    letter-spacing: 0.02em;
+    color: var(--color-ink);
+    background: rgba(28,24,18,0.06);
+    border: 1px solid rgba(28,24,18,0.12);
+    padding: 0.45em 0.9em;
+    border-radius: 3px;
+    text-align: center;
+    white-space: nowrap;
+  }
+  .mock-tag b { font-weight: 600; }
+  .mock-tag em { font-style: normal; opacity: 0.6; }
+
+  /* ── Recreated homepage hero (static / resting state) ─────────────── */
+  .pairing {
+    position: relative;
+    min-height: 100svh;
+    overflow: hidden;
+    border-bottom: 1px dashed rgba(28,24,18,0.18);
+  }
+  .pairing::before {
+    /* stand-in for the two crossing diagonal lines — resting position, non-interactive */
+    content: '';
+    position: absolute; inset: 0; z-index: 1; pointer-events: none;
+    background:
+      linear-gradient(200deg, transparent 47.3%, var(--color-line) 47.3%, var(--color-line) 47.9%, transparent 47.9%),
+      linear-gradient(161deg, transparent 57.8%, var(--color-line-faint) 57.8%, var(--color-line-faint) 58.4%, transparent 58.4%);
+  }
+
+  .corner-label {
+    position: absolute; z-index: 3;
+    font-family: var(--font-display);
+    font-size: 2rem;
+    font-weight: 300;
+    color: var(--color-mid);
+    letter-spacing: 0.04em;
+  }
+  .corner-tl { top: 36px; left: 40px; }
+  .corner-tr { top: 36px; right: 40px; }
+  .corner-bl { bottom: 36px; left: 40px; }
+  .corner-br { bottom: 36px; right: 40px; }
+
+  .home-center {
+    position: absolute; top: 50%; left: 50%;
+    transform: translate(-50%, -50%);
+    text-align: center; z-index: 2; white-space: nowrap;
+  }
+  .home-roles {
+    font-family: var(--font-body);
+    font-size: 0.875rem;
+    color: var(--color-muted);
+    letter-spacing: 0.18em;
+    text-transform: uppercase;
+    margin-bottom: 0.8rem;
+    font-weight: 500;
+  }
+  .home-name {
+    font-family: var(--font-display);
+    font-size: var(--text-hero);
+    font-weight: 400;
+    color: var(--color-ink);
+    letter-spacing: 0.06em;
+    text-transform: uppercase;
+    line-height: 1;
+  }
+  .home-sub {
+    font-family: var(--font-body);
+    font-style: italic;
+    font-size: 1.125rem;
+    color: var(--color-tagline);
+    margin-top: 0.8rem;
+    letter-spacing: 0.04em;
+  }
+
+  /* ── Per-pairing font assignments ─────────────────────────────────── */
+  #pairing-1 { --font-display: 'Fraunces', Georgia, serif; --font-body: 'Karla', system-ui, sans-serif; }
+  #pairing-2 { --font-display: 'Newsreader', Georgia, serif; --font-body: 'Public Sans', system-ui, sans-serif; }
+  #pairing-3 { --font-display: 'Instrument Serif', Georgia, serif; --font-body: 'Archivo', system-ui, sans-serif; }
+
+  #pairing-1 .home-name { font-optical-sizing: auto; }
+  #pairing-2 .home-sub { font-style: italic; }
+  #pairing-3 .corner-label, #pairing-3 .home-name { font-weight: 400; } /* Instrument Serif ships one weight */
+</style>
+</head>
+<body>
+
+  <div class="mock-index">
+    <span class="brand">christianliu.music — homepage font mockups</span>
+    <a href="#pairing-1">01 Catalog Warm</a>
+    <a href="#pairing-2">02 Quiet Literary</a>
+    <a href="#pairing-3">03 Refined Contrast</a>
+  </div>
+
+  <section class="pairing" id="pairing-1">
+    <div class="mock-tag"><b>01 — Catalog Warm</b> · Fraunces <em>+</em> Karla <em>— closest to your reference</em></div>
+    <div class="corner-label corner-tl">Biography</div>
+    <div class="corner-label corner-tr">Contact</div>
+    <div class="corner-label corner-bl">Games</div>
+    <div class="corner-label corner-br">Musicals</div>
+    <div class="home-center">
+      <p class="home-roles">composer · songwriter · producer</p>
+      <h1 class="home-name">CHRISTIAN LIU</h1>
+      <p class="home-sub">Music for stories on stage and screen.</p>
+    </div>
+  </section>
+
+  <section class="pairing" id="pairing-2">
+    <div class="mock-tag"><b>02 — Quiet Literary</b> · Newsreader <em>+</em> Public Sans</div>
+    <div class="corner-label corner-tl">Biography</div>
+    <div class="corner-label corner-tr">Contact</div>
+    <div class="corner-label corner-bl">Games</div>
+    <div class="corner-label corner-br">Musicals</div>
+    <div class="home-center">
+      <p class="home-roles">composer · songwriter · producer</p>
+      <h1 class="home-name">CHRISTIAN LIU</h1>
+      <p class="home-sub">Music for stories on stage and screen.</p>
+    </div>
+  </section>
+
+  <section class="pairing" id="pairing-3">
+    <div class="mock-tag"><b>03 — Refined Contrast</b> · Instrument Serif <em>+</em> Archivo</div>
+    <div class="corner-label corner-tl">Biography</div>
+    <div class="corner-label corner-tr">Contact</div>
+    <div class="corner-label corner-bl">Games</div>
+    <div class="corner-label corner-br">Musicals</div>
+    <div class="home-center">
+      <p class="home-roles">composer · songwriter · producer</p>
+      <h1 class="home-name">CHRISTIAN LIU</h1>
+      <p class="home-sub">Music for stories on stage and screen.</p>
+    </div>
+  </section>
+
+</body>
+</html>

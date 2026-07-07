@@ -1,0 +1,207 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>Biography font pairings — mockup</title>
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,300;9..144,400;9..144,500;9..144,600&family=Karla:wght@400;500;600&family=Newsreader:ital,opsz,wght@0,6..72,400;0,6..72,500;0,6..72,600;1,6..72,400&family=Public+Sans:wght@400;500;600&family=Instrument+Serif:ital@0;1&family=Archivo:wght@400;500;600;700&display=swap" rel="stylesheet" />
+<style>
+  :root {
+    --color-ground:  #FDF9F4;
+    --color-ink:     #1C1812;
+    --color-gold:    #C8A97A;
+    --color-muted:   #756C61;
+    --color-play:    #E8522A;
+  }
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  html { -webkit-font-smoothing: antialiased; text-rendering: optimizeLegibility; }
+  body { background: var(--color-ground); color: var(--color-ink); }
+
+  /* ── Meta chrome — NOT part of the design, just orientation for review ── */
+  .mock-index {
+    position: sticky; top: 0; z-index: 50;
+    display: flex; align-items: center; gap: 1.5rem;
+    padding: 0.9rem 1.5rem;
+    background: #1C1812; color: #FDF9F4;
+    font: 500 12px/1 ui-monospace, 'SF Mono', Menlo, monospace;
+    letter-spacing: 0.03em;
+  }
+  .mock-index a { color: #FDF9F4; opacity: 0.65; text-decoration: none; }
+  .mock-index a:hover { opacity: 1; }
+  .mock-index span.brand { opacity: 0.5; margin-right: auto; }
+
+  .mock-tag {
+    display: inline-block;
+    font: 500 11px/1.4 ui-monospace, 'SF Mono', Menlo, monospace;
+    letter-spacing: 0.02em;
+    color: var(--color-ink);
+    background: rgba(28,24,18,0.06);
+    border: 1px solid rgba(28,24,18,0.12);
+    padding: 0.45em 0.9em;
+    border-radius: 3px;
+    margin-bottom: 2.5rem;
+  }
+  .mock-tag b { font-weight: 600; }
+  .mock-tag em { font-style: normal; opacity: 0.6; }
+
+  .pairing {
+    padding: 4.5rem 2rem 5rem;
+    max-width: 700px;
+    margin: 0 auto;
+    border-bottom: 1px dashed rgba(28,24,18,0.18);
+  }
+
+  /* ── Real bio type classes, verbatim from style.css ─────────────────
+     only --font-display / --font-body change between sections          */
+  .section-label {
+    display: block;
+    font-family: var(--font-body);
+    font-size: 0.8125rem;
+    font-weight: 500;
+    color: var(--color-muted);
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+    padding-bottom: 0.5rem;
+    border-bottom: 1px solid rgba(28, 24, 18, 0.08);
+  }
+  .bio-text-col { display: flex; flex-direction: column; gap: 1.5rem; margin-top: 2.5rem; }
+  .bio-body {
+    font-family: var(--font-body);
+    font-size: 1rem;
+    color: var(--color-muted);
+    line-height: 1.70;
+  }
+  .bio-body a { color: var(--color-ink); border-bottom: 1px dotted currentColor; }
+  .bio-milestone {
+    margin: 0.5rem 0;
+    padding-left: 1.5rem;
+    border-left: 2px solid rgba(200, 169, 122, 0.45);
+    display: flex; flex-direction: column; gap: 0.15em;
+  }
+  .bio-milestone__number {
+    font-family: var(--font-display);
+    font-size: 3rem;
+    font-weight: 400;
+    color: var(--color-ink);
+    letter-spacing: -0.01em;
+    line-height: 1;
+  }
+  .bio-milestone__label {
+    font-family: var(--font-body);
+    font-size: 0.875rem;
+    color: var(--color-muted);
+    letter-spacing: 0.03em;
+    line-height: 1.4;
+  }
+  .bio-facts-row {
+    display: flex; gap: 2.5rem;
+    margin-top: 2.5rem; padding-top: 2rem;
+    border-top: 1px solid rgba(28,24,18,0.08);
+  }
+  .fact { display: flex; flex-direction: column; gap: 0.25em; }
+  .fact-label {
+    font-family: var(--font-body);
+    font-size: 0.8125rem;
+    font-weight: 500;
+    color: var(--color-muted);
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+  }
+  .fact-value {
+    font-family: var(--font-body);
+    font-size: 0.875rem;
+    color: var(--color-ink);
+    line-height: 1.45;
+  }
+  .bio-credits__list { list-style: none; margin-top: 2.5rem; display: flex; flex-direction: column; gap: 0.5rem; }
+  .bio-credits__list li { font-family: var(--font-body); font-size: 0.875rem; color: var(--color-ink); line-height: 1.5; }
+  .bio-credits__list em { font-style: normal; color: var(--color-muted); }
+  .bio-credits__list a { color: var(--color-ink); }
+  .bio-credits__list a:hover { color: var(--color-play); }
+
+  /* ── Per-pairing font assignments ─────────────────────────────────── */
+  #pairing-1 { --font-display: 'Fraunces', Georgia, serif; --font-body: 'Karla', system-ui, sans-serif; }
+  #pairing-2 { --font-display: 'Newsreader', Georgia, serif; --font-body: 'Public Sans', system-ui, sans-serif; }
+  #pairing-3 { --font-display: 'Instrument Serif', Georgia, serif; --font-body: 'Archivo', system-ui, sans-serif; }
+  #pairing-3 .bio-milestone__number { font-weight: 400; } /* Instrument Serif ships one weight */
+</style>
+</head>
+<body>
+
+  <div class="mock-index">
+    <span class="brand">christianliu.music — biography type mockups</span>
+    <a href="#pairing-1">01 Catalog Warm</a>
+    <a href="#pairing-2">02 Quiet Literary</a>
+    <a href="#pairing-3">03 Refined Contrast</a>
+  </div>
+
+  <section class="pairing" id="pairing-1">
+    <div class="mock-tag"><b>01 — Catalog Warm</b> · Fraunces <em>+</em> Karla <em>— closest to your reference</em></div>
+    <span class="section-label">Biography</span>
+    <div class="bio-text-col">
+      <p class="bio-body">Hi! My name is Christian, and I'm a composer from Singapore who loves scoring video games and writing for musical theatre. I'm also a recent graduate of the Harvard–Berklee Joint Studies Program.</p>
+      <p class="bio-body">Though much of my time as an undergraduate was spent studying Computer Science, perhaps even more of it was spent writing music. By graduation, I'd written three full-length, two-act musicals, including one with <a href="#">the Hasty Pudding Theatricals</a>, which ran 40 shows throughout Cambridge, New York, and Bermuda.</p>
+      <div class="bio-milestone">
+        <span class="bio-milestone__number">1.2M</span>
+        <span class="bio-milestone__label">views on Bilibili — Realm of Taiwu teaser trailer</span>
+      </div>
+      <p class="bio-body">I'm now based in Tokyo and Singapore, and open to collaboration worldwide. If you're working on something that needs a composer, I'd love to hear about it!</p>
+    </div>
+    <dl class="bio-facts-row">
+      <div class="fact"><dt class="fact-label">Based in</dt><dd class="fact-value">Tokyo · Singapore · Open to Remote</dd></div>
+      <div class="fact"><dt class="fact-label">Languages</dt><dd class="fact-value">English · Mandarin · Japanese</dd></div>
+    </dl>
+    <ul class="bio-credits__list">
+      <li><a href="#">Island of Hearts ↗</a> <em>— Composer &amp; Sound Designer · Titan Digital Media · 2026</em></li>
+      <li><a href="#">Salooney Tunes ↗</a> <em>— Music · Hasty Pudding Theatricals · 2026</em></li>
+    </ul>
+  </section>
+
+  <section class="pairing" id="pairing-2">
+    <div class="mock-tag"><b>02 — Quiet Literary</b> · Newsreader <em>+</em> Public Sans</div>
+    <span class="section-label">Biography</span>
+    <div class="bio-text-col">
+      <p class="bio-body">Hi! My name is Christian, and I'm a composer from Singapore who loves scoring video games and writing for musical theatre. I'm also a recent graduate of the Harvard–Berklee Joint Studies Program.</p>
+      <p class="bio-body">Though much of my time as an undergraduate was spent studying Computer Science, perhaps even more of it was spent writing music. By graduation, I'd written three full-length, two-act musicals, including one with <a href="#">the Hasty Pudding Theatricals</a>, which ran 40 shows throughout Cambridge, New York, and Bermuda.</p>
+      <div class="bio-milestone">
+        <span class="bio-milestone__number">1.2M</span>
+        <span class="bio-milestone__label">views on Bilibili — Realm of Taiwu teaser trailer</span>
+      </div>
+      <p class="bio-body">I'm now based in Tokyo and Singapore, and open to collaboration worldwide. If you're working on something that needs a composer, I'd love to hear about it!</p>
+    </div>
+    <dl class="bio-facts-row">
+      <div class="fact"><dt class="fact-label">Based in</dt><dd class="fact-value">Tokyo · Singapore · Open to Remote</dd></div>
+      <div class="fact"><dt class="fact-label">Languages</dt><dd class="fact-value">English · Mandarin · Japanese</dd></div>
+    </dl>
+    <ul class="bio-credits__list">
+      <li><a href="#">Island of Hearts ↗</a> <em>— Composer &amp; Sound Designer · Titan Digital Media · 2026</em></li>
+      <li><a href="#">Salooney Tunes ↗</a> <em>— Music · Hasty Pudding Theatricals · 2026</em></li>
+    </ul>
+  </section>
+
+  <section class="pairing" id="pairing-3">
+    <div class="mock-tag"><b>03 — Refined Contrast</b> · Instrument Serif <em>+</em> Archivo</div>
+    <span class="section-label">Biography</span>
+    <div class="bio-text-col">
+      <p class="bio-body">Hi! My name is Christian, and I'm a composer from Singapore who loves scoring video games and writing for musical theatre. I'm also a recent graduate of the Harvard–Berklee Joint Studies Program.</p>
+      <p class="bio-body">Though much of my time as an undergraduate was spent studying Computer Science, perhaps even more of it was spent writing music. By graduation, I'd written three full-length, two-act musicals, including one with <a href="#">the Hasty Pudding Theatricals</a>, which ran 40 shows throughout Cambridge, New York, and Bermuda.</p>
+      <div class="bio-milestone">
+        <span class="bio-milestone__number">1.2M</span>
+        <span class="bio-milestone__label">views on Bilibili — Realm of Taiwu teaser trailer</span>
+      </div>
+      <p class="bio-body">I'm now based in Tokyo and Singapore, and open to collaboration worldwide. If you're working on something that needs a composer, I'd love to hear about it!</p>
+    </div>
+    <dl class="bio-facts-row">
+      <div class="fact"><dt class="fact-label">Based in</dt><dd class="fact-value">Tokyo · Singapore · Open to Remote</dd></div>
+      <div class="fact"><dt class="fact-label">Languages</dt><dd class="fact-value">English · Mandarin · Japanese</dd></div>
+    </dl>
+    <ul class="bio-credits__list">
+      <li><a href="#">Island of Hearts ↗</a> <em>— Composer &amp; Sound Designer · Titan Digital Media · 2026</em></li>
+      <li><a href="#">Salooney Tunes ↗</a> <em>— Music · Hasty Pudding Theatricals · 2026</em></li>
+    </ul>
+  </section>
+
+</body>
+</html>
