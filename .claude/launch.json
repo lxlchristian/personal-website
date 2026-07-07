@@ -10,69 +10,9 @@
     {
       "name": "portfolio-verify",
       "runtimeExecutable": "python3",
-      "runtimeArgs": ["-m", "http.server", "3004"],
-      "port": 3004
-    },
-    {
-      "name": "portfolio-check",
-      "runtimeExecutable": "python3",
-      "runtimeArgs": ["-m", "http.server", "3008"],
-      "port": 3008
-    },
-    {
-      "name": "portfolio-verify2",
-      "runtimeExecutable": "python3",
-      "runtimeArgs": ["-m", "http.server", "3016"],
-      "port": 3016
-    },
-    {
-      "name": "portfolio-ja",
-      "runtimeExecutable": "python3",
       "runtimeArgs": ["-m", "http.server"],
-      "port": 3012,
+      "port": 3004,
       "autoPort": true
-    },
-    {
-      "name": "portfolio-3032",
-      "runtimeExecutable": "python3",
-      "runtimeArgs": ["-m", "http.server", "3032"],
-      "port": 3032
-    },
-    {
-      "name": "portfolio-tagline",
-      "runtimeExecutable": "python3",
-      "runtimeArgs": ["-m", "http.server", "3041"],
-      "port": 3041
-    },
-    {
-      "name": "portfolio-typo",
-      "runtimeExecutable": "python3",
-      "runtimeArgs": ["-m", "http.server", "3050"],
-      "port": 3050
-    },
-    {
-      "name": "portfolio-drift",
-      "runtimeExecutable": "python3",
-      "runtimeArgs": ["-m", "http.server", "3055"],
-      "port": 3055
-    },
-    {
-      "name": "portfolio-imgfix",
-      "runtimeExecutable": "python3",
-      "runtimeArgs": ["-m", "http.server", "3060"],
-      "port": 3060
-    },
-    {
-      "name": "portfolio-cta",
-      "runtimeExecutable": "python3",
-      "runtimeArgs": ["-m", "http.server", "3091"],
-      "port": 3091
-    },
-    {
-      "name": "portfolio-tracks",
-      "runtimeExecutable": "python3",
-      "runtimeArgs": ["-m", "http.server", "3097"],
-      "port": 3097
     }
   ]
 }
