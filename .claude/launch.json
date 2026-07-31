@@ -10,9 +10,8 @@
     {
       "name": "portfolio-verify",
       "runtimeExecutable": "python3",
-      "runtimeArgs": ["-m", "http.server"],
-      "port": 3004,
-      "autoPort": true
+      "runtimeArgs": ["-m", "http.server", "3011"],
+      "port": 3011
     }
   ]
 }

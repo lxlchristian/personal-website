@@ -1445,6 +1445,15 @@ html[data-lang="ja"] .nav-item__title {
   }
   .mus-prod-card__rule { margin-left: auto; margin-right: auto; }
 
+  /* Balance the link-arrow circle with a matching spacer so the
+     title sits truly centered between two equal flanks, not just
+     visually left-shifted by justify-content: space-between. */
+  .mus-prod-card__heading::before {
+    content: '';
+    width: 26px;
+    flex-shrink: 0;
+  }
+
   .show-hero__layout {
     flex-direction: row;
     align-items: flex-start;
