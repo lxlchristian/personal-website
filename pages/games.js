@@ -109,6 +109,7 @@ const GamesPage = {
                   </div>
                   <p class="game-credit-card__meta">${t('track.game.' + credit.genre, lang)} · ${credit.year} · ${credit.studio}</p>
                   <p class="game-credit-card__role">${tCredit(credit, lang)}</p>
+                  <span class="card-tap-bar" aria-hidden="true">${t('cta.details', lang)}&ensp;↗</span>
                 </div>
               </a>`).join('')}
             </div>

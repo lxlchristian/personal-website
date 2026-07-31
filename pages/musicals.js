@@ -115,6 +115,7 @@ function _prodCard(prod, lang) {
           <span class="mus-prod-card__year-mobile" aria-hidden="true">${prod.year}&ensp;·&ensp;</span>${prod.producer}&ensp;·&ensp;${role}
         </p>
         <p class="mus-prod-card__teaser">${teaser}</p>
+        <span class="card-tap-bar" aria-hidden="true">${t('cta.details', lang)}&ensp;↗</span>
       </div>
       <div class="mus-prod-card__poster-col">
         <img src="${prod.poster}" alt="${prod.posterAlt}" loading="lazy"/>

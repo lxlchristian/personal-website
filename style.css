@@ -1718,10 +1718,60 @@ a.credit-card:hover .credit-title { color: var(--color-play); }
   transform: scale(0.94);
 }
 
+/* ── Mobile-only tap bar — replaces the corner arrow ──────
+   No hover on touch, so a 26px corner icon is too easy to miss.
+   Below 768px the card's own bottom edge becomes the signal
+   instead: full-width, labeled, in the same uppercase micro-type
+   already used for section labels and buttons elsewhere. Hidden
+   above 768px, where the existing hover-revealed arrow still does the job. */
+.card-tap-bar {
+  display: none;
+}
+
 /* ── Mobile ──────────────────────────────────────────────── */
 @media (max-width: 768px) {
   .game-screenshot-strip__img { height: 160px; }
   .game-cta-row { flex-direction: column; align-items: flex-start; gap: var(--sp-md); }
+
+  .mus-prod-card .card-link-arrow,
+  .game-credit-card .card-link-arrow {
+    display: none;
+  }
+
+  /* Arrow's gone, so its balancing spacer is no longer needed —
+     let the title center on its own. */
+  .mus-prod-card__heading::before { display: none; }
+  .mus-prod-card__heading { justify-content: center; }
+
+  .card-tap-bar {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 0.4em;
+    font-family: var(--font-body);
+    font-size: var(--text-xs);
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+    color: var(--color-play);
+    background: rgba(200, 169, 122, 0.08);
+    border-top: 1px solid rgba(200, 169, 122, 0.35);
+    transition: background 150ms var(--ease-out), color 150ms var(--ease-out);
+  }
+
+  /* mus-prod-card__body has no side padding, so the bar is
+     already flush with the card's edges — just add breathing
+     room above it. */
+  .mus-prod-card .card-tap-bar {
+    margin-top: var(--sp-md);
+    padding: var(--sp-sm) 0;
+  }
+
+  /* game-credit-card__body has its own padding, so bleed past
+     it to reach the card's true edges. */
+  .game-credit-card .card-tap-bar {
+    margin: var(--sp-sm) calc(-1 * var(--sp-lg)) calc(-1 * var(--sp-md));
+    padding: var(--sp-sm) var(--sp-lg);
+  }
 }
 
 /* ── Touch active-state feedback (no-hover devices) ──────── */
@@ -1731,6 +1781,13 @@ a.credit-card:hover .credit-title { color: var(--color-play); }
   .game-credit-card:active {
     transform: translateY(-1px);
     box-shadow: 0 3px 12px rgba(28, 24, 18, 0.08);
+  }
+
+  .mus-prod-card:active .card-tap-bar,
+  .game-credit-card:active .card-tap-bar {
+    background: var(--color-play);
+    color: var(--color-ground);
+    border-top-color: var(--color-play);
   }
 }
 

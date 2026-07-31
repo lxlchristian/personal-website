@@ -12,6 +12,24 @@
       "runtimeExecutable": "python3",
       "runtimeArgs": ["-m", "http.server", "3011"],
       "port": 3011
+    },
+    {
+      "name": "portfolio-cardcta",
+      "runtimeExecutable": "python3",
+      "runtimeArgs": ["-m", "http.server", "3029"],
+      "port": 3029
+    },
+    {
+      "name": "portfolio-tapbar",
+      "runtimeExecutable": "python3",
+      "runtimeArgs": ["-m", "http.server", "3047"],
+      "port": 3047
+    },
+    {
+      "name": "portfolio-contactdiv",
+      "runtimeExecutable": "python3",
+      "runtimeArgs": ["-m", "http.server", "3061"],
+      "port": 3061
     }
   ]
 }

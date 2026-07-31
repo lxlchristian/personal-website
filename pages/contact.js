@@ -8,7 +8,7 @@ const ContactPage = {
     el.className = 'page-subpage page-contact';
     el.innerHTML = `
       <div class="subpage-layout">
-        <div class="subpage-divider" aria-hidden="true"></div>
+        <div class="subpage-divider" aria-hidden="true">${_DIVIDER_SVG}</div>
         <div class="subpage-content">
 
           <section class="content-section section-contact-full" aria-labelledby="contact-full-label">

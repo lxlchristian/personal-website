@@ -60,6 +60,7 @@ const TRANSLATIONS = {
 
     /* ── CTA ── */
     'cta.workTogether': "Let's work together!",
+    'cta.details':      'Details',
 
     /* ── Credit role descriptors ── */
     'credit.role.trailerMusic':          'Teaser Trailer Music',
@@ -154,7 +155,7 @@ const TRANSLATIONS = {
 
     /* ── Homepage ── */
     'home.subtitle': '舞台与银幕，故事的配乐。',
-    'home.roles':    '作曲家 · 词曲作者 · 制作人',
+    'home.roles':    '作曲 · 作词 · 制作',
 
     /* ── Section labels ── */
     'section.reel':              '精选样片',
@@ -190,6 +191,7 @@ const TRANSLATIONS = {
 
     /* ── CTA ── */
     'cta.workTogether': '期待与您合作！',
+    'cta.details':      '详情',
 
     /* ── Credit role descriptors ── */
     'credit.role.trailerMusic':          '预告片音乐',
@@ -320,6 +322,7 @@ const TRANSLATIONS = {
 
     /* ── CTA ── */
     'cta.workTogether': 'ぜひ一緒にお仕事しましょう！',
+    'cta.details':      '詳細',
 
     /* ── Credit role descriptors ── */
     'credit.role.trailerMusic':          'PV楽曲',
