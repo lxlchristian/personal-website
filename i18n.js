@@ -51,7 +51,6 @@ const TRANSLATIONS = {
     'show.spotifyComingSoon':     'Spotify cast recording coming soon',
     'show.videoComingSoon':       'Video coming soon',
     'show.recordingsForthcoming': 'Recordings forthcoming.',
-    'show.roughMixNote':          'Pre-release rough mixes · Full cast recording coming soon on Spotify.',
 
     /* ── Production teasers ── */
     'prod.teaser.salooney-tunes': "Harvard's 177th Hasty Pudding Musical: an all-new wild west adventure from the nation's oldest collegiate theater company.",
@@ -182,7 +181,6 @@ const TRANSLATIONS = {
     'show.spotifyComingSoon':     '完整演员录音即将登陆 Spotify',
     'show.videoComingSoon':       '视频即将上线',
     'show.recordingsForthcoming': '录音即将发布。',
-    'show.roughMixNote':          '预发行初混版 · 完整演员录音即将登陆 Spotify',
 
     /* ── Production teasers ── */
     'prod.teaser.salooney-tunes': '哈佛第177届Hasty Pudding年度大戏：来自美国历史最悠久大学剧团的全新西部冒险音乐剧。',
@@ -313,7 +311,6 @@ const TRANSLATIONS = {
     'show.spotifyComingSoon':     'Spotifyアルバム、近日公開',
     'show.videoComingSoon':       '動画は近日公開予定',
     'show.recordingsForthcoming': '音源は近日公開予定。',
-    'show.roughMixNote':          'リリース前ラフミックス · フルキャスト録音は近日Spotifyにて公開予定',
 
     /* ── Production teasers ── */
     'prod.teaser.salooney-tunes': 'ハーバード大学 Hasty Pudding Theatricals 第177回ミュージカル：米国最古の大学劇団が贈る新作ワイルドウェスト冒険譚。',

@@ -30,6 +30,24 @@
       "runtimeExecutable": "python3",
       "runtimeArgs": ["-m", "http.server", "3061"],
       "port": 3061
+    },
+    {
+      "name": "portfolio-spotify",
+      "runtimeExecutable": "python3",
+      "runtimeArgs": ["-m", "http.server", "3079"],
+      "port": 3079
+    },
+    {
+      "name": "portfolio-spotify2",
+      "runtimeExecutable": "python3",
+      "runtimeArgs": ["-m", "http.server", "3081"],
+      "port": 3081
+    },
+    {
+      "name": "portfolio-spotify3",
+      "runtimeExecutable": "python3",
+      "runtimeArgs": ["-m", "http.server", "3083"],
+      "port": 3083
     }
   ]
 }

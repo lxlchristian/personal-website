@@ -35,14 +35,6 @@ const _SALOONEY_DATA = {
   ],
 
   synopsis: 'Salooney Tunes is a knee-slapping, nail-biting heist-gone-wrong that follows notorious outlaw Robin Yablind and his fame-hungry sidekick Wyatt Aintme. They must find a way to avoid Mayor Gerri Mandarin and pregnant Sheriff Carrie N Twins, who are on the hunt to put them behind bars. Chock-full of lovable characters like skittish saloon owner Bart Ender, sultry saloon-singer Sarah Problem, and twelve-year-old dancer Anna Fivesix-Fivesixseveneight, Salooney Tunes\'s twists and turns will keep you on the edge of your seat.',
-
-  /* Pre-release rough mixes — shown before the Spotify cast recording goes live.
-     Add { title, src, durationStr } entries; only rows with a src are rendered. */
-  tracks: [
-    { title: 'Want To Be Wanted', src: 'WantToBeWanted_rough.wav', durationStr: '5:20' },
-    { title: 'Rodeo and Juliet', src: 'Rodeo_rough.wav', durationStr: '3:09' },
-    { title: 'Salooney Tunes', src: 'SalooneyTunes_rough.wav', durationStr: '4:08' },
-  ],
 };
 
 const SalooneyTunesPage = {
@@ -72,34 +64,8 @@ const SalooneyTunesPage = {
 
           <section class="content-section" aria-labelledby="music-st">
             <span class="section-label" id="music-st">${t('show.music', lang)}</span>
-            <p class="show-roughmix-note">${t('show.roughMixNote', lang)}</p>
-            <div class="track-list" id="salooney-track-list" role="list"></div>
-
-            <div id="spotify-salooney" style="margin-top: var(--sp-xl)">
-              <!--
-                SPOTIFY EMBED — replace this entire <div> with the Spotify iframe when the album is live.
-
-                Paste the embed code from Spotify here:
-                  <iframe style="border-radius:12px"
-                          src="https://open.spotify.com/embed/album/ALBUM_ID"
-                          width="100%" height="352" frameBorder="0" allowfullscreen=""
-                          allow="autoplay; clipboard-write; encrypted-media; fullscreen; picture-in-picture"
-                          loading="lazy" title="Salooney Tunes — Original Cast Recording"></iframe>
-              -->
-              <div class="mus-spotify-placeholder">
-                <div class="mus-spotify-inner">
-                  <svg class="mus-spotify-icon" width="22" height="22" viewBox="0 0 24 24"
-                       fill="currentColor" aria-hidden="true">
-                    <path d="M12 2C6.477 2 2 6.477 2 12s4.477 10 10 10 10-4.477 10-10S17.523 2 12
-                      2zm4.586 14.424a.622.622 0 01-.857.208c-2.348-1.435-5.304-1.76-8.785-.964a.623.623
-                      0 01-.277-1.215c3.809-.87 7.076-.496 9.712 1.115.294.181.387.564.207.856zm1.223-2.722a.78.78
-                      0 01-1.072.257C14.25 12.314 10.95 11.9 7.84 12.8a.78.78 0 01-.426-1.499c3.522-.999
-                      7.192-.516 9.939 1.329a.78.78 0 01.256 1.072zm.105-2.834C15.16 9.15 10.535 9 7.2
-                      9.984a.937.937 0 01-.517-1.8C10.4 7.08 15.503 7.25 18.9 9.387a.938.938 0 01-.986 1.481z"/>
-                  </svg>
-                  <p class="mus-spotify-label">${t('show.spotifyComingSoon', lang)}</p>
-                </div>
-              </div>
+            <div id="spotify-salooney">
+              <div class="mus-spotify-frame-wrap"></div>
             </div>
           </section>
 
@@ -143,41 +109,70 @@ const SalooneyTunesPage = {
         </div>
       </div>`;
 
-    /* Build pre-release track rows and wire to AudioPlayer */
-    const trackList = el.querySelector('#salooney-track-list');
-    const rows = d.tracks
-      .filter(tr => tr.src)
-      .map(tr => {
-        const audioConfig = { src: tr.src, title: tr.title, source: 'Salooney Tunes', available: true };
-        const rowEl = buildTrackRow({ title: tr.title, meta: 'Salooney Tunes / The Hasty Pudding Cast & Band', duration: tr.durationStr, available: true });
-        const iconEl = rowEl.querySelector('.track-row__play-icon');
-        rowEl.querySelector('.track-row__play').addEventListener('click', () => {
-          AudioPlayer.setLastTrigger(iconEl);
-          AudioPlayer.play(audioConfig);
-        });
-        trackList.appendChild(rowEl);
-        return { el: rowEl, config: audioConfig };
-      });
+    /* Spotify's embed picks its internal layout once, from the width it's
+       given at load, and never re-evaluates it on its own — loaded narrow,
+       it caps the tracklist at ~3 rows and pads any extra height with dead
+       space instead of filling it. Loaded wide, it fills any height with a
+       proper scrollable list. Merely restyling an already-loaded frame's
+       width/height doesn't reliably re-trigger that decision either (seen
+       first-hand: an already-wide frame shrunk back down can come back
+       dead-space-broken), so on narrow columns we give it a fresh iframe at
+       a fixed width comfortably inside "wide" territory and scale the whole
+       frame down to fit. Rotation/resize across that width boundary gets a
+       fresh iframe again for the same reason; resizing within one mode just
+       retunes the existing frame, which is safe. */
+    const spotifyOuterWrap = el.querySelector('#spotify-salooney');
+    const SPOTIFY_SRC = 'https://open.spotify.com/embed/album/2M2BCa0Y8RoUd42ofshnNy?utm_source=generator';
+    const SPOTIFY_TITLE = 'Salooney Tunes — Original Cast Recording';
+    const SPOTIFY_WIDE_WIDTH = 400;
+    const SPOTIFY_WIDE_HEIGHT = 450;
+    const SPOTIFY_NATIVE_HEIGHT = 352;
+    let spotifyIsCompact = null;
 
-    function _syncRows() {
-      const current = AudioPlayer.getCurrentTrack();
-      const playing = AudioPlayer.isPlaying();
-      rows.forEach(({ el: rowEl, config }) => {
-        if (!rowEl.isConnected) return;
-        const isActive = !!(current && current.src === config.src);
-        rowEl.classList.toggle('track-row--active', isActive);
-        const iconPlay  = rowEl.querySelector('.ap-row-icon-play');
-        const iconPause = rowEl.querySelector('.ap-row-icon-pause');
-        if (iconPlay)  iconPlay.style.display  = (isActive && playing) ? 'none' : '';
-        if (iconPause) iconPause.style.display = (isActive && playing) ? ''     : 'none';
-        const btn = rowEl.querySelector('.track-row__play');
-        if (btn) btn.setAttribute('aria-label',
-          (isActive && playing) ? `Pause ${config.title}` : `Play ${config.title}`);
-      });
+    function _createSpotifyFrame() {
+      const frame = document.createElement('iframe');
+      frame.className = 'mus-spotify-embed';
+      frame.src = SPOTIFY_SRC;
+      frame.title = SPOTIFY_TITLE;
+      frame.loading = 'lazy';
+      frame.allowFullscreen = true;
+      frame.setAttribute('frameborder', '0');
+      frame.setAttribute('allow', 'autoplay; clipboard-write; encrypted-media; fullscreen; picture-in-picture');
+      return frame;
     }
-    AudioPlayer.onTrackChange(_syncRows);
-    AudioPlayer.onPlayStateChange(_syncRows);
-    _syncRows();
+
+    function _sizeSpotifyEmbed() {
+      const wrap = spotifyOuterWrap.querySelector('.mus-spotify-frame-wrap');
+      if (!wrap) { window.removeEventListener('resize', _sizeSpotifyEmbed); return; }
+      const wrapWidth = wrap.getBoundingClientRect().width;
+      const compact = wrapWidth < SPOTIFY_WIDE_WIDTH;
+
+      if (compact === spotifyIsCompact) {
+        if (compact) {
+          const scale = wrapWidth / SPOTIFY_WIDE_WIDTH;
+          wrap.firstElementChild.style.transform = `scale(${scale})`;
+          wrap.style.height = Math.round(SPOTIFY_WIDE_HEIGHT * scale) + 'px';
+        }
+        return;
+      }
+
+      spotifyIsCompact = compact;
+      const frame = _createSpotifyFrame();
+      if (compact) {
+        const scale = wrapWidth / SPOTIFY_WIDE_WIDTH;
+        frame.style.width = SPOTIFY_WIDE_WIDTH + 'px';
+        frame.style.height = SPOTIFY_WIDE_HEIGHT + 'px';
+        frame.style.transform = `scale(${scale})`;
+        wrap.style.height = Math.round(SPOTIFY_WIDE_HEIGHT * scale) + 'px';
+      } else {
+        frame.style.width = '100%';
+        frame.style.height = SPOTIFY_NATIVE_HEIGHT + 'px';
+        wrap.style.height = '';
+      }
+      wrap.replaceChildren(frame);
+    }
+    _sizeSpotifyEmbed();
+    window.addEventListener('resize', _sizeSpotifyEmbed);
 
     _initMusLinks(el);
     _initMusReveals(el);
