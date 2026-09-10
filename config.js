@@ -37,6 +37,14 @@ const SITE_CONFIG = {
   /* ── Audio tracks ─────────────────────────────────────── */
   TRACKS: [
     {
+      title:       'Stalwart Blade',
+      game:        'Strategy',
+      gameUrl:     '',
+      genre:       'Cinematic / Orchestral',
+      durationStr: '3:30',
+      src:         'StalwartBlade.wav',
+    },
+    {
       title:       'Battle the Beast!',
       game:        'Action Roguelite',
       gameUrl:     '',
@@ -45,37 +53,28 @@ const SITE_CONFIG = {
       src:         'whaleboss.wav',
     },
     {
+      title:       'Ghost Omen',
+      game:        'Action Sidescroller',
+      gameUrl:     '',
+      genre:       'Electronic / Rock',
+      durationStr: '1:35',
+      src:         'GhostOmen.wav',
+    },
+    {
+      title:       'The Plains',
+      game:        'Exploration',
+      gameUrl:     '',
+      genre:       'Electronic Hybrid',
+      durationStr: '1:35',
+      src:         'ThePlains.wav',
+    },
+    {
       title:       'Reconnaissance',
       game:        'Bullet Hell',
       gameUrl:     '',
       genre:       'Electronic',
       durationStr: '2:08',
       src:         'recon.wav',
-    },
-
-    {
-      title:       'STREAM_LINE (Branched)',
-      game:        'Speed Platformer',
-      gameUrl:     '',
-      genre:       'Drum & Bass',
-      durationStr: '1:23',
-      src:         'STREAM__LINE_Flow.wav',
-    },
-    {
-      title:       'ARACHNOPHOBIA_A',
-      game:        'Rhythm Battler',
-      gameUrl:     '',
-      genre:       'Electronic',
-      durationStr: '2:48',
-      src:         'ARACHNOPHOBIA_A.wav',
-    },
-    {
-      title:       'Windy Hut',
-      game:        'Retro',
-      gameUrl:     '',
-      genre:       'Chiptune',
-      durationStr: '1:55',
-      src:         'WindyHut.wav',
     },
   ],
 

@@ -48,6 +48,12 @@
       "runtimeExecutable": "python3",
       "runtimeArgs": ["-m", "http.server", "3083"],
       "port": 3083
+    },
+    {
+      "name": "portfolio-tracks",
+      "runtimeExecutable": "python3",
+      "runtimeArgs": ["-m", "http.server", "3091"],
+      "port": 3091
     }
   ]
 }
