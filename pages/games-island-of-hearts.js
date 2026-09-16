@@ -94,7 +94,7 @@ const IslandOfHeartsPage = {
 
           <section class="content-section">
             <a href="/contact" data-link="/contact" class="cta-btn">${t('cta.workTogether', lang)}</a>
-            ${_ctaSocialHTML()}
+            ${renderSocialIcons('cta-social')}
           </section>
 
           <footer class="subpage-footer">
@@ -151,6 +151,6 @@ const IslandOfHeartsPage = {
     AudioPlayer.onPlayStateChange(_syncRows);
     _syncRows();
 
-    _initGameLinks(el);
+    initPageLinks(el);
   },
 };

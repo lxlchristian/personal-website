@@ -8,16 +8,6 @@
    show page files (loaded after this one).
 ══════════════════════════════════════════════════════════ */
 
-/* ── Shared: SPA link init ──────────────────────────────── */
-function _initMusLinks(el) {
-  el.querySelectorAll('[data-link]').forEach(a => {
-    a.addEventListener('click', e => {
-      e.preventDefault();
-      Router.navigate(a.getAttribute('data-link'));
-    });
-  });
-}
-
 /* ── Shared: scroll reveal ──────────────────────────────── */
 function _initMusReveals(el) {
   if (!('IntersectionObserver' in window)) {
@@ -38,7 +28,7 @@ function _initMusReveals(el) {
    Set src to a local mp3 path and available: true to enable. */
 const _FEATURED_TRACKS = [
   {
-    title:       'I Just Want To Be Wanted',
+    title:       'Want To Be Wanted',
     show:        'Salooney Tunes',
     meta:        'Salooney Tunes / The Hasty Pudding Cast & Band',
     showPath:    '/musicals/salooney-tunes',
@@ -210,7 +200,7 @@ const MusicalsPage = {
 
           <section class="content-section mus-reveal">
             <a href="/contact" data-link="/contact" class="cta-btn">${t('cta.workTogether', lang)}</a>
-            ${_ctaSocialHTML()}
+            ${renderSocialIcons('cta-social')}
           </section>
 
           <div class="section-crosslink">
@@ -236,7 +226,7 @@ const MusicalsPage = {
     });
 
     _initIndexAudio(el);
-    _initMusLinks(el);
+    initPageLinks(el);
     _initMusReveals(el);
   },
 };

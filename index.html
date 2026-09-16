@@ -37,6 +37,16 @@
 
   <link rel="stylesheet" href="style.css" />
   <link rel="stylesheet" href="audio-player.css" />
+
+  <!-- Vercel Web Analytics — plain-HTML install (no package, no build step).
+       Counts cold page loads only; the HTML variant has no SPA route support,
+       so in-site Router.navigate() hops are not counted. That's fine for the
+       QR codes, which always arrive as a fresh load on /games, /jp/games or
+       /cn/games. Serves 404 locally and fails silently. -->
+  <script>
+    window.va = window.va || function () { (window.vaq = window.vaq || []).push(arguments); };
+  </script>
+  <script defer src="/_vercel/insights/script.js"></script>
 </head>
 <body>
   <div id="app">
@@ -47,13 +57,15 @@
   <!--
     Load order matters — each file depends on those above it:
     1. config.js          → site content (SITE_CONFIG)
-    2. i18n.js            → translations (t, tTrack, applyLanguage, getCurrentLang)
-    3. audio-player.js    → global AudioPlayer controller + buildTrackRow()
-    4. nav.js             → nav renderer (Nav) — reads from i18n, links to Router lazily
-    5. pages/*.js         → page renderers (HomePage, GamesPage, …)
-    6. router.js          → SPA router (Router) — starts the app, must be last
+    2. shared.js          → cross-page helpers (_DIVIDER_SVG, renderSocialIcons, initPageLinks)
+    3. i18n.js            → translations (t, tTrack, applyLanguage, getCurrentLang)
+    4. audio-player.js    → global AudioPlayer controller + buildTrackRow()
+    5. nav.js             → nav renderer (Nav) — reads from i18n, links to Router lazily
+    6. pages/*.js         → page renderers (HomePage, GamesPage, …)
+    7. router.js          → SPA router (Router) — starts the app, must be last
   -->
   <script src="config.js"></script>
+  <script src="shared.js"></script>
   <script src="i18n.js"></script>
   <script src="audio-player.js"></script>
   <script src="nav.js"></script>

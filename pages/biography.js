@@ -103,7 +103,7 @@ const BiographyPage = {
 
           <section class="content-section section-cta">
             <a href="/contact" data-link="/contact" class="cta-btn">${t('cta.workTogether', lang)}</a>
-            ${_ctaSocialHTML()}
+            ${renderSocialIcons('cta-social')}
           </section>
 
           <footer class="subpage-footer">
@@ -114,11 +114,6 @@ const BiographyPage = {
       </div>
     `;
 
-    el.querySelectorAll('[data-link]').forEach(a => {
-      a.addEventListener('click', e => {
-        e.preventDefault();
-        Router.navigate(a.getAttribute('data-link'));
-      });
-    });
+    initPageLinks(el);
   },
 };

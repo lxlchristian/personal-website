@@ -54,6 +54,12 @@
       "runtimeExecutable": "python3",
       "runtimeArgs": ["-m", "http.server", "3091"],
       "port": 3091
+    },
+    {
+      "name": "portfolio-shared",
+      "runtimeExecutable": "python3",
+      "runtimeArgs": ["-m", "http.server", "3123"],
+      "port": 3123
     }
   ]
 }

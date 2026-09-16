@@ -390,7 +390,7 @@ body:not([data-section="home"]) {
   }
 
   .home-name {
-    font-size: clamp(2.5rem, 11vw, 5rem);
+    font-size: clamp(2rem, 11vw, 5rem);
     white-space: nowrap;
   }
 

@@ -18,7 +18,7 @@
 const SITE_CONFIG = {
 
   /* ── Contact ──────────────────────────────────────────── */
-  EMAIL: 'xilebile.music@gmail.com',
+  EMAIL: 'music@christian-liu.me',
 
   /* Formspree endpoint — sign up at formspree.io, create a form,
      and paste the full URL here, e.g.:
@@ -30,6 +30,7 @@ const SITE_CONFIG = {
   SOCIAL: {
     youtube:    'https://www.youtube.com/@xilebilemusic',
     soundcloud: 'https://soundcloud.com/xilebile',
+    x:          'https://x.com/xilebilemusic',
     instagram:  '',
     linkedin:   'https://www.linkedin.com/in/christian-liu-51480522b/',
   },

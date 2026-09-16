@@ -139,7 +139,7 @@ const CityOfPeacePage = {
 
           <section class="content-section">
             <a href="/contact" data-link="/contact" class="cta-btn">${t('cta.workTogether', lang)}</a>
-            ${_ctaSocialHTML()}
+            ${renderSocialIcons('cta-social')}
           </section>
 
           <footer class="subpage-footer">
@@ -195,7 +195,7 @@ const CityOfPeacePage = {
     AudioPlayer.onPlayStateChange(_syncRows);
     _syncRows();
 
-    _initMusLinks(el);
+    initPageLinks(el);
     _initMusReveals(el);
   },
 };
