@@ -31,7 +31,7 @@ const SITE_CONFIG = {
     youtube:    'https://www.youtube.com/@xilebilemusic',
     soundcloud: 'https://soundcloud.com/xilebile',
     x:          'https://x.com/xilebilemusic',
-    instagram:  '',
+    instagram:  'https://www.instagram.com/xilebilemusic/',
     linkedin:   'https://www.linkedin.com/in/christian-liu-51480522b/',
   },
 
